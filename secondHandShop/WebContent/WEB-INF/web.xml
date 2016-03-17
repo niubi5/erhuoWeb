@@ -88,4 +88,14 @@
     <servlet-name>AddressListServlet</servlet-name>
     <url-pattern>/AddressListServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListMarketsServlet</display-name>
+    <servlet-name>ListMarketsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.ListMarketsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListMarketsServlet</servlet-name>
+    <url-pattern>/ListMarketsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

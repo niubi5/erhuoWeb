@@ -5,7 +5,7 @@ import java.io.File;
 public class Types {
 	private int id;
 	private String name;
-	private byte[] inco;
+	private String url;
 	
 	public int getId() {
 		return id;
@@ -19,10 +19,12 @@ public class Types {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public byte[] getInco() {
-		return inco;
+	public String getUrl() {
+		return url;
 	}
-	public void setInco(byte[] inco) {
-		this.inco = inco;
+	public void setUrl(String url) {
+		this.url = url;
 	}
+	
+	
 }

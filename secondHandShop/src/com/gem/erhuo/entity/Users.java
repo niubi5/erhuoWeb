@@ -6,7 +6,7 @@ public class Users {
 	private int id;
 	private String identity;
 	private String pwd;
-	private byte[] photo;
+	private String photo;
 	private String name;
 	private int sex;
 	private int jifen;
@@ -30,10 +30,10 @@ public class Users {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public byte[] getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 	public String getName() {

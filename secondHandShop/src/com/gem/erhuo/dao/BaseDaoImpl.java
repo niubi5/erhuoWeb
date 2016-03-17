@@ -52,11 +52,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql);
 				prep.setString(1, ((Users) t).getIdentity());
 				prep.setString(2, ((Users) t).getPwd());
-				if (((Users) t).getPhoto() != null) {
-					is = new ByteArrayInputStream(((Users) t).getPhoto());
-				} else {
-					prep.setBinaryStream(3, is);
-				}
+				prep.setString(3, ((Users) t).getPhoto());
 				prep.setString(4, ((Users) t).getName());
 				prep.setInt(5, ((Users) t).getSex());
 				prep.setInt(6, ((Users) t).getJifen());
@@ -79,24 +75,16 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(11, ((Goods) t).getState());
 				prep.executeUpdate();
 			} else if (t instanceof Types) {
-				sql = "insert into types(name,inco) values(?,?)";
+				sql = "insert into types(name,url) values(?,?)";
 				prep = conn.prepareStatement(sql);
 				prep.setString(1, ((Types) t).getName());
-				if (((Types) t).getInco() != null) {
-					is = new ByteArrayInputStream(((Types) t).getInco());
-				} else {
-					prep.setBinaryStream(2, is);
-				}
+				prep.setString(2, ((Types) t).getUrl());
 				prep.executeUpdate();
 			} else if (t instanceof Markets) {
-				sql = "insert into markets(name,logo,brief) values(?,?,?)";
+				sql = "insert into markets(name,url,brief) values(?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep.setString(1, ((Markets) t).getName());
-				if (((Markets) t).getLogo() != null) {
-					is = new ByteArrayInputStream(((Markets) t).getLogo());
-				} else {
-					prep.setBinaryStream(2, is);
-				}
+				prep.setString(2, ((Markets) t).getUrl());
 				prep.setString(3, ((Markets) t).getBrief());
 				prep.executeUpdate();
 			} else if (t instanceof Orders) {
@@ -379,11 +367,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql);
 				prep.setString(1, ((Users) t).getIdentity());
 				prep.setString(2, ((Users) t).getPwd());
-				if (((Users) t).getPhoto() != null) {
-					is = new ByteArrayInputStream(((Users) t).getPhoto());
-				} else {
-					prep.setBinaryStream(3, is);
-				}
+				prep.setString(3, ((Users) t).getPhoto());
 				prep.setString(4, ((Users) t).getName());
 				prep.setInt(5, ((Users) t).getSex());
 				prep.setInt(6, ((Users) t).getJifen());
@@ -407,27 +391,21 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(12, ((Goods) t).getId());
 				prep.executeUpdate();
 			} else if (t instanceof Types) {
-				sql = "update types set name=?,inco=? where id=?";
+				sql = "update types set name=?,url=? where id=?";
 				prep = conn.prepareStatement(sql);
 				prep.setString(1, ((Types) t).getName());
-				if (((Types) t).getInco() != null) {
-					is = new ByteArrayInputStream(((Types) t).getInco());
-				} else {
-					prep.setBinaryStream(2, is);
-				}
+				prep.setString(2, ((Types) t).getUrl());
 				prep.setInt(3, ((Types) t).getId());
 				prep.executeUpdate();
 			} else if (t instanceof Markets) {
-				sql = "update markets set name=?,logo=?,brief=? where id=?";
+				sql = "update markets set name=?,url=?,brief=?,usercount=?,goodscount=? where id=?";
 				prep = conn.prepareStatement(sql);
 				prep.setString(1, ((Markets) t).getName());
-				if (((Markets) t).getLogo() != null) {
-					is = new ByteArrayInputStream(((Markets) t).getLogo());
-				} else {
-					prep.setBinaryStream(2, is);
-				}
+				prep.setString(2, ((Markets) t).getUrl());
 				prep.setString(3, ((Markets) t).getBrief());
-				prep.setInt(4, ((Markets) t).getId());
+				prep.setInt(4, ((Markets) t).getUserCount());
+				prep.setInt(5, ((Markets) t).getGoodsCount());
+				prep.setInt(6, ((Markets) t).getId());
 				prep.executeUpdate();
 			} else if (t instanceof Orders) {
 				sql = "update orders set goodid=?,userid=?,ordernumber=?,createtime=?,paytime=?,sendtime=?,completetime=?,state=?,logisticscom=?,logisticsnum=? where id=?";
@@ -588,21 +566,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					u.setId(rs.getInt("id"));
 					u.setIdentity(rs.getString("identity"));
 					u.setPwd(rs.getString("pwd"));
-					if (rs.getBlob("photo") != null) {
-						Blob photo_blob = rs.getBlob("photo");
-						is = photo_blob.getBinaryStream();
-						// blob->InputStream->byte[]
-						ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
-						byte[] buff = new byte[100]; // buff用于存放循环读取的临时数据
-						int rc = 0;
-						while ((rc = is.read(buff, 0, 100)) > 0) {
-							swapStream.write(buff, 0, rc);
-						}
-						byte[] bphoto = swapStream.toByteArray();
-						u.setPhoto(bphoto);
-					} else {
-						u.setPhoto(null);
-					}
+					u.setPhoto(rs.getString("photo"));
 					u.setName(rs.getString("name"));
 					u.setSex(rs.getInt("sex"));
 					u.setJifen(rs.getInt("jifen"));
@@ -641,21 +605,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					Types types = new Types();
 					types.setId(rs.getInt("id"));
 					types.setName(rs.getString("name"));
-					if (rs.getBlob("inco") != null) {
-						Blob inco_blob = rs.getBlob("inco");
-						is = inco_blob.getBinaryStream();
-						// blob->InputStream->byte[]
-						ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
-						byte[] buff = new byte[100]; // buff用于存放循环读取的临时数据
-						int rc = 0;
-						while ((rc = is.read(buff, 0, 100)) > 0) {
-							swapStream.write(buff, 0, rc);
-						}
-						byte[] binco = swapStream.toByteArray();
-						types.setInco(binco);
-					} else {
-						types.setInco(null);
-					}
+					types.setUrl(rs.getString("url"));
 					// 将对象加到集合中
 					list.add((T) types);
 				}
@@ -668,21 +618,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					Markets m = new Markets();
 					m.setId(rs.getInt("id"));
 					m.setName(rs.getString("name"));
-					if (rs.getBlob("logo") != null) {
-						Blob inco_blob = rs.getBlob("logo");
-						is = inco_blob.getBinaryStream();
-						// blob->InputStream->byte[]
-						ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
-						byte[] buff = new byte[100]; // buff用于存放循环读取的临时数据
-						int rc = 0;
-						while ((rc = is.read(buff, 0, 100)) > 0) {
-							swapStream.write(buff, 0, rc);
-						}
-						byte[] logo = swapStream.toByteArray();
-						m.setLogo(logo);
-					} else {
-						m.setLogo(null);
-					}
+					m.setUserCount(rs.getInt("usercount"));
+					m.setGoodsCount(rs.getInt("goodscount"));
+					m.setUrl(rs.getString("url"));
+					m.setBrief(rs.getString("brief"));
 					// 将对象加到集合中
 					list.add((T) m);
 				}
@@ -898,7 +837,6 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 			}
 		}
 		return list;
-
 	}
 
 	@Override
@@ -919,21 +857,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((Users) t).setId(rs.getInt("id"));
 					((Users) t).setIdentity(rs.getString("identity"));
 					((Users) t).setPwd(rs.getString("pwd"));
-					if (rs.getBlob("photo") != null) {
-						Blob photo_blob = rs.getBlob("photo");
-						is = photo_blob.getBinaryStream();
-						// blob->InputStream->byte[]
-						ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
-						byte[] buff = new byte[100]; // buff用于存放循环读取的临时数据
-						int rc = 0;
-						while ((rc = is.read(buff, 0, 100)) > 0) {
-							swapStream.write(buff, 0, rc);
-						}
-						byte[] bphoto = swapStream.toByteArray();
-						((Users) t).setPhoto(bphoto);
-					} else {
-						((Users) t).setPhoto(null);
-					}
+					((Users) t).setPhoto(rs.getString("photo"));
 					((Users) t).setName(rs.getString("name"));
 					((Users) t).setSex(rs.getInt("sex"));
 					((Users) t).setJifen(rs.getInt("jifen"));
@@ -966,21 +890,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				while (rs.next()) {
 					((Types) t).setId(rs.getInt("id"));
 					((Types) t).setName(rs.getString("name"));
-					if (rs.getBlob("inco") != null) {
-						Blob inco_blob = rs.getBlob("inco");
-						is = inco_blob.getBinaryStream();
-						// blob->InputStream->byte[]
-						ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
-						byte[] buff = new byte[100]; // buff用于存放循环读取的临时数据
-						int rc = 0;
-						while ((rc = is.read(buff, 0, 100)) > 0) {
-							swapStream.write(buff, 0, rc);
-						}
-						byte[] binco = swapStream.toByteArray();
-						((Types) t).setInco(binco);
-					} else {
-						((Types) t).setInco(null);
-					}
+					((Types) t).setUrl(rs.getString("url"));
 				}
 			} else if (t instanceof Markets) {
 				sql = "select * from markets where id =?";
@@ -990,21 +900,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				while (rs.next()) {
 					((Markets) t).setId(rs.getInt("id"));
 					((Markets) t).setName(rs.getString("name"));
-					if (rs.getBlob("logo") != null) {
-						Blob inco_blob = rs.getBlob("logo");
-						is = inco_blob.getBinaryStream();
-						// blob->InputStream->byte[]
-						ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
-						byte[] buff = new byte[100]; // buff用于存放循环读取的临时数据
-						int rc = 0;
-						while ((rc = is.read(buff, 0, 100)) > 0) {
-							swapStream.write(buff, 0, rc);
-						}
-						byte[] logo = swapStream.toByteArray();
-						((Markets) t).setLogo(logo);
-					} else {
-						((Markets) t).setLogo(null);
-					}
+					((Markets) t).setUserCount(rs.getInt("usercount"));
+					((Markets) t).setGoodsCount(rs.getInt("goodscount"));
+					((Markets) t).setUrl(rs.getString("url"));
 					((Markets) t).setBrief(rs.getString("brief"));
 				}
 			} else if (t instanceof Orders) {
@@ -1170,21 +1068,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					u.setId(rs.getInt("id"));
 					u.setIdentity(rs.getString("identity"));
 					u.setPwd(rs.getString("pwd"));
-					if (rs.getBlob("photo") != null) {
-						Blob photo_blob = rs.getBlob("photo");
-						is = photo_blob.getBinaryStream();
-						// blob->InputStream->byte[]
-						ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
-						byte[] buff = new byte[100]; // buff用于存放循环读取的临时数据
-						int rc = 0;
-						while ((rc = is.read(buff, 0, 100)) > 0) {
-							swapStream.write(buff, 0, rc);
-						}
-						byte[] bphoto = swapStream.toByteArray();
-						u.setPhoto(bphoto);
-					}else{
-						u.setPhoto(null);						
-					}
+					u.setPhoto(rs.getString("photo"));
 					u.setName(rs.getString("name"));
 					u.setSex(rs.getInt("sex"));
 					u.setJifen(rs.getInt("jifen"));
@@ -1227,54 +1111,40 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					Types types = new Types();
 					types.setId(rs.getInt("id"));
 					types.setName(rs.getString("name"));
-					if (rs.getBlob("inco") != null) {
-						Blob inco_blob = rs.getBlob("inco");
-						is = inco_blob.getBinaryStream();
-						// blob->InputStream->byte[]
-						ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
-						byte[] buff = new byte[100]; // buff用于存放循环读取的临时数据
-						int rc = 0;
-						while ((rc = is.read(buff, 0, 100)) > 0) {
-							swapStream.write(buff, 0, rc);
-						}
-						byte[] binco = swapStream.toByteArray();
-						types.setInco(binco);
-					}else{
-						types.setInco(null);						
-					}
+					types.setUrl(rs.getString("url"));
 					// 将对象加到集合中
 					list.add((T) types);
 				}
 			} else if (t instanceof Markets) {
-				list = (List<T>) new ArrayList<Markets>();
-				sql = "select * from markets limit ?,?";
-				prep = conn.prepareStatement(sql);
-				prep.setInt(1, (curPage - 1) * pageSize);
-				prep.setInt(2, pageSize);
-				rs = prep.executeQuery();
-				while (rs.next()) {
-					Markets m = new Markets();
-					m.setId(rs.getInt("id"));
-					m.setName(rs.getString("name"));
-					if (rs.getBlob("logo") != null) {
-						Blob inco_blob = rs.getBlob("logo");
-						is = inco_blob.getBinaryStream();
-						// blob->InputStream->byte[]
-						ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
-						byte[] buff = new byte[100]; // buff用于存放循环读取的临时数据
-						int rc = 0;
-						while ((rc = is.read(buff, 0, 100)) > 0) {
-							swapStream.write(buff, 0, rc);
-						}
-						byte[] logo = swapStream.toByteArray();
-						m.setLogo(logo);
-					}else{
-						m.setLogo(null);						
-					}
-					m.setBrief(rs.getString("brief"));
-					// 将对象加到集合中
-					list.add((T) m);
-				}
+				// list = (List<T>) new ArrayList<Markets>();
+				// sql = "select * from markets limit ?,?";
+				// prep = conn.prepareStatement(sql);
+				// prep.setInt(1, (curPage - 1) * pageSize);
+				// prep.setInt(2, pageSize);
+				// rs = prep.executeQuery();
+				// while (rs.next()) {
+				// Markets m = new Markets();
+				// m.setId(rs.getInt("id"));
+				// m.setName(rs.getString("name"));
+				// if (rs.getBlob("logo") != null) {
+				// Blob inco_blob = rs.getBlob("logo");
+				// is = inco_blob.getBinaryStream();
+				// // blob->InputStream->byte[]
+				// ByteArrayOutputStream swapStream = new
+				// ByteArrayOutputStream();
+				// byte[] buff = new byte[100]; // buff用于存放循环读取的临时数据
+				// int rc = 0;
+				// while ((rc = is.read(buff, 0, 100)) > 0) {
+				// swapStream.write(buff, 0, rc);
+				// }
+				// byte[] logo = swapStream.toByteArray();
+				// m.setLogo(logo);
+				// }else{
+				// m.setLogo(null);
+				// }
+				// m.setBrief(rs.getString("brief"));
+				// // 将对象加到集合中
+				// list.add((T) m);
 			} else if (t instanceof Orders) {
 				list = (List<T>) new ArrayList<Orders>();
 				sql = "select * from orders limit ?,?";

@@ -5,7 +5,9 @@ import java.io.File;
 public class Markets {
 	private int id;
 	private String name;
-	private byte[] logo;
+	private int userCount;
+	private int goodsCount;
+	private String url;
 	private String brief;
 	
 	public int getId() {
@@ -20,11 +22,23 @@ public class Markets {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public byte[] getLogo() {
-		return logo;
+	public int getUserCount() {
+		return userCount;
 	}
-	public void setLogo(byte[] logo) {
-		this.logo = logo;
+	public void setUserCount(int userCount) {
+		this.userCount = userCount;
+	}
+	public int getGoodsCount() {
+		return goodsCount;
+	}
+	public void setGoodsCount(int goodsCount) {
+		this.goodsCount = goodsCount;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public String getBrief() {
 		return brief;
@@ -32,4 +46,10 @@ public class Markets {
 	public void setBrief(String brief) {
 		this.brief = brief;
 	}
+	@Override
+	public String toString() {
+		return "Markets [id=" + id + ", name=" + name + ", userCount=" + userCount + ", goodsCount=" + goodsCount
+				+ ", url=" + url + ", brief=" + brief + "]";
+	}
+	
 }

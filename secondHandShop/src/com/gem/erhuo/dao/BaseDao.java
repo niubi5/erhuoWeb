@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BaseDao<T> {
 	//存储
-	public void save(T t) throws Exception;
+	public int save(T t) throws Exception;
 	//删除
 	public void delete(int[] ids,T t) throws Exception;
 	//修改

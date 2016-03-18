@@ -98,4 +98,15 @@
     <servlet-name>ListMarketsServlet</servlet-name>
     <url-pattern>/ListMarketsServlet</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <description></description>
+    <display-name>AddGoodServlet</display-name>
+    <servlet-name>AddGoodServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.AddGoodServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddGoodServlet</servlet-name>
+    <url-pattern>/AddGoodServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

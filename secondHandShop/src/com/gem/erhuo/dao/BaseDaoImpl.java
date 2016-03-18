@@ -1,6 +1,5 @@
 package com.gem.erhuo.dao;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,14 +32,17 @@ import com.gem.erhuo.entity.Types;
 import com.gem.erhuo.entity.UserMarket;
 import com.gem.erhuo.entity.Users;
 import com.gem.erhuo.util.DBConnection;
+import com.mysql.jdbc.Statement;
 
 public class BaseDaoImpl<T> implements BaseDao<T> {
 	// 保存
 	@Override
-	public void save(T t) {
+	public int save(T t) {
 		Connection conn = null;
 		PreparedStatement prep = null;
 		InputStream is = null;
+		ResultSet rs = null;
+		int currentId = -1;
 		try {
 			// 1、连接数据库
 			conn = DBConnection.getConnection();
@@ -58,10 +60,11 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(6, ((Users) t).getJifen());
 				prep.setString(7, ((Users) t).getInvCode());
 				prep.executeUpdate();
+			
 
 			} else if (t instanceof Goods) {
 				sql = "insert into goods(userid,name,imformation,typeid,soldprice,buyprice,marketid,longitude,latitude,pubtime,state) values(?,?,?,?,?,?,?,?,?,?,?)";
-				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Goods) t).getUserId());
 				prep.setString(2, ((Goods) t).getName());
 				prep.setString(3, ((Goods) t).getImformation());
@@ -74,6 +77,12 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setDate(10, new java.sql.Date(((Goods) t).getPubTime().getTime()));
 				prep.setInt(11, ((Goods) t).getState());
 				prep.executeUpdate();
+				rs = prep.getGeneratedKeys();
+				if(rs.next()){
+					currentId = rs.getInt(1);
+				}
+				//获取当前插入商品的id
+				
 			} else if (t instanceof Types) {
 				sql = "insert into types(name,url) values(?,?)";
 				prep = conn.prepareStatement(sql);
@@ -207,7 +216,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				throw new RuntimeException(e);
 			}
 		}
-
+		return currentId;
 	}
 
 	// 删除

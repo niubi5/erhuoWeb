@@ -8,8 +8,8 @@ import com.gem.erhuo.entity.Goods;
 public class GoodService {
 	private GoodsDao gd = new GoodsDao();
 	//新增商品
-	public void save(Goods goods){
-		gd.save(goods);
+	public int save(Goods goods){
+		return gd.save(goods);
 	}
 	//获得分页商品
 	public List<Goods> getPage(Goods goods, int curPage, int pageSize){	

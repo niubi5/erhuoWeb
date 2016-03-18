@@ -15,6 +15,7 @@ import com.gem.erhuo.entity.Users;
 import com.gem.erhuo.service.GoodService;
 import com.gem.erhuo.service.UserService;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * Servlet implementation class AddGoodServlet
@@ -34,6 +35,9 @@ public class AddGoodServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//response.setCharacterEncoding("UTF-8");
+		//response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 //		String userId = request.getParameter("userId");
 //		String name = request.getParameter("name");
@@ -64,10 +68,11 @@ public class AddGoodServlet extends HttpServlet {
 //		}
 //		good.setState(Integer.parseInt(state));
 		String goodJson = request.getParameter("goodJson");
-		Gson gson = new Gson();
+		System.out.println(goodJson);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh-mm-ss").create();
 		Goods good = gson.fromJson(goodJson,Goods.class);
 		GoodService gs = new GoodService();
-		gs.save(good);
+		System.out.println(gs.save(good));
 		PrintWriter pw = response.getWriter();
 		//pw.write(c);
 	}

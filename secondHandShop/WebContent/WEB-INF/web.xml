@@ -51,13 +51,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>GoodsServlet</display-name>
-    <servlet-name>GoodsServlet</servlet-name>
-    <servlet-class>com.gem.erhuo.web.GoodsServlet</servlet-class>
+    <display-name>ListGoodsServlet</display-name>
+    <servlet-name>ListGoodsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.ListGoodsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GoodsServlet</servlet-name>
-    <url-pattern>/GoodsServlet</url-pattern>
+    <servlet-name>ListGoodsServlet</servlet-name>
+    <url-pattern>/ListGoodsServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

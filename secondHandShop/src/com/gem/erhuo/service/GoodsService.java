@@ -18,5 +18,9 @@ public class GoodsService {
 	public List<String> getGoodsUrls(int goodsId){
 		return gid.getGoodsImagesUrl(goodsId);
 	}
+	// 获得分页商品
+	public List<Goods> getPagedGoods(int curPage, int pageSize) {
+		return gd.getPagedGoods(curPage, pageSize);
+	}
 
 }

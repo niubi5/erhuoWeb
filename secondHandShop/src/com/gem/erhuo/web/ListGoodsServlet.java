@@ -32,18 +32,13 @@ public class ListGoodsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		BaseDaoImpl<Goods> baseDao = new BaseDaoImpl<Goods>();
-//		Goods good = baseDao.getByID(new Goods(), 1);
-//		Gson gson = new GsonBuilder()
-//				.setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-//		String json = gson.toJson(good);
-//		PrintWriter pw = response.getWriter();
-//		pw.print(json);
-//		pw.close();
+		// 获得参数
+		int curPage = Integer.parseInt(request.getParameter("curPage"));
+		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		// 获得商品集合
 		GoodsService gs = new GoodsService();
-		List<Goods> listGoods = gs.getAllGoods(new Goods());
+//		List<Goods> listGoods = gs.getAllGoods(new Goods());
+		List<Goods> listGoods = gs.getPagedGoods(curPage, pageSize);
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String str = gson.toJson(listGoods);

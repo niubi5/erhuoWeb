@@ -952,7 +952,6 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		PreparedStatement prep = null;
 		ResultSet rs = null;
 		String sql = null;
-		InputStream is;
 		try {
 			conn = DBConnection.getConnection();
 			if (t instanceof Users) {

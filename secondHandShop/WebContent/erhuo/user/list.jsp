@@ -99,7 +99,7 @@
 								<td>${s.identity}</td>
 								<td align="center">${s.name}</td>
 								<td><c:choose>
-										<c:when test="${s.sex == 1}">男</c:when>
+										<c:when test="${s.sex == 0}">男</c:when>
 										<c:otherwise>女</c:otherwise>
 									</c:choose></td>
 								<td>${s.jifen}</td>

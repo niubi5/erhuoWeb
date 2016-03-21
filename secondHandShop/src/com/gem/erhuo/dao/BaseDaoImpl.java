@@ -52,6 +52,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				sql = "insert into users(identity,pwd,photo,name,sex,jifen,invCode) values(?,?,?,?,?,?,?)";
 				// 3、获得PreparedStatement对象
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setString(1, ((Users) t).getIdentity());
 				prep.setString(2, ((Users) t).getPwd());
 				prep.setString(3, ((Users) t).getPhoto());
@@ -60,11 +61,14 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(6, ((Users) t).getJifen());
 				prep.setString(7, ((Users) t).getInvCode());
 				prep.executeUpdate();
-			
-
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof Goods) {
 				sql = "insert into goods(userid,name,imformation,typeid,soldprice,buyprice,marketid,longitude,latitude,pubtime,state) values(?,?,?,?,?,?,?,?,?,?,?)";
-				prep = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Goods) t).getUserId());
 				prep.setString(2, ((Goods) t).getName());
 				prep.setString(3, ((Goods) t).getImformation());
@@ -77,28 +81,42 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setDate(10, new java.sql.Date(((Goods) t).getPubTime().getTime()));
 				prep.setInt(11, ((Goods) t).getState());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();
-				if(rs.next()){
+				if (rs.next()) {
 					currentId = rs.getInt(1);
 				}
-				//获取当前插入商品的id
-				
+				// 获取当前插入商品的id
+
 			} else if (t instanceof Types) {
 				sql = "insert into types(name,url) values(?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setString(1, ((Types) t).getName());
 				prep.setString(2, ((Types) t).getUrl());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof Markets) {
 				sql = "insert into markets(name,url,brief) values(?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setString(1, ((Markets) t).getName());
 				prep.setString(2, ((Markets) t).getUrl());
 				prep.setString(3, ((Markets) t).getBrief());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof Orders) {
 				sql = "insert into orders(goodid,userid,ordernum,createtime,paytime,sendtime,completetime,state,logisticscom,logisticsnum) values(?,?,?,?,?,?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Orders) t).getGoodId());
 				prep.setInt(2, ((Orders) t).getUserId());
 				prep.setString(3, ((Orders) t).getOrderNum());
@@ -110,97 +128,174 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setString(9, ((Orders) t).getLogisticsCom());
 				prep.setString(10, ((Orders) t).getLogisticsCom());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof Helps) {
 				sql = "insert into helps(userid,title,detail,pubtime,state) values(?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Helps) t).getUserId());
 				prep.setString(2, ((Helps) t).getTitle());
 				prep.setString(3, ((Helps) t).getDetail());
 				prep.setDate(4, new java.sql.Date(((Helps) t).getPubTime().getTime()));
 				prep.setInt(5, ((Helps) t).getState());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof Donates) {
 				sql = "insert into donates(helpid,userid,dontime,logisticscom,logisticsnum) values(?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Donates) t).getHelpId());
 				prep.setInt(2, ((Donates) t).getUserId());
 				prep.setDate(3, new java.sql.Date(((Donates) t).getDonTime().getTime()));
 				prep.setString(4, ((Donates) t).getLogisticsCom());
 				prep.setString(5, ((Donates) t).getLogisticsNum());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof GoodsReports) {
 				sql = "insert into goodsreports(goodid,brief,reptime,state) values(?,?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((GoodsReports) t).getGoodId());
 				prep.setString(2, ((GoodsReports) t).getBrief());
 				prep.setDate(3, new java.sql.Date(((GoodsReports) t).getRepTime().getTime()));
 				prep.setInt(4, ((GoodsReports) t).getState());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof HelpsReports) {
 				sql = "insert into helpsreports(helpid,brief,reptime,state) values(?,?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((HelpsReports) t).getHelpId());
 				prep.setString(2, ((HelpsReports) t).getBrief());
 				prep.setDate(3, new java.sql.Date(((HelpsReports) t).getRepTime().getTime()));
 				prep.setInt(4, ((HelpsReports) t).getState());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof Messages) {
 				sql = "insert into messages(goodid,sendid,receiveid,words,sendtime) values(?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Messages) t).getGoodId());
 				prep.setInt(2, ((Messages) t).getSendId());
 				prep.setInt(3, ((Messages) t).getReceiveId());
 				prep.setString(4, ((Messages) t).getWords());
 				prep.setDate(5, new java.sql.Date(((Messages) t).getSendTime().getTime()));
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof PrizeGoods) {
 				sql = "insert into prizegoods(name,detail,price,count) values(?,?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setString(1, ((PrizeGoods) t).getName());
 				prep.setString(2, ((PrizeGoods) t).getDetail());
 				prep.setDouble(3, ((PrizeGoods) t).getPrice());
 				prep.setInt(4, ((PrizeGoods) t).getCount());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof GoodsImages) {
 				sql = "insert into goodsimages(goodid,url) values(?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((GoodsImages) t).getGoodId());
 				prep.setString(2, ((GoodsImages) t).getUrl());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof HelpsImages) {
 				sql = "insert into helpsimages(helpid,url) values(?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((HelpsImages) t).getHelpId());
 				prep.setString(2, ((HelpsImages) t).getUrl());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof PGoodsImages) {
 				sql = "insert into pgoodsimages(pgoodid,url) values(?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((PGoodsImages) t).getpGoodId());
 				prep.setString(2, ((PGoodsImages) t).getUrl());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof Address) {
 				sql = "insert into address(userid,name,phone,address) values(?,?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Address) t).getUserId());
 				prep.setString(2, ((Address) t).getName());
 				prep.setString(3, ((Address) t).getPhone());
 				prep.setString(4, ((Address) t).getAddress());
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof Collections) {
 				sql = "insert into collections(userid,goodid,clotime) values(?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Collections) t).getUserId());
 				prep.setInt(2, ((Collections) t).getGoodId());
 				prep.setDate(3, new java.sql.Date(((Collections) t).getColTime().getTime()));
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			} else if (t instanceof UserMarket) {
 				sql = "insert into usermarket(userid,marketid,foctime) values(?,?,?)";
 				prep = conn.prepareStatement(sql);
+				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((UserMarket) t).getUserId());
 				prep.setInt(2, ((UserMarket) t).getMarketId());
 				prep.setDate(3, new java.sql.Date(((UserMarket) t).getFocTime().getTime()));
 				prep.executeUpdate();
+				//获得当前插入的记录的自增长id
+				rs = prep.getGeneratedKeys();
+				if (rs.next()) {
+					currentId = rs.getInt(1);
+				}
 			}
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 			e.printStackTrace();
@@ -212,6 +307,8 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					conn.close();
 				if (is != null)
 					is.close();
+				if (rs != null)
+					rs.close();
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -355,6 +452,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					prep.close();
 				if (conn != null)
 					conn.close();
+
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}

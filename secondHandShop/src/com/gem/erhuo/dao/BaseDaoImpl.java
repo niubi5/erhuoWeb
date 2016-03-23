@@ -49,6 +49,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 			// 2、SQL语句
 			String sql = null;
 			if (t instanceof Users) {
+				
 				sql = "insert into users(identity,pwd,photo,name,sex,jifen,invCode) values(?,?,?,?,?,?,?)";
 				// 3、获得PreparedStatement对象
 				prep = conn.prepareStatement(sql);
@@ -75,7 +76,11 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(4, ((Goods) t).getTypeId());
 				prep.setDouble(5, ((Goods) t).getSoldPrice());
 				prep.setDouble(6, ((Goods) t).getBuyPrice());
-				prep.setInt(7, ((Goods) t).getMarketId());
+				if(((Goods) t).getMarketId() == 0){
+					prep.setObject(7, null);
+				}else{
+					prep.setInt(7, ((Goods) t).getMarketId());					
+				}
 				prep.setDouble(8, ((Goods) t).getLongitude());
 				prep.setDouble(9, ((Goods) t).getLatitude());
 				prep.setDate(10, new java.sql.Date(((Goods) t).getPubTime().getTime()));

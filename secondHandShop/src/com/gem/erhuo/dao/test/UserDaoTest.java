@@ -31,4 +31,5 @@ public class UserDaoTest {
 	public void getUserByIdentity() {
 		System.out.println(ud.getUserByIdentity("15071048315").getPwd());
 	}
+	
 }

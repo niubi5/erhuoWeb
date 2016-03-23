@@ -14,4 +14,14 @@ public class FileDirectory {
 		}
 		return p.getProperty("fileDirectory");
 	} 
+	public static String getHttpUrl(){
+		Properties p = new Properties();
+		try {
+			p.load(FileDirectory.class.getResourceAsStream("fd.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return p.getProperty("httpUrl");
+	}
 }

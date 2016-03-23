@@ -121,4 +121,14 @@
 		<servlet-name>addGoodImagesServlet</servlet-name>
 		<url-pattern>/addGoodImagesServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ListGoodsServlet</display-name>
+		<servlet-name>ListGoodsServlet</servlet-name>
+		<servlet-class>com.gem.erhuo.web.ListGoodsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ListGoodsServlet</servlet-name>
+		<url-pattern>/ListGoodsServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

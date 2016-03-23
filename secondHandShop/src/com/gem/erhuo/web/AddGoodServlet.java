@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.gem.erhuo.entity.Goods;
 import com.gem.erhuo.entity.GoodsImages;
 import com.gem.erhuo.entity.Users;
-import com.gem.erhuo.service.GoodSImagesService;
+import com.gem.erhuo.service.GoodsImagesService;
 import com.gem.erhuo.service.GoodService;
 import com.gem.erhuo.service.UserService;
 import com.gem.erhuo.util.FileDirectory;
@@ -100,7 +100,7 @@ public class AddGoodServlet extends HttpServlet {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh-mm-ss").create();
 			Goods good = gson.fromJson(goodJson,Goods.class);
 			GoodService gs = new GoodService();
-			GoodSImagesService gis = new GoodSImagesService();
+			GoodsImagesService gis = new GoodsImagesService();
 			//保存商品文字信息，返回数据库自增长id
 			int currentId = gs.save(good);
 			System.out.println(currentId);

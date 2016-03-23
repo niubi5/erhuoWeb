@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gem.erhuo.entity.Goods;
 import com.gem.erhuo.entity.Users;
-import com.gem.erhuo.service.GoodSImagesService;
+import com.gem.erhuo.service.GoodsImagesService;
 import com.gem.erhuo.service.GoodsService;
 import com.gem.erhuo.service.UserService;
 import com.google.gson.Gson;

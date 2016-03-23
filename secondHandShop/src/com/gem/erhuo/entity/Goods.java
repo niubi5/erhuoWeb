@@ -1,8 +1,9 @@
 package com.gem.erhuo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Goods {
+public class Goods implements Serializable{
 	private int id;
 	private int userId;
 	private String name;

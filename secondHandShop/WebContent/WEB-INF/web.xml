@@ -98,8 +98,7 @@
     <servlet-name>ListMarketsServlet</servlet-name>
     <url-pattern>/ListMarketsServlet</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <description></description>
     <display-name>AddGoodServlet</display-name>
     <servlet-name>AddGoodServlet</servlet-name>
@@ -108,5 +107,15 @@
   <servlet-mapping>
     <servlet-name>AddGoodServlet</servlet-name>
     <url-pattern>/AddGoodServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetGoodsImagesServlet</display-name>
+    <servlet-name>GetGoodsImagesServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetGoodsImagesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetGoodsImagesServlet</servlet-name>
+    <url-pattern>/GetGoodsImagesServlet</url-pattern>
   </servlet-mapping>
 </web-app>

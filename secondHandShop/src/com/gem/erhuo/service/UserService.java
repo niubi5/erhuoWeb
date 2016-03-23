@@ -11,6 +11,9 @@ public class UserService {
 	public void save(Users user){
 		ud.save(user);
 	}
+	public Users getById(int id){
+		return ud.getByID(new Users(), id);
+	}
 	//删除用户
 	public void delete(String[] ids, Users user){
 		int[] newIds = new int[ids.length];

@@ -3,6 +3,7 @@ package com.gem.erhuo.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,8 @@ public class GoodsDao extends BaseDaoImpl<Goods> {
 		// TODO Auto-generated method stub
 		return super.getAll(t);
 	}
-	
-	public List<Goods> getPagedGoods(int curPage, int pageSize){
+
+	public List<Goods> getPagedGoods(int curPage, int pageSize) {
 		Connection conn = null;
 		PreparedStatement prep = null;
 		ResultSet rs = null;
@@ -30,7 +31,7 @@ public class GoodsDao extends BaseDaoImpl<Goods> {
 			prep.setInt(1, (curPage - 1) * pageSize);
 			prep.setInt(2, pageSize);
 			rs = prep.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				Goods goods = new Goods();
 				goods.setId(rs.getInt("id"));
 				goods.setUserId(rs.getInt("userid"));
@@ -48,9 +49,19 @@ public class GoodsDao extends BaseDaoImpl<Goods> {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (prep != null)
+					prep.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return listGoods;
 	}
 
-	
 }

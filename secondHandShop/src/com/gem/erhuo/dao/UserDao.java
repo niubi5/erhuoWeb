@@ -1,16 +1,11 @@
 package com.gem.erhuo.dao;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import com.gem.erhuo.entity.Users;
 import com.gem.erhuo.util.DBConnection;

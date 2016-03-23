@@ -118,4 +118,5 @@
     <servlet-name>GetGoodsImagesServlet</servlet-name>
     <url-pattern>/GetGoodsImagesServlet</url-pattern>
   </servlet-mapping>
+
 </web-app>

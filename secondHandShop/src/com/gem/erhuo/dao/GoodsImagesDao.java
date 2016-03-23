@@ -1,6 +1,8 @@
 package com.gem.erhuo.dao;
 
-import java.io.IOException;
+import com.gem.erhuo.entity.GoodsImages;
+
+	
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

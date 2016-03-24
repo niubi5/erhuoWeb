@@ -45,4 +45,8 @@ public class UserService {
 			return null;
 		}
 	}
+	//修改密码
+		public void update(String phone,String pwd){
+			ud.update(phone,pwd);
+		}
 }

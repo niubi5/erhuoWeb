@@ -3,6 +3,7 @@ package com.gem.erhuo.web;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -120,6 +121,7 @@ public class AddGoodServlet extends HttpServlet {
 					//客户端传过来的图片名
 					String imageName = poster.getFileName();
 					File file = new File(getServletContext().getRealPath("GoodsImages"),""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
+					
 					//File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
 					//文件的保存路径
 					String saveImageName = file.getAbsolutePath();
@@ -128,8 +130,10 @@ public class AddGoodServlet extends HttpServlet {
 					//将存在本地的图片路径写入数据库图片表，并与对应的商品表的关联起来
 					GoodsImages gi = new GoodsImages();
 					gi.setGoodId(currentId);
-					gi.setUrl(saveImageName);
+					gi.setUrl((FileDirectory.getHttpUrl()+saveImageName.substring(saveImageName.lastIndexOf("GoodsImages"), saveImageName.length())).replace('\\', '/'));
 					System.out.println(gis.save(gi));
+					
+					//System.out.println(System.getProperty("user.dir"));
 				}
 			}
 		} catch (SmartUploadException e) {

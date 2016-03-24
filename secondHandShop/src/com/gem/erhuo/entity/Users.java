@@ -3,7 +3,7 @@ package com.gem.erhuo.entity;
 import java.io.File;
 import java.io.Serializable;
 
-public class Goods implements Serializable{
+public class Users implements Serializable{
 	private int id;
 	private String identity;
 	private String pwd;

@@ -118,5 +118,14 @@
     <servlet-name>GetGoodsImagesServlet</servlet-name>
     <url-pattern>/GetGoodsImagesServlet</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <description></description>
+    <display-name>ClassificationServlet</display-name>
+    <servlet-name>ClassificationServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.ClassificationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ClassificationServlet</servlet-name>
+    <url-pattern>/ClassificationServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

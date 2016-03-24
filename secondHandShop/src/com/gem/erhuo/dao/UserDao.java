@@ -59,4 +59,23 @@ public class UserDao extends BaseDaoImpl<Users> {
 		return u;
 
 	}
+	//修改密码
+		public void update(String phone,String pwd) {
+			Connection conn = null;
+			PreparedStatement prep = null;
+			InputStream is = null;
+			
+				try {
+					conn = DBConnection.getConnection();
+					String 	sql = "update users set pwd=? where identity=?";
+					prep = conn.prepareStatement(sql);
+					prep.setString(1, pwd);
+					prep.setString(2, phone);
+					prep.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+		}
 }

@@ -55,17 +55,16 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 	}
 	
 	//获得分类的图片集合
-	public List<Goods> getClassificaImagesUrl(int tag){
-		List<Goods> urls = new ArrayList<Goods>();
+	public List<Goods> getClassificaImages(int tag){
+		List<Goods> listGoods = new ArrayList<Goods>();
 		Connection conn = null;
 		PreparedStatement prep = null;
 		ResultSet rs = null;
-		Properties prop = null;
 		String sql=null;
 		try {
-			prop = new Properties();
 			conn = DBConnection.getConnection();
 			if(tag==1){
+				System.out.println("呵呵呵呵呵");
 				sql="select * from goods where name like '%苹果%' or name like '%iphone%'";
 			}else if(tag==2){
 				sql="select * from goods where name like '%平板电脑%' ";
@@ -83,34 +82,47 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 				sql="select * from goods where name like '%化妆%' or name like '%霜%'";
 			}
 			prep = conn.prepareStatement(sql);
+			System.out.println(sql);
 			rs = prep.executeQuery();
-//			while (rs.next()) {
-//				Goods goods = new Goods();
-//				goods.setId(rs.getInt("id"));
-//				goods.setUserId(rs.getInt("userid"));
-//				goods.setName(rs.getString("name"));
-//				goods.setImformation(rs.getString("imformation"));
-//				goods.setTypeId(rs.getInt("typeid"));
-//				goods.setSoldPrice(rs.getDouble("soldprice"));
-//				goods.setBuyPrice(rs.getDouble("buyprice"));
-//				goods.setMarketId(rs.getInt("marketid"));
-//				goods.setLongitude(rs.getDouble("longitude"));
-//				goods.setLatitude(rs.getDouble("latitude"));
-//				goods.setPubTime(rs.getDate("pubtime"));
-//				goods.setState(rs.getInt("state"));
-//				listGoods.add(goods);
-//			}
+			System.out.println(rs.next());
+			while (rs.next()) {
+				System.out.println("进来了11111");
+				Goods goods = new Goods();
+				goods.setId(rs.getInt("id"));
+				goods.setUserId(rs.getInt("userid"));
+				goods.setName(rs.getString("name"));
+				goods.setImformation(rs.getString("imformation"));
+				goods.setTypeId(rs.getInt("typeid"));
+				goods.setSoldPrice(rs.getDouble("soldprice"));
+				goods.setBuyPrice(rs.getDouble("buyprice"));
+				goods.setMarketId(rs.getInt("marketid"));
+				goods.setLongitude(rs.getDouble("longitude"));
+				goods.setLatitude(rs.getDouble("latitude"));
+				goods.setPubTime(rs.getDate("pubtime"));
+				goods.setState(rs.getInt("state"));
+				listGoods.add(goods);
+				if(goods != null){
+					System.out.println(goods.getName());
+				}
+			    
+				
+				
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
-		
-		
-		
-		
-		return null;
-	     
+		}finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (prep != null)
+					prep.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		return listGoods;
 	}
 	
 }

@@ -43,6 +43,7 @@ public class ListGoodsServlet extends HttpServlet {
 		// 获得参数
 		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		System.out.println(curPage + "");
 		// 获得商品集合
 		GoodsService gs = new GoodsService();
 		UserService us = new UserService();

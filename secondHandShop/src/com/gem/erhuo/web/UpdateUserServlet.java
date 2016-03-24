@@ -32,7 +32,7 @@ public class UpdateUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String usersphone=request.getParameter("phone");
+		String usersphone=request.getParameter("identity");
 		String userspwd=request.getParameter("pwd");
 		String userStr = null;
 		UserService us = new UserService();

@@ -82,9 +82,9 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 				sql="select * from goods where name like '%化妆%' or name like '%霜%'";
 			}
 			prep = conn.prepareStatement(sql);
-			System.out.println(sql);
+			System.out.println(prep);
 			rs = prep.executeQuery();
-			System.out.println(rs.next());
+			System.out.println(rs);
 			while (rs.next()) {
 				System.out.println("进来了11111");
 				Goods goods = new Goods();
@@ -104,9 +104,6 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 				if(goods != null){
 					System.out.println(goods.getName());
 				}
-			    
-				
-				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

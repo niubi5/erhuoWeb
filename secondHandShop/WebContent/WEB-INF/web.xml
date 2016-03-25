@@ -128,4 +128,14 @@
     <servlet-name>ClassificationServlet</servlet-name>
     <url-pattern>/ClassificationServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserAddressServlet</display-name>
+    <servlet-name>UserAddressServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.UserAddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserAddressServlet</servlet-name>
+    <url-pattern>/UserAddressServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Collections {
 	private int userId;
 	private int GoodId;
-	private Date colTime;
+	private String colTime;
 	
 	public int getUserId() {
 		return userId;
@@ -19,10 +19,10 @@ public class Collections {
 	public void setGoodId(int goodId) {
 		GoodId = goodId;
 	}
-	public Date getColTime() {
+	public String getColTime() {
 		return colTime;
 	}
-	public void setColTime(Date colTime) {
+	public void setColTime(String colTime) {
 		this.colTime = colTime;
 	}
 	

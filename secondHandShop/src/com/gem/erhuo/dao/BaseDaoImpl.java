@@ -32,9 +32,12 @@ import com.gem.erhuo.entity.Types;
 import com.gem.erhuo.entity.UserMarket;
 import com.gem.erhuo.entity.Users;
 import com.gem.erhuo.util.DBConnection;
+import com.gem.erhuo.util.Url;
 import com.mysql.jdbc.Statement;
 
 public class BaseDaoImpl<T> implements BaseDao<T> {
+	
+	String urlHead = Url.getHeadUrl();
 	// 保存
 	@Override
 	public int save(T t) {
@@ -83,7 +86,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				}
 				prep.setDouble(8, ((Goods) t).getLongitude());
 				prep.setDouble(9, ((Goods) t).getLatitude());
-				prep.setDate(10, new java.sql.Date(((Goods) t).getPubTime().getTime()));
+				prep.setString(10,(((Goods) t).getPubTime()));
 				prep.setInt(11, ((Goods) t).getState());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
@@ -125,17 +128,17 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(1, ((Orders) t).getGoodId());
 				prep.setInt(2, ((Orders) t).getUserId());
 				prep.setString(3, ((Orders) t).getOrderNum());
-				prep.setDate(4, new java.sql.Date(((Orders) t).getCreateTime().getTime()));
-				prep.setDate(5, new java.sql.Date(((Orders) t).getPayTime().getTime()));
+				prep.setString(4, ((Orders) t).getCreateTime());
+				prep.setString(5, ((Orders) t).getPayTime());
 				if(((Orders) t).getSendTime() == null){
 					prep.setDate(6,null);
 				}else{
-					prep.setDate(6, new java.sql.Date(((Orders) t).getSendTime().getTime()));					
+					prep.setString(6, (((Orders) t).getSendTime()));					
 				}
 				if(((Orders) t).getCompleteTime() == null){
 					prep.setDate(7,null);
 				}else{
-					prep.setDate(7, new java.sql.Date(((Orders) t).getCompleteTime().getTime()));prep.setDate(6,null);					
+					prep.setString(7, (((Orders) t).getCompleteTime()));					
 				}
 				prep.setInt(8, ((Orders) t).getState());
 				if(((Orders) t).getLogisticsCom() == null){
@@ -161,7 +164,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(1, ((Helps) t).getUserId());
 				prep.setString(2, ((Helps) t).getTitle());
 				prep.setString(3, ((Helps) t).getDetail());
-				prep.setDate(4, new java.sql.Date(((Helps) t).getPubTime().getTime()));
+				prep.setString(4, (((Helps) t).getPubTime()));
 				prep.setInt(5, ((Helps) t).getState());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
@@ -175,7 +178,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Donates) t).getHelpId());
 				prep.setInt(2, ((Donates) t).getUserId());
-				prep.setDate(3, new java.sql.Date(((Donates) t).getDonTime().getTime()));
+				prep.setString(3, (((Donates) t).getDonTime()));
 				prep.setString(4, ((Donates) t).getLogisticsCom());
 				prep.setString(5, ((Donates) t).getLogisticsNum());
 				prep.executeUpdate();
@@ -190,7 +193,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((GoodsReports) t).getGoodId());
 				prep.setString(2, ((GoodsReports) t).getBrief());
-				prep.setDate(3, new java.sql.Date(((GoodsReports) t).getRepTime().getTime()));
+				prep.setString(3, (((GoodsReports) t).getRepTime()));
 				prep.setInt(4, ((GoodsReports) t).getState());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
@@ -204,7 +207,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((HelpsReports) t).getHelpId());
 				prep.setString(2, ((HelpsReports) t).getBrief());
-				prep.setDate(3, new java.sql.Date(((HelpsReports) t).getRepTime().getTime()));
+				prep.setString(3, (((HelpsReports) t).getRepTime()));
 				prep.setInt(4, ((HelpsReports) t).getState());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
@@ -220,7 +223,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(2, ((Messages) t).getSendId());
 				prep.setInt(3, ((Messages) t).getReceiveId());
 				prep.setString(4, ((Messages) t).getWords());
-				prep.setDate(5, new java.sql.Date(((Messages) t).getSendTime().getTime()));
+				prep.setString(5, (((Messages) t).getSendTime()));
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();
@@ -297,7 +300,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Collections) t).getUserId());
 				prep.setInt(2, ((Collections) t).getGoodId());
-				prep.setDate(3, new java.sql.Date(((Collections) t).getColTime().getTime()));
+				prep.setString(3, (((Collections) t).getColTime()));
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();
@@ -310,7 +313,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((UserMarket) t).getUserId());
 				prep.setInt(2, ((UserMarket) t).getMarketId());
-				prep.setDate(3, new java.sql.Date(((UserMarket) t).getFocTime().getTime()));
+				prep.setString(3, (((UserMarket) t).getFocTime()));
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();
@@ -514,7 +517,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(7, ((Goods) t).getMarketId());
 				prep.setDouble(8, ((Goods) t).getLongitude());
 				prep.setDouble(9, ((Goods) t).getLatitude());
-				prep.setDate(10, new java.sql.Date(((Goods) t).getPubTime().getTime()));
+				prep.setString(10, (((Goods) t).getPubTime()));
 				prep.setInt(11, ((Goods) t).getState());
 				prep.setInt(12, ((Goods) t).getId());
 				prep.executeUpdate();
@@ -541,10 +544,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(1, ((Orders) t).getGoodId());
 				prep.setInt(2, ((Orders) t).getUserId());
 				prep.setString(3, ((Orders) t).getOrderNum());
-				prep.setDate(4, new java.sql.Date(((Orders) t).getCreateTime().getTime()));
-				prep.setDate(5, new java.sql.Date(((Orders) t).getPayTime().getTime()));
-				prep.setDate(6, new java.sql.Date(((Orders) t).getSendTime().getTime()));
-				prep.setDate(7, new java.sql.Date(((Orders) t).getCompleteTime().getTime()));
+				prep.setString(4, (((Orders) t).getCreateTime()));
+				prep.setString(5, (((Orders) t).getPayTime()));
+				prep.setString(6, (((Orders) t).getSendTime()));
+				prep.setString(7, (((Orders) t).getCompleteTime()));
 				prep.setInt(8, ((Orders) t).getState());
 				prep.setString(9, ((Orders) t).getLogisticsCom());
 				prep.setString(10, ((Orders) t).getLogisticsNum());
@@ -556,7 +559,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(1, ((Helps) t).getUserId());
 				prep.setString(2, ((Helps) t).getTitle());
 				prep.setString(3, ((Helps) t).getDetail());
-				prep.setDate(4, new java.sql.Date(((Helps) t).getPubTime().getTime()));
+				prep.setString(4, (((Helps) t).getPubTime()));
 				prep.setInt(5, ((Helps) t).getState());
 				prep.setInt(6, ((Helps) t).getId());
 				prep.executeUpdate();
@@ -565,7 +568,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql);
 				prep.setInt(1, ((Donates) t).getHelpId());
 				prep.setInt(2, ((Donates) t).getUserId());
-				prep.setDate(3, new java.sql.Date(((Donates) t).getDonTime().getTime()));
+				prep.setString(3, (((Donates) t).getDonTime()));
 				prep.setString(4, ((Donates) t).getLogisticsCom());
 				prep.setString(5, ((Donates) t).getLogisticsNum());
 				prep.setInt(6, ((Donates) t).getId());
@@ -575,7 +578,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql);
 				prep.setInt(1, ((GoodsReports) t).getGoodId());
 				prep.setString(2, ((GoodsReports) t).getBrief());
-				prep.setDate(3, new java.sql.Date(((GoodsReports) t).getRepTime().getTime()));
+				prep.setString(3, (((GoodsReports) t).getRepTime()));
 				prep.setInt(4, ((GoodsReports) t).getState());
 				prep.setInt(5, ((GoodsReports) t).getId());
 				prep.executeUpdate();
@@ -584,7 +587,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql);
 				prep.setInt(1, ((HelpsReports) t).getHelpId());
 				prep.setString(2, ((HelpsReports) t).getBrief());
-				prep.setDate(3, new java.sql.Date(((HelpsReports) t).getRepTime().getTime()));
+				prep.setString(3, (((HelpsReports) t).getRepTime()));
 				prep.setInt(4, ((HelpsReports) t).getState());
 				prep.setInt(5, ((HelpsReports) t).getId());
 				prep.executeUpdate();
@@ -595,7 +598,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(2, ((Messages) t).getSendId());
 				prep.setInt(3, ((Messages) t).getReceiveId());
 				prep.setString(4, ((Messages) t).getWords());
-				prep.setDate(5, new java.sql.Date(((Messages) t).getSendTime().getTime()));
+				prep.setString(5, (((Messages) t).getSendTime()));
 				prep.setInt(6, ((Messages) t).getId());
 				prep.executeUpdate();
 			} else if (t instanceof PrizeGoods) {
@@ -643,8 +646,8 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				// prep = conn.prepareStatement(sql);
 				// prep.setInt(1, ((Collections) t).getUserId());
 				// prep.setInt(2, ((Collections) t).getGoodId());
-				// prep.setDate(3, new java.sql.Date(((Collections)
-				// t).getColTime().getTime()));
+				// prep.setString(3, (((Collections)
+				// t).getColTime()));
 				// prep.executeUpdate();
 			} else if (t instanceof UserMarket) {
 				// sql = "update usermarket set userid=?,marketid=?,foctime=?
@@ -652,8 +655,8 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				// prep = conn.prepareStatement(sql);
 				// prep.setInt(1, ((UserMarket) t).getUserId());
 				// prep.setInt(2, ((UserMarket) t).getMarketId());
-				// prep.setDate(3, new java.sql.Date(((UserMarket)
-				// t).getFocTime().getTime()));
+				// prep.setString(3, (((UserMarket)
+				// t).getFocTime()));
 				// prep.executeUpdate();
 			}
 		} catch (Exception e) {
@@ -694,7 +697,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					u.setId(rs.getInt("id"));
 					u.setIdentity(rs.getString("identity"));
 					u.setPwd(rs.getString("pwd"));
-					u.setPhoto(rs.getString("photo"));
+					u.setPhoto(urlHead + "/" +rs.getString("photo"));
 					u.setName(rs.getString("name"));
 					u.setSex(rs.getInt("sex"));
 					u.setJifen(rs.getInt("jifen"));
@@ -719,7 +722,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					g.setMarketId(rs.getInt("marketid"));
 					g.setLongitude(rs.getDouble("longitude"));
 					g.setLatitude(rs.getDouble("latitude"));
-					g.setPubTime(rs.getDate("pubtime"));
+					g.setPubTime(rs.getString("pubtime"));
 					g.setState(rs.getInt("state"));
 					// 将对象加到集合中
 					list.add((T) g);
@@ -748,7 +751,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					m.setName(rs.getString("name"));
 					m.setUserCount(rs.getInt("usercount"));
 					m.setGoodsCount(rs.getInt("goodscount"));
-					m.setUrl(rs.getString("url"));
+					m.setUrl(urlHead + "/" +rs.getString("url"));
 					m.setBrief(rs.getString("brief"));
 					// 将对象加到集合中
 					list.add((T) m);
@@ -764,10 +767,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					o.setGoodId(rs.getInt("goodid"));
 					o.setUserId(rs.getInt("userid"));
 					o.setOrderNum(rs.getString("ordernum"));
-					o.setCreateTime(rs.getDate("createtime"));
-					o.setPayTime(rs.getDate("paytime"));
-					o.setSendTime(rs.getDate("sendtime"));
-					o.setCompleteTime(rs.getDate("completetime"));
+					o.setCreateTime(rs.getString("createtime"));
+					o.setPayTime(rs.getString("paytime"));
+					o.setSendTime(rs.getString("sendtime"));
+					o.setCompleteTime(rs.getString("completetime"));
 					o.setState(rs.getInt("state"));
 					o.setLogisticsCom(rs.getString("logisticscom"));
 					o.setLogisticsNum(rs.getString("logisticsnum"));
@@ -785,7 +788,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					h.setUserId(rs.getInt("userid"));
 					h.setTitle(rs.getString("title"));
 					h.setDetail(rs.getString("detail"));
-					h.setPubTime(rs.getDate("pubtime"));
+					h.setPubTime(rs.getString("pubtime"));
 					h.setState(rs.getInt("state"));
 					// 将对象加到集合中
 					list.add((T) h);
@@ -800,7 +803,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					d.setId(rs.getInt("id"));
 					d.setHelpId(rs.getInt("helpid"));
 					d.setUserId(rs.getInt("userid"));
-					d.setDonTime(rs.getDate("dontime"));
+					d.setDonTime(rs.getString("dontime"));
 					d.setLogisticsCom(rs.getString("logisticscom"));
 					d.setLogisticsNum(rs.getString("logisticsnum"));
 					// 将对象加到集合中
@@ -816,7 +819,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					gr.setId(rs.getInt("id"));
 					gr.setGoodId(rs.getInt("goodid"));
 					gr.setBrief(rs.getString("brief"));
-					gr.setRepTime(rs.getDate("reptime"));
+					gr.setRepTime(rs.getString("reptime"));
 					gr.setState(rs.getInt("state"));
 					// 将对象加到集合中
 					list.add((T) gr);
@@ -831,7 +834,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					hr.setId(rs.getInt("id"));
 					hr.setHelpId(rs.getInt("helpid"));
 					hr.setBrief(rs.getString("brief"));
-					hr.setRepTime(rs.getDate("reptime"));
+					hr.setRepTime(rs.getString("reptime"));
 					hr.setState(rs.getInt("state"));
 					// 将对象加到集合中
 					list.add((T) hr);
@@ -848,7 +851,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					m.setSendId(rs.getInt("sendid"));
 					m.setReceiveId(rs.getInt("receiveid"));
 					m.setWords(rs.getString("words"));
-					m.setSendTime(rs.getDate("sendtime"));
+					m.setSendTime(rs.getString("sendtime"));
 					// 将对象加到集合中
 					list.add((T) m);
 				}
@@ -930,7 +933,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					Collections c = new Collections();
 					c.setUserId(rs.getInt("userid"));
 					c.setGoodId(rs.getInt("goodid"));
-					c.setColTime(rs.getDate("coltime"));
+					c.setColTime(rs.getString("coltime"));
 					// 将对象加到集合中
 					list.add((T) c);
 				}
@@ -943,7 +946,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					UserMarket um = new UserMarket();
 					um.setUserId(rs.getInt("userid"));
 					um.setMarketId(rs.getInt("marketid"));
-					um.setFocTime(rs.getDate("foctime"));
+					um.setFocTime(rs.getString("foctime"));
 					// 将对象加到集合中
 					list.add((T) um);
 				}
@@ -1006,7 +1009,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((Goods) t).setMarketId(rs.getInt("marketid"));
 					((Goods) t).setLongitude(rs.getDouble("longitude"));
 					((Goods) t).setLatitude(rs.getDouble("latitude"));
-					((Goods) t).setPubTime(rs.getDate("pubtime"));
+					((Goods) t).setPubTime(rs.getString("pubtime"));
 					((Goods) t).setState(rs.getInt("state"));
 				}
 			} else if (t instanceof Types) {
@@ -1044,7 +1047,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((Helps) t).setUserId(rs.getInt("userid"));
 					((Helps) t).setTitle(rs.getString("title"));
 					((Helps) t).setDetail(rs.getString("detail"));
-					((Helps) t).setPubTime(rs.getDate("pubtime"));
+					((Helps) t).setPubTime(rs.getString("pubtime"));
 					((Helps) t).setState(rs.getInt("state"));
 				}
 			} else if (t instanceof Donates) {
@@ -1056,7 +1059,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((Donates) t).setId(rs.getInt("id"));
 					((Donates) t).setHelpId(rs.getInt("helpid"));
 					((Donates) t).setUserId(rs.getInt("userid"));
-					((Donates) t).setDonTime(rs.getDate("dontime"));
+					((Donates) t).setDonTime(rs.getString("dontime"));
 					((Donates) t).setLogisticsCom(rs.getString("logisticscom"));
 					((Donates) t).setLogisticsNum(rs.getString("logisticsnum"));
 				}
@@ -1069,7 +1072,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((GoodsReports) t).setId(rs.getInt("id"));
 					((GoodsReports) t).setGoodId(rs.getInt("goodid"));
 					((GoodsReports) t).setBrief(rs.getString("brief"));
-					((GoodsReports) t).setRepTime(rs.getDate("reptime"));
+					((GoodsReports) t).setRepTime(rs.getString("reptime"));
 					((GoodsReports) t).setState(rs.getInt("state"));
 				}
 			} else if (t instanceof HelpsReports) {
@@ -1081,7 +1084,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((HelpsReports) t).setId(rs.getInt("id"));
 					((HelpsReports) t).setHelpId(rs.getInt("helpid"));
 					((HelpsReports) t).setBrief(rs.getString("brief"));
-					((HelpsReports) t).setRepTime(rs.getDate("reptime"));
+					((HelpsReports) t).setRepTime(rs.getString("reptime"));
 					((HelpsReports) t).setState(rs.getInt("state"));
 				}
 			} else if (t instanceof Messages) {
@@ -1095,7 +1098,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((Messages) t).setSendId(rs.getInt("sendid"));
 					((Messages) t).setReceiveId(rs.getInt("receiveid"));
 					((Messages) t).setWords(rs.getString("words"));
-					((Messages) t).setSendTime(rs.getDate("sendtime"));
+					((Messages) t).setSendTime(rs.getString("sendtime"));
 				}
 			} else if (t instanceof PrizeGoods) {
 				sql = "select * from prizegoods where id =?";
@@ -1222,7 +1225,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					g.setMarketId(rs.getInt("marketid"));
 					g.setLongitude(rs.getDouble("longitude"));
 					g.setLatitude(rs.getDouble("latitude"));
-					g.setPubTime(rs.getDate("pubtime"));
+					g.setPubTime(rs.getString("pubtime"));
 					g.setState(rs.getInt("state"));
 					// 将对象加到集合中
 					list.add((T) g);
@@ -1285,10 +1288,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					o.setGoodId(rs.getInt("goodid"));
 					o.setUserId(rs.getInt("userid"));
 					o.setOrderNum(rs.getString("ordernum"));
-					o.setCreateTime(rs.getDate("createtime"));
-					o.setPayTime(rs.getDate("paytime"));
-					o.setSendTime(rs.getDate("sendtime"));
-					o.setCompleteTime(rs.getDate("completetime"));
+					o.setCreateTime(rs.getString("createtime"));
+					o.setPayTime(rs.getString("paytime"));
+					o.setSendTime(rs.getString("sendtime"));
+					o.setCompleteTime(rs.getString("completetime"));
 					o.setState(rs.getInt("state"));
 					o.setLogisticsCom(rs.getString("logisticscom"));
 					o.setLogisticsNum(rs.getString("logisticsnum"));
@@ -1308,7 +1311,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					h.setUserId(rs.getInt("userid"));
 					h.setTitle(rs.getString("title"));
 					h.setDetail(rs.getString("detail"));
-					h.setPubTime(rs.getDate("pubtime"));
+					h.setPubTime(rs.getString("pubtime"));
 					h.setState(rs.getInt("state"));
 					// 将对象加到集合中
 					list.add((T) h);
@@ -1325,7 +1328,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					d.setId(rs.getInt("id"));
 					d.setHelpId(rs.getInt("helpid"));
 					d.setUserId(rs.getInt("userid"));
-					d.setDonTime(rs.getDate("dontime"));
+					d.setDonTime(rs.getString("dontime"));
 					d.setLogisticsCom(rs.getString("logisticscom"));
 					d.setLogisticsNum(rs.getString("logisticsnum"));
 					// 将对象加到集合中
@@ -1343,7 +1346,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					gr.setId(rs.getInt("id"));
 					gr.setGoodId(rs.getInt("goodid"));
 					gr.setBrief(rs.getString("brief"));
-					gr.setRepTime(rs.getDate("reptime"));
+					gr.setRepTime(rs.getString("reptime"));
 					gr.setState(rs.getInt("state"));
 					// 将对象加到集合中
 					list.add((T) gr);
@@ -1360,7 +1363,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					hr.setId(rs.getInt("id"));
 					hr.setHelpId(rs.getInt("helpid"));
 					hr.setBrief(rs.getString("brief"));
-					hr.setRepTime(rs.getDate("reptime"));
+					hr.setRepTime(rs.getString("reptime"));
 					hr.setState(rs.getInt("state"));
 					// 将对象加到集合中
 					list.add((T) hr);
@@ -1379,7 +1382,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					m.setSendId(rs.getInt("sendid"));
 					m.setReceiveId(rs.getInt("receiveid"));
 					m.setWords(rs.getString("words"));
-					m.setSendTime(rs.getDate("sendtime"));
+					m.setSendTime(rs.getString("sendtime"));
 					// 将对象加到集合中
 					list.add((T) m);
 				}

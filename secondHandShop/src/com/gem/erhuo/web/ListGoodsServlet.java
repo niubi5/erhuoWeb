@@ -43,10 +43,10 @@ public class ListGoodsServlet extends HttpServlet {
 		// 获得参数
 		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		// 获得商品集合
 		GoodsService gs = new GoodsService();
 		UserService us = new UserService();
 		GoodsImagesService gis = new GoodsImagesService();
+		// 获得商品集合
 		List<Goods> listGoods = gs.getPagedGoods(curPage, pageSize);
 		List<Map<Map<Goods, Users>, List<String>>> listAll = new ArrayList<Map<Map<Goods, Users>, List<String>>>();
 		// 遍历集合取出id

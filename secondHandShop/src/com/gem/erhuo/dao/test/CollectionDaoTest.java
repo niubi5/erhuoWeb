@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import com.gem.erhuo.dao.CollectionDao;
 import com.gem.erhuo.entity.Collections;
+import com.gem.erhuo.util.MySdf;
 
 public class CollectionDaoTest {
 	@Test
@@ -13,7 +14,7 @@ public class CollectionDaoTest {
 		Collections c = new Collections();
 		c.setUserId(1);
 		c.setGoodId(2);
-		c.setColTime(new Date(System.currentTimeMillis()));
+		c.setColTime(MySdf.getDateToString(new Date(System.currentTimeMillis())));
 		new CollectionDao().save(c);
 	}
 }

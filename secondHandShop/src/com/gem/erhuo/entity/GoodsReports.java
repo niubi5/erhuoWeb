@@ -6,7 +6,7 @@ public class GoodsReports {
 	private int id;
 	private int goodId;
 	private String brief;
-	private Date repTime;
+	private String repTime;
 	private int state;
 	
 	public int getId() {
@@ -27,10 +27,10 @@ public class GoodsReports {
 	public void setBrief(String brief) {
 		this.brief = brief;
 	}
-	public Date getRepTime() {
+	public String getRepTime() {
 		return repTime;
 	}
-	public void setRepTime(Date repTime) {
+	public void setRepTime(String repTime) {
 		this.repTime = repTime;
 	}
 	public int getState() {

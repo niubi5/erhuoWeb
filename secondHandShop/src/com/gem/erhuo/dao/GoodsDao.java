@@ -25,8 +25,8 @@ public class GoodsDao extends BaseDaoImpl<Goods> {
 		List<Goods> listGoods = new ArrayList<Goods>();
 		try {
 			conn = DBConnection.getConnection();
-			// 按时间排序
-			String sql = "select * from goods order by pubtime desc limit ?,? ";
+			// 按时间排序 并且为上架状态
+			String sql = "select * from goods where state = 1  order by pubtime desc limit ?,? ";
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, (curPage - 1) * pageSize);
 			prep.setInt(2, pageSize);
@@ -43,7 +43,7 @@ public class GoodsDao extends BaseDaoImpl<Goods> {
 				goods.setMarketId(rs.getInt("marketid"));
 				goods.setLongitude(rs.getDouble("longitude"));
 				goods.setLatitude(rs.getDouble("latitude"));
-				goods.setPubTime(rs.getDate("pubtime"));
+				goods.setPubTime(rs.getString("pubtime"));
 				goods.setState(rs.getInt("state"));
 				listGoods.add(goods);
 			}

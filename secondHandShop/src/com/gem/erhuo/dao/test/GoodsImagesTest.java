@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gem.erhuo.dao.GoodsImagesDao;
+import com.gem.erhuo.entity.Goods;
 
 public class GoodsImagesTest {
 	GoodsImagesDao gid = new GoodsImagesDao();
@@ -13,5 +14,5 @@ public class GoodsImagesTest {
 		List<String> urls = gid.getGoodsImagesUrl(5);
 		System.out.println(urls);
 	}
-
+	
 }

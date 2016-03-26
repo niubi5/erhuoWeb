@@ -104,11 +104,11 @@ public class AddGoodServlet extends HttpServlet {
 			GoodsImagesService gis = new GoodsImagesService();
 			//保存商品文字信息，返回数据库自增长id
 			int currentId = gs.save(good);
-			System.out.println(currentId);
+//			System.out.println(currentId);
 			//处理获得的图片信息
-			String realpath = this.getServletContext().getRealPath("GoodsImages");
+			String realpath = this.getServletContext().getRealPath("goodsimages");
 			//String realpath = FileDirectory.getFileSaveDirectory()+"\\GoodsImages";
-			File imageDir = new File(realpath);
+			File imageDir = new File(realpath.substring(0, realpath.indexOf("secondHandShop"))+"\\ROOT\\goodsimages");
 			//如果目录不存在则先创建该目录
 			if(!imageDir.exists()){
 				imageDir.mkdirs();
@@ -120,18 +120,24 @@ public class AddGoodServlet extends HttpServlet {
 				if(!poster.isMissing()){
 					//客户端传过来的图片名
 					String imageName = poster.getFileName();
-					File file = new File(getServletContext().getRealPath("GoodsImages"),""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
+					File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
 					
 					//File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
 					//文件的保存路径
 					String saveImageName = file.getAbsolutePath();
+//					System.out.println(saveImageName);
+					saveImageName.substring(saveImageName.lastIndexOf(""));
+//					System.out.println("文件绝对路径：" + saveImageName);
 					poster.saveAs(saveImageName);
-					System.out.println(currentId+" "+saveImageName);
+//					System.out.println(currentId+" "+saveImageName);
 					//将存在本地的图片路径写入数据库图片表，并与对应的商品表的关联起来
+					//System.out.println(file.getName());
 					GoodsImages gi = new GoodsImages();
 					gi.setGoodId(currentId);
-					gi.setUrl((FileDirectory.getHttpUrl()+saveImageName.substring(saveImageName.lastIndexOf("GoodsImages"), saveImageName.length())).replace('\\', '/'));
-					System.out.println(gis.save(gi));
+					gi.setUrl((saveImageName.substring(saveImageName.indexOf("goodsimages"))).replace('\\', '/'));
+//					System.out.println((saveImageName.substring(saveImageName.indexOf("goodsimages"))).replace('\\', '/'));
+					//System.out.println(FileDirectory.getHttpUrl());
+					gis.save(gi);
 					
 					//System.out.println(System.getProperty("user.dir"));
 				}

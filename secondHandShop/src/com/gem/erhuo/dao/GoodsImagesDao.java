@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.gem.erhuo.entity.GoodsImages;
 import com.gem.erhuo.util.DBConnection;
+import com.gem.erhuo.util.Url;
 
 public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 	
@@ -28,8 +28,7 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 		String url = null;
 		try {
 			prop = new Properties();
-			prop.load(GoodsImagesDao.class.getResourceAsStream("/com/gem/erhuo/util/url.properties"));
-			url = prop.getProperty("url");// 获得url
+			url = Url.getHeadUrl();// 获得url头部
 			conn = DBConnection.getConnection();
 			String sql = "select url from goodsimages where goodid = ?";
 			prep = conn.prepareStatement(sql);
@@ -54,8 +53,8 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 		return urls;
 	}
 	
-	//获得分类的图片集合
-	public List<Goods> getClassificaImages(int tag){
+	//获得分类的商品集合
+	public List<Goods> getClassificaImages(int tag,int curPage, int pageSize){
 		List<Goods> listGoods = new ArrayList<Goods>();
 		Connection conn = null;
 		PreparedStatement prep = null;
@@ -64,29 +63,27 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 		try {
 			conn = DBConnection.getConnection();
 			if(tag==1){
-				System.out.println("呵呵呵呵呵");
-				sql="select * from goods where name like '%苹果%' or name like '%iphone%'";
+				sql="select * from goods where name like '%苹果%' or name like '%iphone%' order by pubtime desc limit ?,?";
 			}else if(tag==2){
-				sql="select * from goods where name like '%平板电脑%' ";
+				sql="select * from goods where name like '%平板电脑%' order by pubtime desc limit ?,?";
 			}else if(tag==3){
-				sql="select * from goods where name like '%电脑%' and name like '%/!平板%'";
+				sql="select * from goods where name like '%电脑%' or name like '%平板%' order by pubtime desc limit ?,?";
 			}else if(tag==4){
-				sql="select * from goods where name like '%小米%' ";
+				sql="select * from goods where name like '%小米%' order by pubtime desc limit ?,?";
 			}else if(tag==5){
-				sql="select * from goods where name like '%数码%' ";
+				sql="select * from goods where name like '%数码%' order by pubtime desc limit ?,?";
 			}else if(tag==6){
-				sql="select * from goods where name like '%书%' ";
+				sql="select * from goods where name like '%书%' order by pubtime desc limit ?,?";
 			}else if(tag==7){
-				sql="select * from goods where name like '%衣%' or name like '%鞋%'or name like '%包%'";
+				sql="select * from goods where name like '%衣%' or name like '%鞋%'or name like '%包%' order by pubtime desc limit ?,?";
 			}else if(tag==8){
-				sql="select * from goods where name like '%化妆%' or name like '%霜%'";
+				sql="select * from goods where name like '%化妆%' or name like '%霜%' order by pubtime desc limit ?,?";
 			}
 			prep = conn.prepareStatement(sql);
-			System.out.println(sql);
+			prep.setInt(1, (curPage - 1) * pageSize);
+			prep.setInt(2, pageSize);
 			rs = prep.executeQuery();
-			System.out.println(rs.next());
 			while (rs.next()) {
-				System.out.println("进来了11111");
 				Goods goods = new Goods();
 				goods.setId(rs.getInt("id"));
 				goods.setUserId(rs.getInt("userid"));
@@ -98,15 +95,9 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 				goods.setMarketId(rs.getInt("marketid"));
 				goods.setLongitude(rs.getDouble("longitude"));
 				goods.setLatitude(rs.getDouble("latitude"));
-				goods.setPubTime(rs.getDate("pubtime"));
+				goods.setPubTime(rs.getString("pubtime"));
 				goods.setState(rs.getInt("state"));
 				listGoods.add(goods);
-				if(goods != null){
-					System.out.println(goods.getName());
-				}
-			    
-				
-				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

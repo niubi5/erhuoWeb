@@ -128,4 +128,34 @@
     <servlet-name>ClassificationServlet</servlet-name>
     <url-pattern>/ClassificationServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddCollectionServlet</display-name>
+    <servlet-name>AddCollectionServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.AddCollectionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCollectionServlet</servlet-name>
+    <url-pattern>/AddCollectionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddCollectionsServlet</display-name>
+    <servlet-name>AddCollectionsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.AddCollectionsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCollectionsServlet</servlet-name>
+    <url-pattern>/AddCollectionsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteCollectionsServlet</display-name>
+    <servlet-name>DeleteCollectionsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.DeleteCollectionsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCollectionsServlet</servlet-name>
+    <url-pattern>/DeleteCollectionsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

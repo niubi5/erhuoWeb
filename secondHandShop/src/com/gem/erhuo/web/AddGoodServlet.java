@@ -98,7 +98,7 @@ public class AddGoodServlet extends HttpServlet {
 			String goodJson = smartUpload.getRequest().getParameter("goodJson");
 			//处理获得的商品的文字信息
 			System.out.println(goodJson);
-			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh-mm-ss").create();
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 			Goods good = gson.fromJson(goodJson,Goods.class);
 			GoodService gs = new GoodService();
 			GoodsImagesService gis = new GoodsImagesService();

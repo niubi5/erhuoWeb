@@ -8,7 +8,7 @@ public class Messages {
 	private int sendId;
 	private int receiveId;
 	private String words;
-	private Date sendTime;
+	private String sendTime;
 	
 	public int getId() {
 		return id;
@@ -40,10 +40,10 @@ public class Messages {
 	public void setWords(String words) {
 		this.words = words;
 	}
-	public Date getSendTime() {
+	public String getSendTime() {
 		return sendTime;
 	}
-	public void setSendTime(Date sendTime) {
+	public void setSendTime(String sendTime) {
 		this.sendTime = sendTime;
 	}
 }

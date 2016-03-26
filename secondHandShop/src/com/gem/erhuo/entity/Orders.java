@@ -7,10 +7,10 @@ public class Orders {
 	private int goodId;
 	private int userId;
 	private String orderNum;
-	private Date createTime;
-	private Date payTime;
-	private Date sendTime;
-	private Date completeTime;
+	private String createTime;
+	private String payTime;
+	private String sendTime;
+	private String completeTime;
 	private int state;
 	private String logisticsCom;
 	private String logisticsNum;
@@ -39,28 +39,28 @@ public class Orders {
 	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
 	}
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public Date getPayTime() {
+	public String getPayTime() {
 		return payTime;
 	}
-	public void setPayTime(Date payTime) {
+	public void setPayTime(String payTime) {
 		this.payTime = payTime;
 	}
-	public Date getSendTime() {
+	public String getSendTime() {
 		return sendTime;
 	}
-	public void setSendTime(Date sendTime) {
+	public void setSendTime(String sendTime) {
 		this.sendTime = sendTime;
 	}
-	public Date getCompleteTime() {
+	public String getCompleteTime() {
 		return completeTime;
 	}
-	public void setCompleteTime(Date completeTime) {
+	public void setCompleteTime(String completeTime) {
 		this.completeTime = completeTime;
 	}
 	public int getState() {

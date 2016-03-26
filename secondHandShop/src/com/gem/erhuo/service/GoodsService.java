@@ -24,8 +24,8 @@ public class GoodsService {
 	}
 	
 	//分类查询获得商品对象
-	public List<Goods> getClassifiGoods(int tag){
-		return gid.getClassificaImages(tag);
+	public List<Goods> getClassifiGoods(int tag, int curPage, int pageSize){
+		return gid.getClassificaImages(tag, curPage, pageSize);
 	}
 
 }

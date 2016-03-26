@@ -5,7 +5,7 @@ import java.util.Date;
 public class UserMarket {
 	private int userId;
 	private int marketId;
-	private Date focTime;
+	private String focTime;
 	
 	public int getUserId() {
 		return userId;
@@ -19,10 +19,10 @@ public class UserMarket {
 	public void setMarketId(int marketId) {
 		this.marketId = marketId;
 	}
-	public Date getFocTime() {
+	public String getFocTime() {
 		return focTime;
 	}
-	public void setFocTime(Date focTime) {
+	public void setFocTime(String focTime) {
 		this.focTime = focTime;
 	}
 }

@@ -39,10 +39,10 @@ public class AddGoodsReportsServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("AddGoodOrderServlet");
+		System.out.println("AddGoodsReportsServlet");
 		GoodsReportsService grs = new GoodsReportsService();
 		// 获取商品举报信息
-		String goodsReportJson = request.getParameter("goodsReportJson");
+		String goodsReportJson = request.getParameter("goodsReportsJson");
 		System.out.println(goodsReportJson);
 		Gson goodsReportGson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		GoodsReports gr = goodsReportGson.fromJson(goodsReportJson, GoodsReports.class);

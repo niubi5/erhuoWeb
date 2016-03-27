@@ -54,7 +54,7 @@ public class AddressDao extends BaseDaoImpl<Address>{
 			prep.setString(3, address.getPhone());
 			prep.setString(4, address.getAddress());
 			prep.setString(5, address.getIsdefault());
-			prep.executeQuery();
+			prep.executeUpdate();
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -63,6 +63,21 @@ public class AddressDao extends BaseDaoImpl<Address>{
 		
 	}
 	
-	
+	public void updateAddressIsdefault(String userid){
+		Connection conn = null;
+		PreparedStatement prep = null;
+		try {
+			conn=DBConnection.getConnection();
+			String sql="update address set isdefault='no' where userid=?";
+			prep=conn.prepareStatement(sql);
+			prep.setInt(1, Integer.parseInt(userid));
+			prep.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 }

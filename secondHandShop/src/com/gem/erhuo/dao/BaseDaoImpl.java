@@ -158,14 +158,17 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					currentId = rs.getInt(1);
 				}
 			} else if (t instanceof Helps) {
-				sql = "insert into helps(userid,title,detail,pubtime,state) values(?,?,?,?,?)";
+				sql = "insert into helps(userid,title,detail,pubtime,logistics,consignee,address,state) values(?,?,?,?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Helps) t).getUserId());
 				prep.setString(2, ((Helps) t).getTitle());
 				prep.setString(3, ((Helps) t).getDetail());
 				prep.setString(4, (((Helps) t).getPubTime()));
-				prep.setInt(5, ((Helps) t).getState());
+				prep.setString(5, ((Helps) t).getLogistics());
+				prep.setString(6, ((Helps) t).getConsignee());
+				prep.setString(7, ((Helps) t).getAddress());
+				prep.setInt(8, ((Helps) t).getState());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();

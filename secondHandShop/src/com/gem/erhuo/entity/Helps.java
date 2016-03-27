@@ -8,8 +8,47 @@ public class Helps {
 	private String title;
 	private String detail;
 	private String pubTime;
+	private String logistics;
+	private String address;
+	private String consignee;
+	
 	private int state;
 	
+	public String getLogistics() {
+		return logistics;
+	}
+	public void setLogistics(String logistics) {
+		this.logistics = logistics;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getConsignee() {
+		return consignee;
+	}
+	public void setConsignee(String consignee) {
+		this.consignee = consignee;
+	}
+	
+	public Helps(){
+		
+	}
+	
+	public Helps(int id, int userId, String title, String detail, String pubTime, String logistics, String address,
+			String consignee) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.title = title;
+		this.detail = detail;
+		this.pubTime = pubTime;
+		this.logistics = logistics;
+		this.address = address;
+		this.consignee = consignee;
+	}
 	public int getId() {
 		return id;
 	}

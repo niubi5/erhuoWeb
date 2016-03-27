@@ -32,4 +32,8 @@ public class UserDaoTest {
 		System.out.println(ud.getUserByIdentity("15071048315").getPwd());
 	}
 	
+	@Test
+	public void updateUser(){
+		ud.updateUser("小罗", "15333334441", "1");
+	}
 }

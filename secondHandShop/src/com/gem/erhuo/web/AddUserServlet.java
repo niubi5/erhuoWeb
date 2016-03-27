@@ -33,8 +33,9 @@ public class AddUserServlet extends HttpServlet {
 //		String name = request.getParameter("name");
 //		String pwd = request.getParameter("pwd");
 		String userJson = request.getParameter("userJson");
+		System.out.println(userJson);
 		Gson gson = new Gson();
-		Users user = new Users();
+		Users user = gson.fromJson(userJson, Users.class);
 		String identity = user.getIdentity();
 		String name = user.getName();
 		String pwd = user.getPwd();

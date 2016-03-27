@@ -27,7 +27,6 @@ public class CollectionsDao extends BaseDaoImpl<Collections> {
 			prep.setInt(2, goodsId);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String str = sdf.format(new Date(System.currentTimeMillis()));
-			System.out.println(str);
 			prep.setString(3, str);
 			prep.executeUpdate();
 		} catch (Exception e) {

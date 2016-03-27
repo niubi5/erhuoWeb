@@ -6,9 +6,9 @@ import com.gem.erhuo.entity.Address;
 public class AddressService {
 	private AddressDao ad=new AddressDao();
 	//查找地址
-	public Address getUserAddressByPhoneService(String phone){
-		return ad.getUserAddressByPhone(phone);
+	public Address getUserAddressByPhoneService(String userid){
+		return ad.getUserAddressByUserId(userid);
 		
 	}
-
+	
 }

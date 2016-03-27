@@ -197,4 +197,36 @@
     <servlet-name>HelpsServlet</servlet-name>
     <url-pattern>/HelpsServlet</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>UpdateServlet</display-name>
+    <servlet-name>UpdateServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateServlet</servlet-name>
+    <url-pattern>/UpdateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserInformationServlet</display-name>
+    <servlet-name>UserInformationServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.UserInformationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserInformationServlet</servlet-name>
+    <url-pattern>/UserInformationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CanRegisterServlet</display-name>
+    <servlet-name>CanRegisterServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.CanRegisterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CanRegisterServlet</servlet-name>
+    <url-pattern>/CanRegisterServlet</url-pattern>
+  </servlet-mapping>
+
 </web-app>

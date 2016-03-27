@@ -31,9 +31,9 @@ public class UserAddressServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	      String phone=request.getParameter("phone");
+	      String userid=request.getParameter("userid");
 	      AddressService as=new AddressService();
-	      Address address=as.getUserAddressByPhoneService(phone);
+	      Address address=as.getUserAddressByPhoneService(userid);
 	      String userAddress=null;
 	      if(address!=null){
 	    	  userAddress=new Gson().toJson(address);

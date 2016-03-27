@@ -6,7 +6,14 @@ public class Address {
 	private String name;
 	private String phone;
 	private String address;
+	private String isdefault;
 	
+	public String getIsdefault() {
+		return isdefault;
+	}
+	public void setIsdefault(String isdefault) {
+		this.isdefault = isdefault;
+	}
 	public int getId() {
 		return id;
 	}

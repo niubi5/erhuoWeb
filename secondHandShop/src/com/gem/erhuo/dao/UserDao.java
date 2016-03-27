@@ -76,6 +76,25 @@ public class UserDao extends BaseDaoImpl<Users> {
 					e.printStackTrace();
 				}
 				
+		}
+		
+		//修改用户信息
+		public void updateUser(String name,String phone,String sex){
+			Connection conn = null;
+			PreparedStatement prep = null;
+			try {
+				conn=DBConnection.getConnection();
+				String sql="update users set name=?,sex=? where identity=?";
+				prep=conn.prepareStatement(sql);
+				prep.setString(1, name);
+				prep.setInt(2,Integer.parseInt(sex));
+				prep.setString(3, phone);
+				prep.executeUpdate();
 				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 }

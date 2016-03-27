@@ -27,6 +27,6 @@ public class AddressDaoTest {
      
      @Test
      public void updateAddressIsdefault(){
-    	 ad.updateAddressIsdefault("1");
+    	 ad.updateAddressIsdefault(1);
      }
 }

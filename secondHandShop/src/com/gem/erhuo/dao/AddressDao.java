@@ -63,14 +63,14 @@ public class AddressDao extends BaseDaoImpl<Address>{
 		
 	}
 	
-	public void updateAddressIsdefault(String userid){
+	public void updateAddressIsdefault(int userid){
 		Connection conn = null;
 		PreparedStatement prep = null;
 		try {
 			conn=DBConnection.getConnection();
 			String sql="update address set isdefault='no' where userid=?";
 			prep=conn.prepareStatement(sql);
-			prep.setInt(1, Integer.parseInt(userid));
+			prep.setInt(1, userid);
 			prep.executeUpdate();
 			
 		} catch (Exception e) {

@@ -14,6 +14,8 @@ public class AddressService {
 		ad.saveAddress(address);
 	}
 	
-	
+	public void updateAddressIsdefault(int userid){
+		ad.updateAddressIsdefault(userid);
+	}
 	
 }

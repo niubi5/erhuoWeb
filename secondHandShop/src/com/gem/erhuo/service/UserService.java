@@ -49,4 +49,14 @@ public class UserService {
 		public void update(String phone,String pwd){
 			ud.update(phone,pwd);
 		}
+	//修改用户
+		public void updateUser(String name,String phone,String sex){
+			ud.updateUser(name, phone, sex);
+		}
+		
+		public Users getUserByIdentity(String phone){
+			return ud.getUserByIdentity(phone);
+			
+		}
+		
 }

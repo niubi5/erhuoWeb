@@ -122,19 +122,35 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					currentId = rs.getInt(1);
 				}
 			} else if (t instanceof Orders) {
-				sql = "insert into orders(goodid,userid,ordernum,createtime,paytime,sendtime,completetime,state,logisticscom,logisticsnum) values(?,?,?,?,?,?,?,?,?,?)";
+				sql = "insert into orders(goodid,userid,ordernum,createtime,paytime,sendtime,completetime,status,logisticscom,logisticsnum) values(?,?,?,?,?,?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Orders) t).getGoodId());
 				prep.setInt(2, ((Orders) t).getUserId());
 				prep.setString(3, ((Orders) t).getOrderNum());
-				prep.setString(4, (((Orders) t).getCreateTime()));
-				prep.setString(5, (((Orders) t).getPayTime()));
-				prep.setString(6, (((Orders) t).getSendTime()));
-				prep.setString(7, (((Orders) t).getCompleteTime()));
+				prep.setString(4, ((Orders) t).getCreateTime());
+				prep.setString(5, ((Orders) t).getPayTime());
+				if(((Orders) t).getSendTime() == null){
+					prep.setDate(6,null);
+				}else{
+					prep.setString(6, (((Orders) t).getSendTime()));					
+				}
+				if(((Orders) t).getCompleteTime() == null){
+					prep.setDate(7,null);
+				}else{
+					prep.setString(7, (((Orders) t).getCompleteTime()));					
+				}
 				prep.setInt(8, ((Orders) t).getState());
-				prep.setString(9, ((Orders) t).getLogisticsCom());
-				prep.setString(10, ((Orders) t).getLogisticsCom());
+				if(((Orders) t).getLogisticsCom() == null){
+					prep.setString(9,null);
+				}else{
+					prep.setString(9, ((Orders) t).getLogisticsCom());					
+				}
+				if(((Orders) t).getLogisticsCom() == null){
+					prep.setString(10,null);
+				}else{
+					prep.setString(10, ((Orders) t).getLogisticsCom());					
+				}
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();
@@ -279,7 +295,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					currentId = rs.getInt(1);
 				}
 			} else if (t instanceof Collections) {
-				sql = "insert into collections(userid,goodid,clotime) values(?,?,?)";
+				sql = "insert into collections(userid,goodid,coltime) values(?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Collections) t).getUserId());

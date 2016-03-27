@@ -11,15 +11,15 @@ import com.gem.erhuo.util.DBConnection;
 
 public class AddressDao extends BaseDaoImpl<Address>{
       
-	public Address getUserAddressByPhone(String phone){
+	public Address getUserAddressByUserId(String userid){
 		Connection conn = null;
 		PreparedStatement prep = null;
 		ResultSet rs = null;
 		try {
 			conn=DBConnection.getConnection();
-			String sql="select * from address where phone=? ";
+			String sql="select * from address where userid=? and isdefault='yes'";
 			prep=conn.prepareStatement(sql);
-			prep.setString(1, phone);
+			prep.setString(1, userid);
 			rs=prep.executeQuery();
 			while(rs.next()){
 				Address address=new Address();
@@ -39,6 +39,30 @@ public class AddressDao extends BaseDaoImpl<Address>{
 		
 	}
 
+	//保存地址
+	public void saveAddress(Address address){
+		Connection conn = null;
+		PreparedStatement prep = null;
+		ResultSet rs = null;
+		try {
+			conn=DBConnection.getConnection();
+			String sql="insert into address(userId,name,phone,address,isdefault)"
+					+ "values(?,?,?,?,?)";
+			prep=conn.prepareStatement(sql);
+			prep.setInt(1, address.getUserId());
+			prep.setString(2,address.getName());
+			prep.setString(3, address.getPhone());
+			prep.setString(4, address.getAddress());
+			prep.setString(5, address.getIsdefault());
+			prep.executeQuery();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	
 }

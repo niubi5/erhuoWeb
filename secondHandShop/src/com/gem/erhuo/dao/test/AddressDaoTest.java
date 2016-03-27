@@ -10,7 +10,8 @@ public class AddressDaoTest {
 	 AddressDao ad=new AddressDao();
      @Test
      public void getUserAddressByPhone(){
-    	 Address ads=ad.getUserAddressByPhone("15333334441");
+    	 Address ads=ad.getUserAddressByUserId("1");
     	 System.out.println(ads);
      }
+   
 }

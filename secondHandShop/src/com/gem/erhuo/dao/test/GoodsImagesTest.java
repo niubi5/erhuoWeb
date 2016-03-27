@@ -15,12 +15,4 @@ public class GoodsImagesTest {
 		System.out.println(urls);
 	}
 	
-	@Test
-	public List<Goods> getClassificaImages(){
-		List<Goods> listGoods=gid.getClassificaImages(1);
-		System.out.println(listGoods);
-		
-		return listGoods;
-		
-	}
 }

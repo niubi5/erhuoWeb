@@ -15,7 +15,7 @@ import com.jspsmart.upload.SmartUploadException;
 /**
  * Servlet implementation class addGoodImagesServlet
  */
-public class addGoodImagesServlet extends HttpServlet {
+public class AddGoodImagesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**

@@ -168,4 +168,53 @@
     <servlet-name>CanRegisterServlet</servlet-name>
     <url-pattern>/CanRegisterServlet</url-pattern>
   </servlet-mapping>
+
+
+
+
+	
+
+	
+	
+	<servlet>
+		<description></description>
+		<display-name>AddGoodOrderServlet</display-name>
+		<servlet-name>AddGoodOrderServlet</servlet-name>
+		<servlet-class>com.gem.erhuo.web.AddGoodOrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddGoodOrderServlet</servlet-name>
+		<url-pattern>/AddGoodOrderServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>AddGoodsReportsServlet</display-name>
+		<servlet-name>AddGoodsReportsServlet</servlet-name>
+		<servlet-class>com.gem.erhuo.web.AddGoodsReportsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddGoodsReportsServlet</servlet-name>
+		<url-pattern>/AddGoodsReportsServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>AddCollectionsServlet</display-name>
+		<servlet-name>AddCollectionsServlet</servlet-name>
+		<servlet-class>com.gem.erhuo.web.AddCollectionsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddCollectionsServlet</servlet-name>
+		<url-pattern>/AddCollectionsServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>DeleteCollectionsServlet</display-name>
+		<servlet-name>DeleteCollectionsServlet</servlet-name>
+		<servlet-class>com.gem.erhuo.web.DeleteCollectionsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteCollectionsServlet</servlet-name>
+		<url-pattern>/DeleteCollectionsServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -6,7 +6,7 @@ public class Donates {
 	private int id;
 	private int helpId;
 	private int userId;
-	private Date donTime;
+	private String donTime;
 	private String logisticsCom;
 	private String logisticsNum;
 	
@@ -28,10 +28,10 @@ public class Donates {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public Date getDonTime() {
+	public String getDonTime() {
 		return donTime;
 	}
-	public void setDonTime(Date donTime) {
+	public void setDonTime(String donTime) {
 		this.donTime = donTime;
 	}
 	public String getLogisticsCom() {

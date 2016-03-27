@@ -7,7 +7,7 @@ public class Helps {
 	private int userId;
 	private String title;
 	private String detail;
-	private Date pubTime;
+	private String pubTime;
 	private int state;
 	
 	public int getId() {
@@ -34,10 +34,10 @@ public class Helps {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	public Date getPubTime() {
+	public String getPubTime() {
 		return pubTime;
 	}
-	public void setPubTime(Date pubTime) {
+	public void setPubTime(String pubTime) {
 		this.pubTime = pubTime;
 	}
 	public int getState() {

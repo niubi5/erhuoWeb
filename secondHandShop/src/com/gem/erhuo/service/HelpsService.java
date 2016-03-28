@@ -8,8 +8,8 @@ public class HelpsService {
 	HelpsDao helpsDao = new HelpsDao();
 	
 	// 保存信息
-	public void saveHelps(Helps helps){
-		helpsDao.save(helps);
+	public int saveHelps(Helps helps){
+		return helpsDao.save(helps);
 	}
 
 }

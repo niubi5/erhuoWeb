@@ -31,7 +31,7 @@ public class UserAddressServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	      String userid=request.getParameter("userid");
+	      String userid=request.getParameter("curUserId");
 	      AddressService as=new AddressService();
 	      Address address=as.getUserAddressByPhoneService(userid);
 	      String userAddress=null;

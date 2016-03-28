@@ -49,6 +49,9 @@ public class HelpsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 		// doGet(request, response);
 //		String name = request.getParameter("DonationRequest");
@@ -60,9 +63,9 @@ public class HelpsServlet extends HttpServlet {
 			// 获取求助信息
 			String helpsJson = smartUpload.getRequest().getParameter("DonationRequest");
 //			 处理获得的求助的文字信息
-			Gson gson = new GsonBuilder().create();
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
 			Helps help = gson.fromJson(helpsJson, Helps.class);
-
+            
 			// 保存求助信息并返回当前求助id
 			HelpsService helpsService = new HelpsService();
 			int currentId = helpsService.saveHelps(help);
@@ -87,7 +90,7 @@ public class HelpsServlet extends HttpServlet {
 					poster.saveAs(saveImageName);
 					HelpsImages hi = new HelpsImages();
 					hi.setHelpId(currentId);
-					hi.setUrl((saveImageName.substring(saveImageName.indexOf("goodsimages"))).replace('\\', '/'));
+					hi.setUrl((saveImageName.substring(saveImageName.indexOf("helpsimages"))).replace('\\', '/'));
 					his.save(hi);
 				}
 			}

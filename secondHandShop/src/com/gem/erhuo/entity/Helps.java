@@ -9,8 +9,8 @@ public class Helps {
 	private String detail;
 	private String pubTime;
 	private String logistics;
-	private String address;
 	private String consignee;
+	private String address;
 	
 	private int state;
 	
@@ -37,8 +37,9 @@ public class Helps {
 		
 	}
 	
-	public Helps(int id, int userId, String title, String detail, String pubTime, String logistics, String address,
-			String consignee) {
+
+	public Helps(int id, int userId, String title, String detail, String pubTime, String logistics, String consignee,
+			String address) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -46,8 +47,8 @@ public class Helps {
 		this.detail = detail;
 		this.pubTime = pubTime;
 		this.logistics = logistics;
-		this.address = address;
 		this.consignee = consignee;
+		this.address = address;
 	}
 	public int getId() {
 		return id;

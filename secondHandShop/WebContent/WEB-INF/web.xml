@@ -228,5 +228,14 @@
     <servlet-name>CanRegisterServlet</servlet-name>
     <url-pattern>/CanRegisterServlet</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <description></description>
+    <display-name>SaveAddressServlet</display-name>
+    <servlet-name>SaveAddressServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.SaveAddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveAddressServlet</servlet-name>
+    <url-pattern>/SaveAddressServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

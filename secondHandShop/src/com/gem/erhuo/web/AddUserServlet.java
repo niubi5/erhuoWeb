@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gem.erhuo.entity.Users;
 import com.gem.erhuo.service.UserService;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class AddUserServlet
@@ -28,19 +29,22 @@ public class AddUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String identity = request.getParameter("identity");
-		String name = request.getParameter("name");
-		String pwd = request.getParameter("pwd");
+//		String identity = request.getParameter("identity");
+//		String name = request.getParameter("name");
+//		String pwd = request.getParameter("pwd");
+		String userJson = request.getParameter("userJson");
+		System.out.println(userJson);
+		Gson gson = new Gson();
+		Users user = gson.fromJson(userJson, Users.class);
+		String identity = user.getIdentity();
+		String name = user.getName();
+		String pwd = user.getPwd();
 		if(identity != null){
 			UserService us = new UserService();
 			boolean b = us.canRegister(identity);
 			System.out.println(identity+name);
 			if(b){
-				Users u = new Users();
-				u.setIdentity(identity);
-				u.setName(name);
-				u.setPwd(pwd);
-				us.save(u);
+				us.save(user);
 				request.setAttribute("tag",true);
 			}else{
 				request.setAttribute("identity",identity);

@@ -20,17 +20,21 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
@@ -38,12 +42,16 @@ public class LoginServlet extends HttpServlet {
 		String pwd = request.getParameter("pwd");
 		String userStr = null;
 		UserService us = new UserService();
-		Users user =  us.canLogin(identity, pwd);
-		if(user != null){
-			userStr = new Gson().toJson(user);
-		}
 		PrintWriter pw = response.getWriter();
-		pw.print(userStr);
+		if (us.canRegister(identity)) {
+			pw.print("phoneIsNull");
+		} else {
+			Users user = us.canLogin(identity, pwd);
+			if (user != null) {
+				userStr = new Gson().toJson(user);
+			}
+			pw.print(userStr);
+		}
 		pw.close();
 	}
 

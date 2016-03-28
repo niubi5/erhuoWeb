@@ -191,13 +191,14 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					currentId = rs.getInt(1);
 				}
 			} else if (t instanceof GoodsReports) {
-				sql = "insert into goodsreports(goodid,brief,reptime,state) values(?,?,?,?)";
+				sql = "insert into goodsreports(goodid,userid,brief,reptime,state) values(?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((GoodsReports) t).getGoodId());
-				prep.setString(2, ((GoodsReports) t).getBrief());
-				prep.setString(3, (((GoodsReports) t).getRepTime()));
-				prep.setInt(4, ((GoodsReports) t).getState());
+				prep.setInt(2, ((GoodsReports) t).getUserId());
+				prep.setString(3, ((GoodsReports) t).getBrief());
+				prep.setString(4, (((GoodsReports) t).getRepTime()));
+				prep.setInt(5, ((GoodsReports) t).getState());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();
@@ -205,13 +206,14 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					currentId = rs.getInt(1);
 				}
 			} else if (t instanceof HelpsReports) {
-				sql = "insert into helpsreports(helpid,brief,reptime,state) values(?,?,?,?)";
+				sql = "insert into helpsreports(helpid,userid,brief,reptime,state) values(?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((HelpsReports) t).getHelpId());
-				prep.setString(2, ((HelpsReports) t).getBrief());
-				prep.setString(3, (((HelpsReports) t).getRepTime()));
-				prep.setInt(4, ((HelpsReports) t).getState());
+				prep.setInt(2, ((HelpsReports) t).getUserId());
+				prep.setString(3, ((HelpsReports) t).getBrief());
+				prep.setString(4, (((HelpsReports) t).getRepTime()));
+				prep.setInt(5, ((HelpsReports) t).getState());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();

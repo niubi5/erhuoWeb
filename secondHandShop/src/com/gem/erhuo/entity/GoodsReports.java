@@ -5,10 +5,17 @@ import java.util.Date;
 public class GoodsReports {
 	private int id;
 	private int goodId;
+	private int userId;
 	private String brief;
 	private String repTime;
 	private int state;
 	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	public int getId() {
 		return id;
 	}

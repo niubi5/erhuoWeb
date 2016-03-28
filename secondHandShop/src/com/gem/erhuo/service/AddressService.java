@@ -10,5 +10,12 @@ public class AddressService {
 		return ad.getUserAddressByUserId(userid);
 		
 	}
+	public void saveAddress(Address address){
+		ad.saveAddress(address);
+	}
+	
+	public void updateAddressIsdefault(int userid){
+		ad.updateAddressIsdefault(userid);
+	}
 	
 }

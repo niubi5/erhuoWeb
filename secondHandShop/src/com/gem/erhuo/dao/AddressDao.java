@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.gem.erhuo.entity.Address;
 import com.gem.erhuo.util.DBConnection;
@@ -77,6 +79,38 @@ public class AddressDao extends BaseDaoImpl<Address>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	
+	public List<Address> getListAddressByUserId(String userid){
+		List<Address> list=new ArrayList<Address>();
+		Connection conn = null;
+		PreparedStatement prep = null;
+		ResultSet rs = null;
+		try {
+			conn=DBConnection.getConnection();
+			String sql="select * from address where userid=?";
+			prep=conn.prepareStatement(sql);
+			prep.setString(1, userid);
+			rs=prep.executeQuery();
+			while(rs.next()){
+				Address address=new Address();
+				address.setId(rs.getInt("id"));
+				address.setName(rs.getString("name"));
+				address.setUserId(rs.getInt("userid"));
+				address.setPhone(rs.getString("phone"));
+				address.setAddress(rs.getString("address"));
+				address.setIsdefault(rs.getString("isdefault"));
+				list.add(address);
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
 		
 	}
 	

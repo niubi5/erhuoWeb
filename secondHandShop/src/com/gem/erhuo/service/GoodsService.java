@@ -27,5 +27,10 @@ public class GoodsService {
 	public List<Goods> getClassifiGoods(int tag, int curPage, int pageSize){
 		return gid.getClassificaImages(tag, curPage, pageSize);
 	}
+	
+	// 获得分页在售中的商品
+		public List<Goods> getSellingPagedGoods(int curPage, int pageSize,int userId) {
+			return gd.getSellingPagedGoods(curPage, pageSize,userId);
+		}
 
 }

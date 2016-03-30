@@ -794,7 +794,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					h.setTitle(rs.getString("title"));
 					h.setDetail(rs.getString("detail"));
 					h.setPubTime(rs.getString("pubtime"));
-					h.setState(rs.getInt("state"));
+					h.setLogistics(rs.getString("logistics"));
+					h.setConsignee(rs.getString("consignee"));
+					h.setAddress(rs.getString("address"));
+//					h.setState(rs.getInt("state"));
 					// 将对象加到集合中
 					list.add((T) h);
 				}

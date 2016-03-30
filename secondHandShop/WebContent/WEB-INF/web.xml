@@ -197,7 +197,6 @@
     <servlet-name>HelpsServlet</servlet-name>
     <url-pattern>/HelpsServlet</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <description></description>
     <display-name>UpdateServlet</display-name>
@@ -237,5 +236,15 @@
   <servlet-mapping>
     <servlet-name>SaveAddressServlet</servlet-name>
     <url-pattern>/SaveAddressServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListHelpsServlet</display-name>
+    <servlet-name>ListHelpsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.ListHelpsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListHelpsServlet</servlet-name>
+    <url-pattern>/ListHelpsServlet</url-pattern>
   </servlet-mapping>
 </web-app>

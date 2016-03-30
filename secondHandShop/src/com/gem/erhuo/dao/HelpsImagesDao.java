@@ -14,7 +14,7 @@ import com.gem.erhuo.util.Url;
 public class HelpsImagesDao extends BaseDaoImpl<HelpsImages> {
 
 	// 获得求助图片的集合
-	public List<String> getGoodsImagesUrl(int goodsId) {
+	public List<String> getGoodsImagesUrl(int helpsId) {
 		List<String> urls = new ArrayList<String>();
 		Connection conn = null;
 		PreparedStatement prep = null;
@@ -25,9 +25,9 @@ public class HelpsImagesDao extends BaseDaoImpl<HelpsImages> {
 			prop = new Properties();
 			url = Url.getHeadUrl();// 获得url头部
 			conn = DBConnection.getConnection();
-			String sql = "select url from helpssimages where helpsid = ?";
+			String sql = "select url from helpsimages where helpid = ?";
 			prep = conn.prepareStatement(sql);
-			prep.setInt(1, goodsId);
+			prep.setInt(1, helpsId);
 			rs = prep.executeQuery();
 			while (rs.next()) {
 				// 拼接url

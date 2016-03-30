@@ -7,7 +7,7 @@ public class Helps {
 	private int userId;
 	private String title;
 	private String detail;
-	private String pubTime;
+	private String pubtime;
 	private String logistics;
 	private String consignee;
 	private String address;
@@ -38,14 +38,14 @@ public class Helps {
 	}
 	
 
-	public Helps(int id, int userId, String title, String detail, String pubTime, String logistics, String consignee,
+	public Helps(int id, int userId, String title, String detail, String pubtime, String logistics, String consignee,
 			String address) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.title = title;
 		this.detail = detail;
-		this.pubTime = pubTime;
+		this.pubtime = pubtime;
 		this.logistics = logistics;
 		this.consignee = consignee;
 		this.address = address;
@@ -75,10 +75,10 @@ public class Helps {
 		this.detail = detail;
 	}
 	public String getPubTime() {
-		return pubTime;
+		return pubtime;
 	}
 	public void setPubTime(String pubTime) {
-		this.pubTime = pubTime;
+		this.pubtime = pubTime;
 	}
 	public int getState() {
 		return state;

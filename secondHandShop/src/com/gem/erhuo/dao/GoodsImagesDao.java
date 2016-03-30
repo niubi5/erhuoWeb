@@ -17,9 +17,9 @@ import com.gem.erhuo.util.DBConnection;
 import com.gem.erhuo.util.Url;
 
 public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
-	
+
 	// 获得商品图片的集合
-	public List<String> getGoodsImagesUrl(int goodsId){
+	public List<String> getGoodsImagesUrl(int goodsId) {
 		List<String> urls = new ArrayList<String>();
 		Connection conn = null;
 		PreparedStatement prep = null;
@@ -34,50 +34,55 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, goodsId);
 			rs = prep.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				// 拼接url
-				String urlAll = url + "/" +  rs.getString("url");
+				String urlAll = url + "/" + rs.getString("url");
 				urls.add(urlAll);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(prep != null)prep.close();
-				if(conn != null)conn.close();
-				if(rs != null) rs.close();
+				if (prep != null)
+					prep.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		return urls;
 	}
-	
-	//获得分类的商品集合
-	public List<Goods> getClassificaImages(int tag,int curPage, int pageSize){
+
+	// 获得分类的商品集合
+	public List<Goods> getClassificaImages(int tag, int curPage, int pageSize) {
 		List<Goods> listGoods = new ArrayList<Goods>();
 		Connection conn = null;
 		PreparedStatement prep = null;
 		ResultSet rs = null;
-		String sql=null;
+		String sql = null;
 		try {
 			conn = DBConnection.getConnection();
-			if(tag==1){
-				sql="select * from goods where name like '%苹果%' or name like '%iphone%' order by pubtime desc limit ?,?";
-			}else if(tag==2){
-				sql="select * from goods where name like '%平板电脑%' order by pubtime desc limit ?,?";
-			}else if(tag==3){
-				sql="select * from goods where name like '%电脑%' or name like '%平板%' order by pubtime desc limit ?,?";
-			}else if(tag==4){
-				sql="select * from goods where name like '%小米%' order by pubtime desc limit ?,?";
-			}else if(tag==5){
-				sql="select * from goods where name like '%数码%' order by pubtime desc limit ?,?";
-			}else if(tag==6){
-				sql="select * from goods where name like '%书%' order by pubtime desc limit ?,?";
-			}else if(tag==7){
-				sql="select * from goods where name like '%衣%' or name like '%鞋%'or name like '%包%' order by pubtime desc limit ?,?";
-			}else if(tag==8){
-				sql="select * from goods where name like '%化妆%' or name like '%霜%' order by pubtime desc limit ?,?";
+			if (tag == 1) {
+				sql = "select * from goods where name like '%苹果%' or name like '%iphone%' order by pubtime desc limit ?,?";
+			} else if (tag == 2) {
+				sql = "select * from goods where name like '%平板电脑%' order by pubtime desc limit ?,?";
+			} else if (tag == 3) {
+				sql = "select * from goods where name like '%电脑%' or name like '%平板%' order by pubtime desc limit ?,?";
+			} else if (tag == 4) {
+				sql = "select * from goods where name like '%小米%' order by pubtime desc limit ?,?";
+			} else if (tag == 5) {
+				sql = "select * from goods where name like '%数码%' order by pubtime desc limit ?,?";
+			} else if (tag == 6) {
+				sql = "select * from goods where name like '%书%' order by pubtime desc limit ?,?";
+			} else if (tag == 7) {
+				sql = "select * from goods where name like '%衣%' or name like '%鞋%'or name like '%包%' order by pubtime desc limit ?,?";
+			} else if (tag == 8) {
+				sql = "select * from goods where name like '%化妆%' or name like '%霜%' order by pubtime desc limit ?,?";
+			} else if (tag == 9) {
+				sql = "select * from goods where typeid = 1 order by pubtime desc limit ?,?";
 			}
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, (curPage - 1) * pageSize);
@@ -101,19 +106,19 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				if (conn != null)
 					conn.close();
 				if (prep != null)
 					prep.close();
-				if(rs != null)
+				if (rs != null)
 					rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}	
+		}
 		return listGoods;
 	}
-	
+
 }

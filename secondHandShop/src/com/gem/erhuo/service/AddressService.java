@@ -1,5 +1,7 @@
 package com.gem.erhuo.service;
 
+import java.util.List;
+
 import com.gem.erhuo.dao.AddressDao;
 import com.gem.erhuo.entity.Address;
 
@@ -18,4 +20,8 @@ public class AddressService {
 		ad.updateAddressIsdefault(userid);
 	}
 	
+	//查询address集合
+	public List<Address> getListAddressByUserId(String userid){
+		return ad.getListAddressByUserId(userid);
+	}
 }

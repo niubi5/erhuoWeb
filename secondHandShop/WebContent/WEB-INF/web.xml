@@ -247,10 +247,6 @@
     <servlet-name>ListHelpsServlet</servlet-name>
     <url-pattern>/ListHelpsServlet</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>SaveAddressServlet</servlet-name>
-    <url-pattern>/SaveAddressServlet</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>CollectionsServlet</display-name>
@@ -310,5 +306,35 @@
   <servlet-mapping>
     <servlet-name>GetMySoldServlet</servlet-name>
     <url-pattern>/GetMySoldServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetMyBoughtServlet</display-name>
+    <servlet-name>GetMyBoughtServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetMyBoughtServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMyBoughtServlet</servlet-name>
+    <url-pattern>/GetMyBoughtServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetMyDonateServlet</display-name>
+    <servlet-name>GetMyDonateServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetMyDonateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMyDonateServlet</servlet-name>
+    <url-pattern>/GetMyDonateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetGoodServlet</display-name>
+    <servlet-name>GetGoodServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetGoodServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetGoodServlet</servlet-name>
+    <url-pattern>/GetGoodServlet</url-pattern>
   </servlet-mapping>
 </web-app>

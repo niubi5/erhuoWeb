@@ -56,29 +56,36 @@ public class SearchGoodsServlet extends HttpServlet {
 		GoodsImagesService gis = new GoodsImagesService();
 		List<Goods> listGoods=service.getGoodsList(word,curPage,pageSize);
 		List<Map<Map<Goods, Users>, List<String>>> listAll = new ArrayList<Map<Map<Goods, Users>, List<String>>>();
-		// 遍历集合取出id
-	    // 通过id查找商品图片表，取出图片url，将url封装
-		for (Goods goods : listGoods) {
-			// 获得url集合
-			List<String> urls = gis.getGoodsImages(goods.getId());
-			// 通过id获得用户对象
-			Users user = us.getById(goods.getUserId());
-			Map<Map<Goods, Users>, List<String>> mapAll = new HashMap<Map<Goods, Users>, List<String>>();
-			Map<Goods, Users> goodsUsers = new HashMap<Goods, Users>();
-			// 将商品，用户加入集合
-			goodsUsers.put(goods, user);
-			// 将商品，用户，图片集合封装
-			mapAll.put(goodsUsers, urls);
-			// 加入总集合
-			listAll.add(mapAll);
+		if (listGoods!=null) {
+			// 遍历集合取出id
+		    // 通过id查找商品图片表，取出图片url，将url封装
+			for (Goods goods : listGoods) {
+				// 获得url集合
+				List<String> urls = gis.getGoodsImages(goods.getId());
+				// 通过id获得用户对象
+				Users user = us.getById(goods.getUserId());
+				Map<Map<Goods, Users>, List<String>> mapAll = new HashMap<Map<Goods, Users>, List<String>>();
+				Map<Goods, Users> goodsUsers = new HashMap<Goods, Users>();
+				// 将商品，用户加入集合
+				goodsUsers.put(goods, user);
+				// 将商品，用户，图片集合封装
+				mapAll.put(goodsUsers, urls);
+				// 加入总集合
+				listAll.add(mapAll);
+			}
+			
+			Gson gson = new GsonBuilder().enableComplexMapKeySerialization().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			String str = gson.toJson(listAll);
+			
+			PrintWriter pw = response.getWriter();
+			pw.print(str);
+			pw.close();
+			
+		}else {
+			PrintWriter pw = response.getWriter();
+			pw.print("null");
+			pw.close();
 		}
-		
-		Gson gson = new GsonBuilder().enableComplexMapKeySerialization().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		String str = gson.toJson(listAll);
-		
-		PrintWriter pw = response.getWriter();
-		pw.print(str);
-		pw.close();
 		
 		
 	}
@@ -88,6 +95,7 @@ public class SearchGoodsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doGet(request, response);
 		//获取传来的参数
 		doGet(request, response);
 //		

@@ -1,10 +1,8 @@
 package com.gem.erhuo.dao;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +28,7 @@ public class AddressDao extends BaseDaoImpl<Address>{
 				address.setUserId(rs.getInt("userid"));
 				address.setPhone(rs.getString("phone"));
 				address.setAddress(rs.getString("address"));
+				address.setIsdefault(rs.getString("isdefault"));
 				return address;
 			}
 		} catch (Exception e) {

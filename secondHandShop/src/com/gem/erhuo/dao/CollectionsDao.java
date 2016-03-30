@@ -3,8 +3,11 @@ package com.gem.erhuo.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.gem.erhuo.entity.Collections;
 import com.gem.erhuo.util.DBConnection;
@@ -60,12 +63,45 @@ public class CollectionsDao extends BaseDaoImpl<Collections> {
 			try {
 				if (conn != null)
 					conn.close();
-				if(prep != null)
+				if (prep != null)
 					prep.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public List<Integer> getCollection(int userId) {
+		List<Integer> list = new ArrayList<Integer>();
+		Connection conn = null;
+		PreparedStatement prep = null;
+		ResultSet rs = null;
+		try {
+			conn = DBConnection.getConnection();
+			String sql = "select * from collections where userid = ?";
+			prep = conn.prepareStatement(sql);
+			prep.setInt(1, userId);
+			rs = prep.executeQuery();
+			while (rs.next()) {
+				int goodsId = rs.getInt("goodid");
+				list.add(goodsId);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (prep != null)
+					prep.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return list;
 	}
 
 }

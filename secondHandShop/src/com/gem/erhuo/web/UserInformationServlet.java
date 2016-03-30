@@ -54,7 +54,6 @@ public class UserInformationServlet extends HttpServlet {
 		pw.print(userStr);
 		System.out.println(userStr);
 		pw.close();
-		
 	}
 
 }

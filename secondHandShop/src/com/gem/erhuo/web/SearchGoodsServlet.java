@@ -89,6 +89,7 @@ public class SearchGoodsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//获取传来的参数
+		doGet(request, response);
 //		
 //		String word=request.getParameter("word");
 //		int curPage = Integer.parseInt(request.getParameter("curPage"));

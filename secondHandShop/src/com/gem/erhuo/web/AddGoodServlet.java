@@ -100,6 +100,7 @@ public class AddGoodServlet extends HttpServlet {
 			System.out.println(goodJson);
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 			Goods good = gson.fromJson(goodJson,Goods.class);
+			
 			GoodService gs = new GoodService();
 			GoodsImagesService gis = new GoodsImagesService();
 			//保存商品文字信息，返回数据库自增长id

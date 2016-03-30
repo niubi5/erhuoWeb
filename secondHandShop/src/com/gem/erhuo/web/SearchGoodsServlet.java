@@ -97,6 +97,7 @@ public class SearchGoodsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		//获取传来的参数
+		doGet(request, response);
 //		
 //		String word=request.getParameter("word");
 //		int curPage = Integer.parseInt(request.getParameter("curPage"));

@@ -1,6 +1,5 @@
 package com.gem.erhuo.dao;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +26,8 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 			sql = "select * from remark where goods_id = ? and father_id is null order by comment_time";
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, goodsId);
+//			prep.setInt(2, (curPage - 1) * pageSize);
+//			prep.setInt(3, pageSize);
 			rs = prep.executeQuery();
 			while (rs.next()) {
 				Remark remark = new Remark();

@@ -17,4 +17,9 @@ public class RemarkService {
 	public void saveRemark(Remark remark){
 		rd.saveRemark(remark);
 	}
+	
+	
+	public List<Remark> getAllRemarkByUserId(int userid){
+		return rd.getAllRemarkByUserId(userid);
+	}
 }

@@ -1,6 +1,5 @@
 package com.gem.erhuo.dao;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +26,8 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 			sql = "select * from remark where goods_id = ? and father_id is null order by comment_time";
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, goodsId);
+//			prep.setInt(2, (curPage - 1) * pageSize);
+//			prep.setInt(3, pageSize);
 			rs = prep.executeQuery();
 			while (rs.next()) {
 				Remark remark = new Remark();
@@ -134,5 +135,50 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 
 		}
 	}
+	
+	
+	// 通过商品Id 返回他的所有评论
+		public List<Remark> getAllRemarkByUserId(int userId) {
+			Connection conn = null;
+			PreparedStatement prep = null;
+			ResultSet rs = null;
+			String sql = null;
+			try {
+				conn = DBConnection.getConnection();
+				sql = "select * from remark where user_id = ?  order by comment_time";
+				prep = conn.prepareStatement(sql);
+				prep.setInt(1, userId);
+//				prep.setInt(2, (curPage - 1) * pageSize);
+//				prep.setInt(3, pageSize);
+				rs = prep.executeQuery();
+				while (rs.next()) {
+					Remark remark = new Remark();
+					remark.setId(rs.getInt("id"));
+					remark.setGoodsId(userId);
+					remark.setUserId(rs.getInt("goods_id"));
+					remark.setComment_content(rs.getString("comment_content"));
+					remark.setComment_time(rs.getString("comment_time"));
+					remark.setFatherId(rs.getInt("father_id"));
+					remark.setIsEnd(rs.getInt("is_end"));
+					listRemarks.add(remark);
+					// 通过一级评论id找出二级评论
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null)
+						conn.close();
+					if (prep != null)
+						prep.close();
+					if (rs != null)
+						prep.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return listRemarks;
+		}
+
 
 }

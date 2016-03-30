@@ -36,6 +36,7 @@ public class GetGoodsImagesServlet extends HttpServlet {
 		Gson gson = new Gson();
 		String str = gson.toJson(urls);
 		pw.print(str);
+		pw.close();
 	}
 
 	/**

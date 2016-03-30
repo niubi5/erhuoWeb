@@ -39,6 +39,7 @@ public class ClassificationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//获取传来的参数
 		int tag=Integer.parseInt(request.getParameter("tag"));
+		System.out.println(tag);
 		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		//获得商品集合

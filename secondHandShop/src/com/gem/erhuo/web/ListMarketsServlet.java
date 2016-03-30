@@ -44,6 +44,7 @@ public class ListMarketsServlet extends HttpServlet {
 		String str = gson.toJson(list);
 		PrintWriter pw = response.getWriter();
 		pw.print(str);
+		pw.close();
 	}
 
 }

@@ -218,4 +218,34 @@
     <servlet-name>SaveAddressServlet</servlet-name>
     <url-pattern>/SaveAddressServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CollectionsServlet</display-name>
+    <servlet-name>CollectionsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.CollectionsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CollectionsServlet</servlet-name>
+    <url-pattern>/CollectionsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListRemarkServlet</display-name>
+    <servlet-name>ListRemarkServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.ListRemarkServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListRemarkServlet</servlet-name>
+    <url-pattern>/ListRemarkServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddCommentServlet</display-name>
+    <servlet-name>AddCommentServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.AddCommentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCommentServlet</servlet-name>
+    <url-pattern>/AddCommentServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

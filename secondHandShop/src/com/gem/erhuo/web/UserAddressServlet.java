@@ -22,7 +22,6 @@ public class UserAddressServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 	      doPost(request, response);
 	}
 
@@ -31,7 +30,7 @@ public class UserAddressServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	      String userid=request.getParameter("userid");
+	      String userid=request.getParameter("curUserId");
 	      AddressService as=new AddressService();
 	      Address address=as.getUserAddressByPhoneService(userid);
 	      String userAddress=null;

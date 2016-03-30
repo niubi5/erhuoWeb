@@ -40,6 +40,7 @@ public class UserInformationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name=request.getParameter("name");
+		System.out.println(name);
 		String phone=request.getParameter("phone");
 		String sex=request.getParameter("sex");
 		UserService service=new UserService();
@@ -53,7 +54,6 @@ public class UserInformationServlet extends HttpServlet {
 		pw.print(userStr);
 		System.out.println(userStr);
 		pw.close();
-		
 	}
 
 }

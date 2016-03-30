@@ -218,4 +218,14 @@
     <servlet-name>SaveAddressServlet</servlet-name>
     <url-pattern>/SaveAddressServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchGoodsServlet</display-name>
+    <servlet-name>SearchGoodsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.SearchGoodsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchGoodsServlet</servlet-name>
+    <url-pattern>/SearchGoodsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

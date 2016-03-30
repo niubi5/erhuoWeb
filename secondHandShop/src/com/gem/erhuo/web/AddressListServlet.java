@@ -38,6 +38,9 @@ public class AddressListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String userid=request.getParameter("curUserId");
 		AddressService service=new AddressService();
 		List<Address> address=service.getListAddressByUserId(userid);

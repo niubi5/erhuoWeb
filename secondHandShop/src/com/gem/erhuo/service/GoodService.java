@@ -15,4 +15,10 @@ public class GoodService {
 	public List<Goods> getPage(Goods goods, int curPage, int pageSize){	
 		return gd.getPage(goods, curPage, pageSize);
 	}
+	//获得搜索的集合
+	public List<Goods> getGoodsList(String word,int curPage, int pageSize){
+		System.out.println("集合"+gd.getGoodsList(word,curPage,pageSize));
+		return gd.getGoodsList(word,curPage,pageSize);
+		
+	}
 }

@@ -247,10 +247,6 @@
     <servlet-name>ListHelpsServlet</servlet-name>
     <url-pattern>/ListHelpsServlet</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>SaveAddressServlet</servlet-name>
-    <url-pattern>/SaveAddressServlet</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>CollectionsServlet</display-name>
@@ -310,5 +306,15 @@
   <servlet-mapping>
     <servlet-name>GetMySoldServlet</servlet-name>
     <url-pattern>/GetMySoldServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CommentRemarkServlet</display-name>
+    <servlet-name>CommentRemarkServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.CommentRemarkServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommentRemarkServlet</servlet-name>
+    <url-pattern>/CommentRemarkServlet</url-pattern>
   </servlet-mapping>
 </web-app>

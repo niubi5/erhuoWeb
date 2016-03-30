@@ -30,6 +30,7 @@ public class AddressDao extends BaseDaoImpl<Address>{
 				address.setUserId(rs.getInt("userid"));
 				address.setPhone(rs.getString("phone"));
 				address.setAddress(rs.getString("address"));
+				address.setIsdefault(rs.getString("isdefault"));
 				return address;
 			}
 		} catch (Exception e) {

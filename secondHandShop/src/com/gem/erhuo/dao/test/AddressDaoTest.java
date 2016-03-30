@@ -10,7 +10,7 @@ public class AddressDaoTest {
 	 AddressDao ad=new AddressDao();
      @Test
      public void getUserAddressByPhone(){
-    	 Address ads=ad.getUserAddressByUserId("1");
+    	 Address ads=ad.getUserAddressByUserId("6");
     	 System.out.println(ads);
      }
    

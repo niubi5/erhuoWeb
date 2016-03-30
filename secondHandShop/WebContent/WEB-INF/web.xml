@@ -247,10 +247,6 @@
     <servlet-name>ListHelpsServlet</servlet-name>
     <url-pattern>/ListHelpsServlet</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>SaveAddressServlet</servlet-name>
-    <url-pattern>/SaveAddressServlet</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>CollectionsServlet</display-name>

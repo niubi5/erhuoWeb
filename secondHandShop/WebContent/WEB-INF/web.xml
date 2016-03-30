@@ -301,4 +301,14 @@
     <servlet-name>GetMySellingServlet</servlet-name>
     <url-pattern>/GetMySellingServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetMySoldServlet</display-name>
+    <servlet-name>GetMySoldServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetMySoldServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMySoldServlet</servlet-name>
+    <url-pattern>/GetMySoldServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

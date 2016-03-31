@@ -22,7 +22,6 @@ public class RemarkDaoTest {
 		remark.setComment_content("测试！！");
 		remark.setComment_time("2016-03-30 08:41:20");
 //		remark.setFatherId(0);
-		remark.setIsEnd(0);
 		rd.saveRemark(remark);
 	}
 }

@@ -51,7 +51,7 @@ public class CommentRemarkServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int userid = Integer.parseInt(request.getParameter("userid"));
+		int userid = Integer.parseInt(request.getParameter("userId"));
 		RemarkService rs = new RemarkService();
 		UserService us = new UserService();
 		List<Remark> listRemark = rs.getAllRemarkByUserId(userid);

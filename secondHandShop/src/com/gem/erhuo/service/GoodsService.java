@@ -1,5 +1,6 @@
 package com.gem.erhuo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gem.erhuo.dao.GoodsDao;
@@ -13,6 +14,16 @@ public class GoodsService {
 	//根据商品id获得商品
 	public Goods getGoodsById(int goodId){
 		return gd.getByID(new Goods(), goodId);
+	}
+	
+	//根据商品id获得商品
+	public List<Goods> getGoodsListById(List<Integer> listId){
+		List<Goods> listGoods = new ArrayList<Goods>();
+		for(Integer i : listId){
+			Goods g = gd.getByID(new Goods(), i);
+			listGoods.add(g);
+		}
+		return listGoods;
 	}
 	
 	// 获得商品集合

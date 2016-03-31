@@ -2,6 +2,7 @@ package com.gem.erhuo.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import com.gem.erhuo.service.GoodsService;
 import com.gem.erhuo.service.UserService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Servlet implementation class GoodsServlet
@@ -47,7 +49,15 @@ public class ListGoodsServlet extends HttpServlet {
 		UserService us = new UserService();
 		GoodsImagesService gis = new GoodsImagesService();
 		// 获得商品集合
-		List<Goods> listGoods = gs.getPagedGoods(curPage, pageSize);
+		List<Goods> listGoods = new ArrayList<Goods>();
+		if(request.getParameter("collecGoodsId") != null){
+			Gson gson = new Gson();
+			Type type = new TypeToken<List<Integer>>() {}.getType();
+			List<Integer> listId = gson.fromJson(request.getParameter("collecGoodsId"), type);
+			listGoods = gs.getGoodsListById(listId);
+		}else{
+			listGoods = gs.getPagedGoods(curPage, pageSize);			
+		}
 		List<Map<Map<Goods, Users>, List<String>>> listAll = new ArrayList<Map<Map<Goods, Users>, List<String>>>();
 		// 遍历集合取出id
 		// 通过id查找商品图片表，取出图片url，将url封装

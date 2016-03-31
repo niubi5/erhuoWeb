@@ -37,7 +37,7 @@ public class GetMyDonateServlet extends HttpServlet {
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		int userId = Integer.parseInt(request.getParameter("userId"));
 		DonateService ds = new DonateService();
-		List<Donates> listDonates = ds.getUserOrders(curPage, pageSize, userId);
+		List<Donates> listDonates = ds.getUserDonate(curPage, pageSize, userId);
 		Gson gson = new GsonBuilder().enableComplexMapKeySerialization().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String str = gson.toJson(listDonates);
 		PrintWriter pw = response.getWriter();

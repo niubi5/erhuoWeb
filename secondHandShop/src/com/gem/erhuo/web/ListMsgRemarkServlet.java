@@ -22,13 +22,13 @@ import com.google.gson.GsonBuilder;
 /**
  * Servlet implementation class CommentRemarkServlet
  */
-public class CommentRemarkServlet extends HttpServlet {
+public class ListMsgRemarkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CommentRemarkServlet() {
+	public ListMsgRemarkServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -51,9 +51,11 @@ public class CommentRemarkServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int userid = Integer.parseInt(request.getParameter("userid"));
+		int userid = Integer.parseInt(request.getParameter("userId"));
 		RemarkService rs = new RemarkService();
 		UserService us = new UserService();
+		// 通过用户Id找到fatherid字段对应的所有Remark对象
+		// 通过Remark对象的useId找到该评论用户
 		List<Remark> listRemark = rs.getAllRemarkByUserId(userid);
 		List<Map<Remark, Users>> listRemarkUsers = new ArrayList<Map<Remark, Users>>();
 		// 通过评论中的用户id取出用户对象，封装起来

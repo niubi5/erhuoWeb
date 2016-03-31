@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gem.erhuo.entity.Goods;
 import com.gem.erhuo.entity.Orders;
+import com.gem.erhuo.service.GoodsService;
 import com.gem.erhuo.service.OrderService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,11 +38,15 @@ public class AddGoodOrderServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		System.out.println("AddGoodOrderServlet");
 		OrderService os = new OrderService();
+		GoodsService gs = new GoodsService();
 		//获取订单信息
 		String orderJson = request.getParameter("orderJosn");
 		System.out.println(orderJson);
 		Gson orderGson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Orders order = orderGson.fromJson(orderJson, Orders.class);
+		Goods good = gs.getGoodsById(order.getGoodId());
+		good.setState(2);
+		gs.update(good);
 		System.out.println(os.save(order));
 		
 	}

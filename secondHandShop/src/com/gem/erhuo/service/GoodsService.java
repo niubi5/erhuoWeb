@@ -15,6 +15,9 @@ public class GoodsService {
 	public Goods getGoodsById(int goodId){
 		return gd.getByID(new Goods(), goodId);
 	}
+	public void update(Goods goods){
+		gd.update(goods);
+	}
 	
 	//根据商品id获得商品
 	public List<Goods> getGoodsListById(List<Integer> listId){

@@ -12,7 +12,7 @@ public class DonateService {
 		dd.save(donates);
 	}
 
-	public List<Donates> getUserOrders(int curPage, int pageSize, int userId) {
+	public List<Donates> getUserDonate(int curPage, int pageSize, int userId) {
 		return dd.getUserDonate(curPage, pageSize, userId);
 	}
 }

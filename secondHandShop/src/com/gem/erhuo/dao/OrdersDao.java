@@ -36,7 +36,7 @@ public class OrdersDao extends BaseDaoImpl {
 				o.setPayTime(rs.getString("paytime"));
 				o.setSendTime(rs.getString("sendtime"));
 				o.setCompleteTime(rs.getString("completetime"));
-				o.setState(rs.getInt("state"));
+				o.setState(rs.getInt("status"));
 				o.setLogisticsCom(rs.getString("logisticscom"));
 				o.setLogisticsNum(rs.getString("logisticsnum"));
 				// 将对象加到集合中

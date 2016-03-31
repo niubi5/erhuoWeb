@@ -2,6 +2,7 @@ package com.gem.erhuo.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,11 +41,20 @@ public class GetMyBoughtServlet extends HttpServlet {
 		OrderService os = new OrderService();
 		List<Orders> listOrsers = os.getUserOrders(curPage, pageSize, userId); 
 		// 获得用户已售出商品集合
-		//List<Goods> listGoods = gs.getSoldPagedGoods(curPage, pageSize, userId);
+		List<Map<Goods, List<String>>> listBoughtGood = new ArrayList<Map<Goods, List<String>>>();
 		// Map<Goods,List<String>>
-		Map<Goods, List<String>> mapBoughtAll = new HashMap<Goods, List<String>>();
 		// 遍历集合取出id
 		// 通过id查找商品图片表，取出图片url，将url封装
+//		for (Orders orders : listOrsers) {
+//			//获得商品
+//			Goods goods = gs.getGoodsById(orders.getGoodId());
+//			// 获得url集合
+//			List<String> urls = gis.getGoodsImages(goods.getId());
+//			// 将商品，图片集合封装
+//			// mapAll.put(goodsUsers, urls);
+//			// 加入总集合
+//			mapBoughtAll.put(goods, urls);
+//		}
 		for (Orders orders : listOrsers) {
 			//获得商品
 			Goods goods = gs.getGoodsById(orders.getGoodId());
@@ -53,10 +63,12 @@ public class GetMyBoughtServlet extends HttpServlet {
 			// 将商品，图片集合封装
 			// mapAll.put(goodsUsers, urls);
 			// 加入总集合
-			mapBoughtAll.put(goods, urls);
+			Map<Goods, List<String>> mapGood = new HashMap<Goods, List<String>>();
+			mapGood.put(goods, urls);
+			listBoughtGood.add(mapGood);
 		}
 		Gson gson = new GsonBuilder().enableComplexMapKeySerialization().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		String str = gson.toJson(mapBoughtAll);
+		String str = gson.toJson(listBoughtGood);
 		PrintWriter pw = response.getWriter();
 		pw.print(str);
 		pw.close();

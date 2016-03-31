@@ -8,7 +8,7 @@ import com.gem.erhuo.entity.Donates;
 public class DonateService {
 	private DonateDao dd = new DonateDao();
 
-	public List<Donates> getUserOrders(int curPage, int pageSize, int userId) {
+	public List<Donates> getUserDonate(int curPage, int pageSize, int userId) {
 		return dd.getUserDonate(curPage, pageSize, userId);
 	}
 }

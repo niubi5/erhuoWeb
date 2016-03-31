@@ -36,7 +36,9 @@ public class SaveAddressServlet extends HttpServlet {
 		Address address=new Gson().fromJson(ads, Address.class);
 		AddressService service=new AddressService();
 		int userid=address.getUserId();
-		service.updateAddressIsdefault(userid);
+		if ((address.getIsdefault().toString()).equals("yes")) {
+			service.updateAddressIsdefault(userid);
+		}
 		service.saveAddress(address);
 		Address As=service.getUserAddressByPhoneService(address.getUserId()+"");
 		if (As!=null&&!As.equals("null")) {

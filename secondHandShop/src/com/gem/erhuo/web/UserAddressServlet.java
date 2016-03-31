@@ -31,6 +31,7 @@ public class UserAddressServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	      String userid=request.getParameter("curUserId");
+	      System.out.println(userid);
 	      AddressService as=new AddressService();
 	      Address address=as.getUserAddressByPhoneService(userid);
 	      String userAddress=null;
@@ -38,6 +39,7 @@ public class UserAddressServlet extends HttpServlet {
 	    	  userAddress=new Gson().toJson(address);
 	      }
 	      PrintWriter pw=response.getWriter();
+	      System.out.println(userAddress);
 	      pw.print(userAddress);
 	      pw.close();
 	}

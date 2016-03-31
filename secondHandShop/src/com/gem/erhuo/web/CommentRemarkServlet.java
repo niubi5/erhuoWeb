@@ -20,15 +20,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
- * Servlet implementation class ListRemarkServlet
+ * Servlet implementation class CommentRemarkServlet
  */
-public class ListRemarkServlet extends HttpServlet {
+public class CommentRemarkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListRemarkServlet() {
+	public CommentRemarkServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -39,7 +39,9 @@ public class ListRemarkServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doPost(request, response);
+
 	}
 
 	/**
@@ -48,14 +50,12 @@ public class ListRemarkServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		int curPage = Integer.parseInt(request.getParameter("curPage"));
-//		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+		// TODO Auto-generated method stub
+		int userid = Integer.parseInt(request.getParameter("userid"));
 		RemarkService rs = new RemarkService();
 		UserService us = new UserService();
-		List<Remark> listRemark = rs.getAll(goodsId);
+		List<Remark> listRemark = rs.getAllRemarkByUserId(userid);
 		List<Map<Remark, Users>> listRemarkUsers = new ArrayList<Map<Remark, Users>>();
-
 		// 通过评论中的用户id取出用户对象，封装起来
 		for (Remark remark : listRemark) {
 			Users user = us.getById(remark.getUserId());

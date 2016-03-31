@@ -24,4 +24,13 @@ public class AddressService {
 	public List<Address> getListAddressByUserId(String userid){
 		return ad.getListAddressByUserId(userid);
 	}
+	
+	//修改地址
+	public void updateAddress(Address address){
+		ad.updateAddress(address);
+	}
+	
+	public Address getUserAddressById(String id){
+		return ad.getUserAddressById(id);
+	}
 }

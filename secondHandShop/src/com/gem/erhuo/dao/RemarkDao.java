@@ -35,7 +35,6 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 				remark.setComment_content(rs.getString("comment_content"));
 				remark.setComment_time(rs.getString("comment_time"));
 				remark.setFatherId(rs.getInt("father_id"));
-				remark.setIsEnd(rs.getInt("is_end"));
 				// 装入集合中
 				listRemarks.add(remark);
 				// 通过一级评论id找出二级评论
@@ -82,7 +81,6 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 				remark.setComment_content(rs.getString("comment_content"));
 				remark.setComment_time(rs.getString("comment_time"));
 				remark.setFatherId(rs.getInt("father_id"));
-				remark.setIsEnd(rs.getInt("is_end"));
 				// 将子评论装入集合，实现排序
 				listRemarks.add(remark);
 				ids.add(rs.getInt("id"));
@@ -110,7 +108,7 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 		try {
 			conn = DBConnection.getConnection();
 			String sql = "insert into remark(goods_id,user_id,comment_content,"
-					+ "comment_time,father_id,is_end) values(?,?,?,?,?,?)";
+					+ "comment_time,father_id,is_end) values(?,?,?,?,?)";
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, remark.getGoodsId());
 			prep.setInt(2, remark.getUserId());
@@ -121,7 +119,6 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 			} else {
 				prep.setInt(5, remark.getFatherId());
 			}
-			prep.setInt(6, remark.getIsEnd());
 			prep.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -146,7 +143,7 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 		String sql = null;
 		try {
 			conn = DBConnection.getConnection();
-			sql = "select * from remark where user_id = ?  order by comment_time";
+			sql = "select * from remark where user_id = ?  order by comment_time desc";
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, userId);
 			// prep.setInt(2, (curPage - 1) * pageSize);
@@ -155,12 +152,11 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 			while (rs.next()) {
 				Remark remark = new Remark();
 				remark.setId(rs.getInt("id"));
-				remark.setGoodsId(userId);
-				remark.setUserId(rs.getInt("goods_id"));
+				remark.setGoodsId(rs.getInt("goods_id"));
+				remark.setUserId(userId);
 				remark.setComment_content(rs.getString("comment_content"));
 				remark.setComment_time(rs.getString("comment_time"));
 				remark.setFatherId(rs.getInt("father_id"));
-				remark.setIsEnd(rs.getInt("is_end"));
 				listRemarks.add(remark);
 				// 通过一级评论id找出二级评论
 			}

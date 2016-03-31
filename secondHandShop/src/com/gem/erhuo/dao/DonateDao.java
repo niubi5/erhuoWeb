@@ -12,6 +12,13 @@ import com.gem.erhuo.entity.Orders;
 import com.gem.erhuo.util.DBConnection;
 
 public class DonateDao extends BaseDaoImpl<Donates> {
+	
+	@Override
+	public int save(Donates t) {
+		// TODO Auto-generated method stub
+		return super.save(t);
+	}
+
 	public List<Donates> getUserDonate(int curPage, int pageSize, int userId) {
 		Connection conn = null;
 		PreparedStatement prep = null;
@@ -53,4 +60,5 @@ public class DonateDao extends BaseDaoImpl<Donates> {
 		}
 		return listDonate;
 	}
+	
 }

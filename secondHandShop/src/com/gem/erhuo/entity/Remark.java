@@ -10,7 +10,6 @@ public class Remark implements Serializable{
 	private String comment_content;
 	private String comment_time;
 	private int fatherId;
-	private int isEnd;
 	
 	public int getId() {
 		return id;
@@ -47,17 +46,5 @@ public class Remark implements Serializable{
 	}
 	public void setFatherId(int fatherId) {
 		this.fatherId = fatherId;
-	}
-	public int getIsEnd() {
-		return isEnd;
-	}
-	public void setIsEnd(int isEnd) {
-		this.isEnd = isEnd;
-	}
-	@Override
-	public String toString() {
-		return "Remark [id=" + id + ", goodsId=" + goodsId + ", userId=" + userId + ", comment_content="
-				+ comment_content + ", comment_time=" + comment_time + ", fatherId=" + fatherId + ", isEnd=" + isEnd
-				+ "]";
 	}
 }

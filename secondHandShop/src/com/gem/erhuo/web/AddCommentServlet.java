@@ -50,7 +50,6 @@ public class AddCommentServlet extends HttpServlet {
 		remark.setComment_content(commentContent);
 		remark.setComment_time(commentTime);
 		remark.setFatherId(fatherId);
-		remark.setIsEnd(0);
 		RemarkService rs = new RemarkService();
 		rs.saveRemark(remark);
 		System.out.println(remark.toString());

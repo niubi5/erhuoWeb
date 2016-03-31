@@ -29,4 +29,16 @@ public class AddressDaoTest {
      public void updateAddressIsdefault(){
     	 ad.updateAddressIsdefault(1);
      }
+     
+     @Test
+     public void updateAddress(){
+    	 Address adds=new Address();
+    	 adds.setId(11);
+    	 adds.setUserId(7);
+    	 adds.setName("雷克顿");
+    	 adds.setPhone("15911112332");
+    	 adds.setAddress("湖北省武汉市汉阳镇博学路江大五号门");
+    	 adds.setIsdefault("yes");
+    	 ad.updateAddress(adds);
+     }
 }

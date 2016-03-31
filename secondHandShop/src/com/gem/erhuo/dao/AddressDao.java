@@ -113,4 +113,57 @@ public class AddressDao extends BaseDaoImpl<Address>{
 		
 	}
 	
+	
+	public void updateAddress(Address address){
+		Connection conn = null;
+		PreparedStatement prep = null;
+		ResultSet rs = null;
+		try {
+			conn=DBConnection.getConnection();
+			String sql="update address set userid=?,name=?,phone=?,address=?,isdefault=? where id=?";
+			prep=conn.prepareStatement(sql);
+			prep.setInt(1, address.getUserId());
+			prep.setString(2,address.getName());
+			prep.setString(3, address.getPhone());
+			prep.setString(4, address.getAddress());
+			prep.setString(5, address.getIsdefault());
+			prep.setInt(6, address.getId());
+			prep.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public Address getUserAddressById(String id){
+		Connection conn = null;
+		PreparedStatement prep = null;
+		ResultSet rs = null;
+		try {
+			conn=DBConnection.getConnection();
+			String sql="select * from address where id=? ";
+			prep=conn.prepareStatement(sql);
+			prep.setString(1, id);
+			rs=prep.executeQuery();
+			while(rs.next()){
+				Address address=new Address();
+				address.setId(rs.getInt("id"));
+				address.setName(rs.getString("name"));
+				address.setUserId(rs.getInt("userid"));
+				address.setPhone(rs.getString("phone"));
+				address.setAddress(rs.getString("address"));
+				address.setIsdefault(rs.getString("isdefault"));
+				return address;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+	
 }

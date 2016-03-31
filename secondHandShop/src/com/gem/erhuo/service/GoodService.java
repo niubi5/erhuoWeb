@@ -17,8 +17,14 @@ public class GoodService {
 	}
 	//获得搜索的集合
 	public List<Goods> getGoodsList(String word,int curPage, int pageSize){
-		System.out.println("集合"+gd.getGoodsList(word,curPage,pageSize));
 		return gd.getGoodsList(word,curPage,pageSize);
-		
+	}
+	
+	public Goods getById(int goodsId){
+		return gd.getByID(new Goods(), goodsId);
+	}
+	
+	public List<Goods> getByUserId(int userId){
+		return gd.getByUserId(userId);
 	}
 }

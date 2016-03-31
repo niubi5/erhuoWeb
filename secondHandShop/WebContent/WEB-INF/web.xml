@@ -338,13 +338,14 @@
     <url-pattern>/GetGoodServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <display-name>CommentRemarkServlet</display-name>
-    <servlet-name>CommentRemarkServlet</servlet-name>
-    <servlet-class>com.gem.erhuo.web.CommentRemarkServlet</servlet-class>
+    <description></description>
+    <display-name>ListMsgRemarkServlet</display-name>
+    <servlet-name>ListMsgRemarkServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.ListMsgRemarkServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CommentRemarkServlet</servlet-name>
-    <url-pattern>/CommentRemarkServlet</url-pattern>
+    <servlet-name>ListMsgRemarkServlet</servlet-name>
+    <url-pattern>/ListMsgRemarkServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -356,7 +357,14 @@
     <servlet-name>UpdateAddressServlet</servlet-name>
     <url-pattern>/UpdateAddressServlet</url-pattern>
   </servlet-mapping>
-
-
-
-  </web-app>
+  <servlet>
+    <description></description>
+    <display-name>ListCommentGoodsServlet</display-name>
+    <servlet-name>ListCommentGoodsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.ListCommentGoodsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListCommentGoodsServlet</servlet-name>
+    <url-pattern>/ListCommentGoodsServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

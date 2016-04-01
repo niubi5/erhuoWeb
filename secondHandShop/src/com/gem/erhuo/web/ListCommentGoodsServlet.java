@@ -48,7 +48,7 @@ public class ListCommentGoodsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String str = request.getParameter("listRemarks");
+		String str = request.getParameter("remarkList");
 		Gson gson = new GsonBuilder().enableComplexMapKeySerialization().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Type type = new TypeToken<List<Remark>>(){}.getType();
 		List<Remark> listRemarks = gson.fromJson(str, type);

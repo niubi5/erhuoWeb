@@ -40,7 +40,7 @@ public class SaveAddressServlet extends HttpServlet {
 			service.updateAddressIsdefault(userid);
 		}
 		service.saveAddress(address);
-		Address As=service.getUserAddressById(address.getId()+"");
+		Address As=service.getUserAddressById(address.getId());
 		if (As!=null&&!As.equals("null")) {
 			PrintWriter pw = response.getWriter();
 			pw.print("save ok");

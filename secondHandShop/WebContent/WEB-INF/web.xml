@@ -356,7 +356,14 @@
     <servlet-name>UpdateAddressServlet</servlet-name>
     <url-pattern>/UpdateAddressServlet</url-pattern>
   </servlet-mapping>
-
-
-
-  </web-app>
+  <servlet>
+    <description></description>
+    <display-name>AddHeaderImageServlet</display-name>
+    <servlet-name>AddHeaderImageServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.AddHeaderImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddHeaderImageServlet</servlet-name>
+    <url-pattern>/AddHeaderImageServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

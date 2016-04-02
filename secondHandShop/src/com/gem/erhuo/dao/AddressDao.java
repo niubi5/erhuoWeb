@@ -137,15 +137,15 @@ public class AddressDao extends BaseDaoImpl<Address>{
 		
 	}
 	
-	public Address getUserAddressById(String id){
+	public Address getUserAddressById(int id){
 		Connection conn = null;
 		PreparedStatement prep = null;
 		ResultSet rs = null;
 		try {
 			conn=DBConnection.getConnection();
-			String sql="select * from address where id=? ";
+			String sql="select * from address where id=?";
 			prep=conn.prepareStatement(sql);
-			prep.setString(1, id);
+			prep.setInt(1, id);
 			rs=prep.executeQuery();
 			while(rs.next()){
 				Address address=new Address();
@@ -161,8 +161,25 @@ public class AddressDao extends BaseDaoImpl<Address>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
+	}
+	
+	
+	public void updateAddress(String address,String userid){
+		Connection conn = null;
+		PreparedStatement prep = null;
+		try {
+			conn=DBConnection.getConnection();
+			String sql="update address set address=? where userid=? and isdefault='yes'";
+			prep=conn.prepareStatement(sql);
+			prep.setString(1, address);
+			prep.setString(2, userid);
+			prep.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

@@ -55,7 +55,10 @@ public class ListGoodsServlet extends HttpServlet {
 			Type type = new TypeToken<List<Integer>>() {}.getType();
 			List<Integer> listId = gson.fromJson(request.getParameter("collecGoodsId"), type);
 			listGoods = gs.getGoodsListById(listId);
-		}else{
+		} else if(request.getParameter("marketId") != null){
+			int marketId = Integer.parseInt(request.getParameter("marketId"));
+			listGoods = gs.getGoodsByMarketId(curPage,pageSize,marketId);
+		} else{
 			listGoods = gs.getPagedGoods(curPage, pageSize);			
 		}
 		List<Map<Map<Goods, Users>, List<String>>> listAll = new ArrayList<Map<Map<Goods, Users>, List<String>>>();

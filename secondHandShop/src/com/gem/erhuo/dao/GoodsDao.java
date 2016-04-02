@@ -259,4 +259,51 @@ public class GoodsDao extends BaseDaoImpl<Goods> {
 		return listGoods;
 	}
 
+	public List<Goods> getGoodsByMarketId(int curPage, int pageSize, int marketId) {
+		List<Goods> listGoods = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement prep = null;
+		ResultSet rs = null;
+		try {
+			conn = DBConnection.getConnection();
+			String sql = "select * from goods where marketid = ? limit ?,?";
+			prep = conn.prepareStatement(sql);
+			prep.setInt(1, marketId);
+			prep.setInt(2,(curPage - 1) * pageSize );
+			prep.setInt(3, pageSize);
+			rs = prep.executeQuery();
+			while (rs.next()) {
+				Goods goods = new Goods();
+				goods.setId(rs.getInt("id"));
+				goods.setUserId(rs.getInt("userid"));
+				goods.setName(rs.getString("name"));
+				goods.setImformation(rs.getString("imformation"));
+				goods.setTypeId(rs.getInt("typeid"));
+				goods.setSoldPrice(rs.getDouble("soldprice"));
+				goods.setBuyPrice(rs.getDouble("buyprice"));
+				goods.setMarketId(rs.getInt("marketid"));
+				goods.setLongitude(rs.getDouble("longitude"));
+				goods.setLatitude(rs.getDouble("latitude"));
+				goods.setPubTime(rs.getString("pubtime"));
+				goods.setState(rs.getInt("state"));
+				listGoods.add(goods);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (prep != null)
+					prep.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return listGoods;
+	}
+
 }

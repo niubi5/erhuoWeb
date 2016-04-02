@@ -13,7 +13,7 @@ import com.gem.erhuo.util.DBConnection;
 
 public class RemarkDao extends BaseDaoImpl<Remark> {
 
-	private List<Remark> listRemarks = new ArrayList<Remark>();
+	private List<Remark> listRemarks;
 
 	// 通过商品Id 返回他的所有评论
 	public List<Remark> getAll(int goodsId) {
@@ -22,6 +22,7 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 		PreparedStatement prep = null;
 		ResultSet rs = null;
 		String sql = null;
+		listRemarks = new ArrayList<Remark>();
 		try {
 			conn = DBConnection.getConnection();
 			sql = "select * from remark where goods_id = ? and father_id is null order by comment_time";
@@ -39,11 +40,7 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 				// 装入集合中
 				listRemarks.add(remark);
 				// 通过一级评论id找出二级评论
-				List<Integer> ids = getChildRemark(rs.getInt("id"));
-				// 递归调用
-				for (Integer id : ids) {
-					getChildRemark(id);// 这个方法通过父评论Id查找出子评论，并且将子评论装入了Remark集合
-				}
+				getChildRemark(rs.getInt("id"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,11 +60,11 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 	}
 
 	// 通过父评论找出子评论
-	private List<Integer> getChildRemark(int fatherId) {
+	public int getChildRemark(int fatherId) {
 		Connection conn = null;
 		PreparedStatement prep = null;
 		ResultSet rs = null;
-		List<Integer> ids = new ArrayList<Integer>();
+		int id = 0;
 		try {
 			conn = DBConnection.getConnection();
 			String sql = "select * from remark where father_id = ? order by comment_time";
@@ -76,15 +73,21 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 			rs = prep.executeQuery();
 			while (rs.next()) {
 				Remark remark = new Remark();
-				remark.setId(rs.getInt("id"));
+				id = rs.getInt("id");
+				remark.setId(id);
 				remark.setGoodsId(rs.getInt("goods_id"));
 				remark.setUserId(rs.getInt("user_id"));
 				remark.setComment_content(rs.getString("comment_content"));
 				remark.setComment_time(rs.getString("comment_time"));
 				remark.setFatherId(rs.getInt("father_id"));
+				remark.setIsEnd(rs.getInt("is_end"));
 				// 将子评论装入集合，实现排序
 				listRemarks.add(remark);
-				ids.add(rs.getInt("id"));
+				if (remark.getIsEnd() != 0) {
+					getChildRemark(rs.getInt("id"));
+				} else {
+					break;
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,7 +103,7 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 				e.printStackTrace();
 			}
 		}
-		return ids;
+		return id;
 	}
 
 	public void saveRemark(Remark remark) {
@@ -132,6 +135,29 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public void update(int id) {
+		Connection conn = null;
+		PreparedStatement prep = null;
+		try {
+			conn = DBConnection.getConnection();
+			String sql = "update remark set is_end = 1 where id = ?";
+			prep = conn.prepareStatement(sql);
+			prep.setInt(1, id);
+			prep.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (prep != null)
+					prep.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
 		}
 	}
@@ -142,6 +168,7 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 		PreparedStatement prep = null;
 		ResultSet rs = null;
 		String sql = null;
+		List<Remark> list = new ArrayList<>();
 		try {
 			conn = DBConnection.getConnection();
 			sql = "select * from remark where user_id = ?  order by comment_time desc";
@@ -158,7 +185,7 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 				remark.setComment_content(rs.getString("comment_content"));
 				remark.setComment_time(rs.getString("comment_time"));
 				remark.setFatherId(rs.getInt("father_id"));
-				listRemarks.add(remark);
+				list.add(remark);
 				// 通过一级评论id找出二级评论
 			}
 		} catch (Exception e) {
@@ -175,22 +202,20 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 				e.printStackTrace();
 			}
 		}
-		return listRemarks;
+		return list;
 	}
 
 	// 通过father_id找到remark
-	public List<Remark> getAllByFatherID(int fatherId, int curPage, int pageSize) {
+	public List<Remark> getAllByFatherID(int fatherId) {
 		Connection conn = null;
 		PreparedStatement prep = null;
 		ResultSet rs = null;
 		List<Remark> list = new ArrayList<Remark>();
 		try {
 			conn = DBConnection.getConnection();
-			String sql = "select * from remark where father_id = ? limit ?,?";
+			String sql = "select * from remark where father_id = ?";
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, fatherId);
-			prep.setInt(2, (curPage - 1) * pageSize);
-			prep.setInt(3, pageSize);
 			rs = prep.executeQuery();
 			while (rs.next()) {
 				Remark remark = new Remark();
@@ -227,7 +252,7 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 		List<Remark> list = new ArrayList<Remark>();
 		try {
 			conn = DBConnection.getConnection();
-			String sql = "select * from remark where user_id = ? and father_id is not null limit ?,?";
+			String sql = "select * from remark where father_id in (select id from remark where user_id = ?) order by comment_time desc limit ?,?";
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, userId);
 			prep.setInt(2, (curPage - 1) * pageSize);
@@ -258,6 +283,43 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 			}
 		}
 		return list;
+	}
+
+	public Remark getRemarkById(int remarkId) {
+		Remark remark = new Remark();
+		Connection conn = null;
+		PreparedStatement prep = null;
+		ResultSet rs = null;
+		try {
+			conn = DBConnection.getConnection();
+			String sql = "select * from remark where id = ?";
+			prep = conn.prepareStatement(sql);
+			prep.setInt(1, remarkId);
+			rs = prep.executeQuery();
+			while (rs.next()) {
+				remark.setId(rs.getInt("id"));
+				remark.setGoodsId(rs.getInt("goods_id"));
+				remark.setUserId(rs.getInt("user_id"));
+				remark.setComment_content(rs.getString("comment_content"));
+				remark.setComment_time(rs.getString("comment_time"));
+				remark.setFatherId(rs.getInt("father_id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (prep != null)
+					prep.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return remark;
 	}
 
 	// public Remark getById(int remarkId) {

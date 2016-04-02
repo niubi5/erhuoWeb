@@ -17,28 +17,37 @@ import com.gem.erhuo.service.RemarkService;
  */
 public class AddCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddCommentServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AddCommentServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
 		int userId = Integer.parseInt(request.getParameter("userId"));
+		RemarkService rs = new RemarkService();
+		if (request.getParameter("id") != null) {
+			// 修改父评论is_end
+			rs.update(Integer.parseInt(request.getParameter("id")));
+		}
 		String commentContent = request.getParameter("commentContent");
 		int fatherId = Integer.parseInt(request.getParameter("fatherId"));
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -50,9 +59,9 @@ public class AddCommentServlet extends HttpServlet {
 		remark.setComment_content(commentContent);
 		remark.setComment_time(commentTime);
 		remark.setFatherId(fatherId);
-		RemarkService rs = new RemarkService();
+		remark.setIsEnd(0);// 默认为终极评论
 		rs.saveRemark(remark);
-		System.out.println(remark.toString());
+		
 	}
 
 }

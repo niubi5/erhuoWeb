@@ -55,9 +55,10 @@ public class ListMsgRemarkServlet extends HttpServlet {
 		RemarkService rs = new RemarkService();
 		UserService us = new UserService();
 		List<Map<Remark, Users>> listRemarkUsers = new ArrayList<Map<Remark, Users>>();
-		// 通过用户Id找到fatherid字段不为null的数据
+		// 通过用户Id找到所有remark
+		// 当remark的id为其他评论的father_id时，这些评论就是我收到的评论
 		List<Remark> listRemarks = rs.getMyReceiveRemarks(userId, curPage, pageSize);
-		// 通过Remark对象的useId找到所有评论用户
+		// 通过Remark对象的useId找到所有评论用户，通过id找到该评论
 		for (Remark remark : listRemarks) {
 			// 将评论对象与该用户对象封装在一起
 			Users user = us.getById(remark.getUserId());

@@ -18,13 +18,21 @@ public class RemarkService {
 		rd.saveRemark(remark);
 	}
 	
+	public Remark getRemarkById(int remarkId){
+		return rd.getRemarkById(remarkId);
+	}
+	
+	// 将remark的is_end设为1
+	public void update(int id){
+		rd.update(id);
+	}
 	
 	public List<Remark> getAllRemarkByUserId(int userid){
 		return rd.getAllRemarkByUserId(userid);
 	}
 	
-	public List<Remark> getAllByFatherId(int fatherId, int curPage, int pageSize){
-		return rd.getAllByFatherID(fatherId, curPage, pageSize);
+	public List<Remark> getAllByFatherId(int fatherId){
+		return rd.getAllByFatherID(fatherId);
 	}
 	
 	public List<Remark> getMyReceiveRemarks(int userId, int curPage, int pageSize){

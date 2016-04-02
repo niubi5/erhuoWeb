@@ -758,6 +758,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					m.setGoodsCount(rs.getInt("goodscount"));
 					m.setUrl(urlHead + "/" +rs.getString("url"));
 					m.setBrief(rs.getString("brief"));
+					m.setInfoUrl(urlHead + "/"  + rs.getString("infourl"));
 					// 将对象加到集合中
 					list.add((T) m);
 				}

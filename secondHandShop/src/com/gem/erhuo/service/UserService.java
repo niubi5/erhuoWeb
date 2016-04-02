@@ -59,4 +59,8 @@ public class UserService {
 			
 		}
 		
+//		public Users getByGoodsId(int goodsId){
+//			return ud.getByGoodsId(goodsId);
+//		}
+		
 }

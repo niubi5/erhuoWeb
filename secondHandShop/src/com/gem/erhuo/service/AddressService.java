@@ -30,7 +30,11 @@ public class AddressService {
 		ad.updateAddress(address);
 	}
 	
-	public Address getUserAddressById(String id){
+	public Address getUserAddressById(int id){
 		return ad.getUserAddressById(id);
+	}
+	
+	public void updateUserAddress(String address,String userid){
+		ad.updateAddress(address, userid);
 	}
 }

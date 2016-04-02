@@ -369,6 +369,17 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+
+
+    <display-name>AddHeaderImageServlet</display-name>
+    <servlet-name>AddHeaderImageServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.AddHeaderImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddHeaderImageServlet</servlet-name>
+    <url-pattern>/AddHeaderImageServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
     <display-name>ListCommentGoodsServlet</display-name>
     <servlet-name>ListCommentGoodsServlet</servlet-name>
     <servlet-class>com.gem.erhuo.web.ListCommentGoodsServlet</servlet-class>

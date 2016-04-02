@@ -22,4 +22,8 @@ public class RemarkService {
 	public List<Remark> getAllRemarkByUserId(int userid){
 		return rd.getAllRemarkByUserId(userid);
 	}
+	
+	public List<Remark> getAllByFatherId(int fatherId, int curPage, int pageSize){
+		return rd.getAllByFatherID(fatherId, curPage, pageSize);
+	}
 }

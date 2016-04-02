@@ -307,6 +307,15 @@
     <servlet-name>GetMySoldServlet</servlet-name>
     <url-pattern>/GetMySoldServlet</url-pattern>
   </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
   <servlet>
     <description></description>
     <display-name>GetMyBoughtServlet</display-name>
@@ -338,14 +347,26 @@
     <url-pattern>/GetGoodServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <display-name>CommentRemarkServlet</display-name>
-    <servlet-name>CommentRemarkServlet</servlet-name>
-    <servlet-class>com.gem.erhuo.web.CommentRemarkServlet</servlet-class>
+    <description></description>
+    <display-name>ListMsgRemarkServlet</display-name>
+    <servlet-name>ListMsgRemarkServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.ListMsgRemarkServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CommentRemarkServlet</servlet-name>
-    <url-pattern>/CommentRemarkServlet</url-pattern>
+    <servlet-name>ListMsgRemarkServlet</servlet-name>
+    <url-pattern>/ListMsgRemarkServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoanteServlet</display-name>
+    <servlet-name>DoanteServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.DoanteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoanteServlet</servlet-name>
+    <url-pattern>/DoanteServlet</url-pattern>
+  </servlet-mapping>
+
   <servlet>
     <description></description>
     <display-name>UpdateAddressServlet</display-name>
@@ -358,6 +379,8 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+
+
     <display-name>AddHeaderImageServlet</display-name>
     <servlet-name>AddHeaderImageServlet</servlet-name>
     <servlet-class>com.gem.erhuo.web.AddHeaderImageServlet</servlet-class>
@@ -365,5 +388,14 @@
   <servlet-mapping>
     <servlet-name>AddHeaderImageServlet</servlet-name>
     <url-pattern>/AddHeaderImageServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <display-name>ListCommentGoodsServlet</display-name>
+    <servlet-name>ListCommentGoodsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.ListCommentGoodsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListCommentGoodsServlet</servlet-name>
+    <url-pattern>/ListCommentGoodsServlet</url-pattern>
   </servlet-mapping>
 </web-app>

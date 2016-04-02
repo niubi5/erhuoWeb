@@ -48,8 +48,6 @@ public class ListRemarkServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		int curPage = Integer.parseInt(request.getParameter("curPage"));
-//		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
 		RemarkService rs = new RemarkService();
 		UserService us = new UserService();

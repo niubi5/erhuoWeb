@@ -44,6 +44,10 @@ public class ListHelpsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at:
 		// ").append(request.getContextPath());
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		// 获得参数
 		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));

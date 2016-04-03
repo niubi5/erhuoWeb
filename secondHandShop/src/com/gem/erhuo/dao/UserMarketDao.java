@@ -2,9 +2,12 @@ package com.gem.erhuo.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.gem.erhuo.entity.UserMarket;
 import com.gem.erhuo.util.DBConnection;
@@ -37,8 +40,8 @@ public class UserMarketDao extends BaseDaoImpl<UserMarket> {
 
 		}
 	}
-	
-	public void deleteUserMarket(int userId, int marketId){
+
+	public void deleteUserMarket(int userId, int marketId) {
 		Connection conn = null;
 		PreparedStatement prep = null;
 		try {
@@ -63,4 +66,32 @@ public class UserMarketDao extends BaseDaoImpl<UserMarket> {
 		}
 	}
 
+	public List<Integer> getUserMarketIDById(int userId) {
+		Connection conn = null;
+		PreparedStatement prep = null;
+		ResultSet rs = null;
+		List<Integer> list = new ArrayList<>();
+		try {
+			conn = DBConnection.getConnection();
+			String sql = "select * from usermarket where userid = ?";
+			prep = conn.prepareStatement(sql);
+			prep.setInt(1, userId);
+			rs = prep.executeQuery();
+			while (rs.next()) {
+				list.add(rs.getInt("marketid"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (prep != null)
+					prep.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 }

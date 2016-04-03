@@ -39,14 +39,14 @@ public class ClassificationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//获取传来的参数
 		int tag=Integer.parseInt(request.getParameter("tag"));
-		System.out.println(tag);
+		int sortTag = Integer.parseInt(request.getParameter("sortTag"));
 		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		//获得商品集合
 		GoodsService gs = new GoodsService();
 		UserService us = new UserService();
 		GoodsImagesService gis = new GoodsImagesService();
-		List<Goods> listGoods = gs.getClassifiGoods(tag,curPage,pageSize);
+		List<Goods> listGoods = gs.getClassifiGoods(tag, sortTag, curPage, pageSize);
 		List<Map<Map<Goods, Users>, List<String>>> listAll = new ArrayList<Map<Map<Goods, Users>, List<String>>>();
 		// 遍历集合取出id
 	    // 通过id查找商品图片表，取出图片url，将url封装

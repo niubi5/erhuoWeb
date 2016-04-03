@@ -315,7 +315,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-
   <servlet>
     <description></description>
     <display-name>GetMyBoughtServlet</display-name>
@@ -357,17 +356,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>DoanteServlet</display-name>
-    <servlet-name>DoanteServlet</servlet-name>
-    <servlet-class>com.gem.erhuo.web.DoanteServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DoanteServlet</servlet-name>
-    <url-pattern>/DoanteServlet</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <description></description>
     <display-name>UpdateAddressServlet</display-name>
     <servlet-name>UpdateAddressServlet</servlet-name>
     <servlet-class>com.gem.erhuo.web.UpdateAddressServlet</servlet-class>
@@ -376,7 +364,44 @@
     <servlet-name>UpdateAddressServlet</servlet-name>
     <url-pattern>/UpdateAddressServlet</url-pattern>
   </servlet-mapping>
-
-
-
-  </web-app>
+  <servlet>
+    <description></description>
+    <display-name>DonateServlet</display-name>
+    <servlet-name>DonateServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.DonateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DonateServlet</servlet-name>
+    <url-pattern>/DonateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HelpsReportsServlet</display-name>
+    <servlet-name>HelpsReportsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.HelpsReportsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelpsReportsServlet</servlet-name>
+    <url-pattern>/HelpsReportsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HelpsReportServlet</display-name>
+    <servlet-name>HelpsReportServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.HelpsReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelpsReportServlet</servlet-name>
+    <url-pattern>/HelpsReportServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetDonatorServlet</display-name>
+    <servlet-name>GetDonatorServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetDonatorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetDonatorServlet</servlet-name>
+    <url-pattern>/GetDonatorServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

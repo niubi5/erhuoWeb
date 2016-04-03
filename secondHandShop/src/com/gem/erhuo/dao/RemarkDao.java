@@ -1,5 +1,6 @@
 package com.gem.erhuo.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -108,7 +109,7 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 		try {
 			conn = DBConnection.getConnection();
 			String sql = "insert into remark(goods_id,user_id,comment_content,"
-					+ "comment_time,father_id,is_end) values(?,?,?,?,?)";
+					+ "comment_time,father_id) values(?,?,?,?,?)";
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, remark.getGoodsId());
 			prep.setInt(2, remark.getUserId());
@@ -176,5 +177,69 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 		}
 		return listRemarks;
 	}
+
+	// 通过father_id找到remark
+	public List<Remark> getAllByFatherID(int fatherId, int curPage, int pageSize) {
+		Connection conn = null;
+		PreparedStatement prep = null;
+		ResultSet rs = null;
+		List<Remark> list = new ArrayList<Remark>();
+		try {
+			conn = DBConnection.getConnection();
+			String sql = "select * from remark where father_id = ? limit ?,?";
+			prep = conn.prepareStatement(sql);
+			prep.setInt(1, fatherId);
+			prep.setInt(2, (curPage - 1) * pageSize);
+			prep.setInt(3, pageSize);
+			rs = prep.executeQuery();
+			while (rs.next()) {
+				Remark remark = new Remark();
+				remark.setId(rs.getInt("id"));
+				remark.setUserId(rs.getInt("goods_id"));
+				remark.setUserId(rs.getInt("user_id"));
+				remark.setComment_content(rs.getString("comment_content"));
+				remark.setComment_time(rs.getString("comment_time"));
+				remark.setFatherId(fatherId);
+				list.add(remark);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (prep != null)
+					prep.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return list;
+	}
+
+//	public Remark getById(int remarkId) {
+//		Connection conn = null;
+//		PreparedStatement prep = null;
+//		ResultSet rs = null;
+//		Remark remark = null;
+//		try {
+//			conn = DBConnection.getConnection();
+//			String sql = "select * from remark where remark_id = ?";
+//			prep = conn.prepareStatement(sql);
+//			prep.setInt(1, remarkId);
+//			rs = prep.executeQuery();
+//			while(rs.next()){
+//				remark.setId(rs.getInt("id"));
+//				remark.setUserId(rs.getU);
+//			}
+//		
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} 
+//		return null;
+//	}
 
 }

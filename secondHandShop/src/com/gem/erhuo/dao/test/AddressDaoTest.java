@@ -9,7 +9,7 @@ public class AddressDaoTest {
 	
 	 AddressDao ad=new AddressDao();
      @Test
-     public void getUserAddressByPhone(){
+     public void getUserAddressByUserid(){
     	 Address ads=ad.getUserAddressByUserId("6");
     	 System.out.println(ads);
      }
@@ -19,9 +19,9 @@ public class AddressDaoTest {
     	 Address adds=new Address();
     	 adds.setUserId(7);
     	 adds.setName("雷克顿");
-    	 adds.setPhone("15911112222");
+    	 adds.setPhone("15911119999");
     	 adds.setAddress("湖北省武汉市汉阳镇博学路江大五号门");
-    	 adds.setIsdefault("yes");
+    	 adds.setIsdefault("no");
     	 ad.saveAddress(adds);
      }
      
@@ -40,5 +40,9 @@ public class AddressDaoTest {
     	 adds.setAddress("湖北省武汉市汉阳镇博学路江大五号门");
     	 adds.setIsdefault("yes");
     	 ad.updateAddress(adds);
+     }
+     @Test
+     public Address getUserAddressById(){
+    	 return ad.getUserAddressById(1);
      }
 }

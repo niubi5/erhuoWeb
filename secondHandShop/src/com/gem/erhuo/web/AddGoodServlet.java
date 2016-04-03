@@ -122,7 +122,6 @@ public class AddGoodServlet extends HttpServlet {
 					//客户端传过来的图片名
 					String imageName = poster.getFileName();
 					File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
-					
 					//File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
 					//文件的保存路径
 					String saveImageName = file.getAbsolutePath();

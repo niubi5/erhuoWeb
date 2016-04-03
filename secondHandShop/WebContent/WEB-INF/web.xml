@@ -369,8 +369,46 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>DonateServlet</display-name>
+    <servlet-name>DonateServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.DonateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DonateServlet</servlet-name>
+    <url-pattern>/DonateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HelpsReportsServlet</display-name>
+    <servlet-name>HelpsReportsServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.HelpsReportsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelpsReportsServlet</servlet-name>
+    <url-pattern>/HelpsReportsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HelpsReportServlet</display-name>
+    <servlet-name>HelpsReportServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.HelpsReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelpsReportServlet</servlet-name>
+    <url-pattern>/HelpsReportServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetDonatorServlet</display-name>
+    <servlet-name>GetDonatorServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetDonatorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetDonatorServlet</servlet-name>
+    <url-pattern>/GetDonatorServlet</url-pattern>
+  </servlet-mapping>
 
-
+ <servlet>
     <display-name>AddHeaderImageServlet</display-name>
     <servlet-name>AddHeaderImageServlet</servlet-name>
     <servlet-class>com.gem.erhuo.web.AddHeaderImageServlet</servlet-class>

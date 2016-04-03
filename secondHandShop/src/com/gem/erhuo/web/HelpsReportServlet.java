@@ -39,19 +39,20 @@ public class HelpsReportServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// 设置字符编码
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
 		
-		// 取出数据，封装到实体
-		String reportGson = request.getParameter("helpReportGson");
+		// 设置字符编码
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("utf-8");
+		
+		String helpsReport = request.getParameter("helpReportGson");
+		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		HelpsReports helpReports = gson.fromJson(reportGson, HelpsReports.class);
+		HelpsReports hr = gson.fromJson(helpsReport, HelpsReports.class);
+		System.out.println(hr.toString());
 		
 		HelpsReportService hrs = new HelpsReportService();
-		hrs.save(helpReports);
-		
+		hrs.save(hr);
 	}
 
 }

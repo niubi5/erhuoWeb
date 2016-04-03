@@ -11,6 +11,20 @@ public class Helps {
 	private String logistics;
 	private String consignee;
 	private String address;
+	private String phone;
+	
+	public String getPubtime() {
+		return pubtime;
+	}
+	public void setPubtime(String pubtime) {
+		this.pubtime = pubtime;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	private int state;
 
 	public Helps() {

@@ -97,4 +97,21 @@ public class UserDao extends BaseDaoImpl<Users> {
 			}
 			
 		}
+		
+		
+//		public Users getByGoodsId(int goodsId) {
+//			Users user = new Users();
+//			Connection conn = null;
+//			PreparedStatement prep = null;
+//			ResultSet rs = null;
+//			try {
+//				conn = DBConnection.getConnection();
+//				String sql = "select * from users where id = ?";
+//				prep = conn.prepareStatement(sql);
+//				prep.setInt(1, goodsId);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			return null;
+//		}
 }

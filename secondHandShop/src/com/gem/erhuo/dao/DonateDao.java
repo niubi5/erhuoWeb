@@ -13,6 +13,12 @@ import com.gem.erhuo.util.DBConnection;
 
 public class DonateDao extends BaseDaoImpl<Donates> {
 	//获得用户的捐赠
+	@Override
+	public int save(Donates t) {
+		// TODO Auto-generated method stub
+		return super.save(t);
+	}
+
 	public List<Donates> getUserDonate(int curPage, int pageSize, int userId) {
 		Connection conn = null;
 		PreparedStatement prep = null;

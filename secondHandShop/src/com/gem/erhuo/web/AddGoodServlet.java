@@ -2,10 +2,6 @@ package com.gem.erhuo.web;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URISyntaxException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,11 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gem.erhuo.entity.Goods;
 import com.gem.erhuo.entity.GoodsImages;
-import com.gem.erhuo.entity.Users;
 import com.gem.erhuo.service.GoodsImagesService;
+import com.gem.erhuo.service.MarketsService;
 import com.gem.erhuo.service.GoodService;
-import com.gem.erhuo.service.UserService;
-import com.gem.erhuo.util.FileDirectory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jspsmart.upload.SmartUpload;
@@ -47,46 +41,6 @@ public class AddGoodServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
-//		String userId = request.getParameter("userId");
-//		String name = request.getParameter("name");
-//		String imformation = request.getParameter("imformation");
-//		String typeId = request.getParameter("typeId");
-//		String soldPrice = request.getParameter("soldPrice");
-//		String buyPrice = request.getParameter("buyPrice");
-//		String marketId = request.getParameter("marketId");
-//		String longitude = request.getParameter("longitude");
-//		String latitude = request.getParameter("latitude");
-//		String pubTime = request.getParameter("pubTime");
-//		String state = request.getParameter("state");
-//		Goods good = new Goods();
-//		good.setUserId(Integer.parseInt(userId));
-//		good.setName(name);
-//		good.setImformation(imformation);
-//		good.setTypeId(Integer.parseInt(typeId));
-//		good.setSoldPrice(Double.parseDouble(soldPrice));
-//		good.setBuyPrice(Double.parseDouble(buyPrice));
-//		good.setMarketId(Integer.parseInt(marketId));
-//		good.setLongitude(Double.parseDouble(longitude));
-//		good.setLatitude(Double.parseDouble(latitude));
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-//		try {
-//			good.setPubTime(sdf.parse(pubTime));
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		good.setState(Integer.parseInt(state));
-		/**###################################*/
-//		String goodJson = request.getParameter("goodJson");
-//		System.out.println(goodJson);
-//		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh-mm-ss").create();
-//		Goods good = gson.fromJson(goodJson,Goods.class);
-//		GoodService gs = new GoodService();
-//		int currentId = gs.save(good);
-//		System.out.println(currentId);
-//		PrintWriter pw = response.getWriter();
-//		pw.print(currentId);
-//		pw.flush();
-//		pw.close();
 		
 		
 		//使用SmartUpload来处理上传的图片
@@ -105,7 +59,11 @@ public class AddGoodServlet extends HttpServlet {
 			GoodsImagesService gis = new GoodsImagesService();
 			//保存商品文字信息，返回数据库自增长id
 			int currentId = gs.save(good);
-//			System.out.println(currentId);
+			if(good.getMarketId() != 0){
+				// 将集市数量加一
+				MarketsService ms = new MarketsService();
+				ms.marketGoodsCountPlus(good.getMarketId());
+			}
 			//处理获得的图片信息
 			String realpath = this.getServletContext().getRealPath("goodsimages");
 			//String realpath = FileDirectory.getFileSaveDirectory()+"\\GoodsImages";
@@ -122,7 +80,6 @@ public class AddGoodServlet extends HttpServlet {
 					//客户端传过来的图片名
 					String imageName = poster.getFileName();
 					File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
-					
 					//File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
 					//文件的保存路径
 					String saveImageName = file.getAbsolutePath();

@@ -10,7 +10,14 @@ public class Remark implements Serializable{
 	private String comment_content;
 	private String comment_time;
 	private int fatherId;
+	private int isEnd;
 	
+	public int getIsEnd(){
+		return isEnd;
+	}
+	public void setIsEnd(int isEnd){
+		this.isEnd = isEnd;
+	}
 	public int getId() {
 		return id;
 	}

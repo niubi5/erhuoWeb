@@ -12,4 +12,16 @@ public class MarketsService {
 	public List<Markets> getAll(Markets market){
 		return md.getAll(market);
 	}
+	
+	public void marketGoodsCountPlus(int marketId){
+		md.marketGoodsCountPlus(marketId);
+	}
+	
+	public void marketUsersCountPlus(int marketId){
+		md.marketUsersCountPlus(marketId);
+	}
+	
+	public void marketUsersCountSub(int marketId){
+		md.marketUsersCountSub(marketId);
+	}
 }

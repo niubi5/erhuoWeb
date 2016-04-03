@@ -159,7 +159,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					currentId = rs.getInt(1);
 				}
 			} else if (t instanceof Helps) {
-				sql = "insert into helps(userid,title,detail,pubtime,logistics,consignee,address) values(?,?,?,?,?,?,?)";
+				sql = "insert into helps(userid,title,detail,pubtime,logistics,consignee,address,phone) values(?,?,?,?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Helps) t).getUserId());
@@ -169,6 +169,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setString(5, ((Helps) t).getLogistics());
 				prep.setString(6, ((Helps) t).getConsignee());
 				prep.setString(7, ((Helps) t).getAddress());
+				prep.setString(8, ((Helps) t).getPhone());
 				System.out.println(((Helps) t).getPubTime());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
@@ -207,14 +208,14 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					currentId = rs.getInt(1);
 				}
 			} else if (t instanceof HelpsReports) {
-				sql = "insert into helpsreports(helpid,userid,brief,reptime,state) values(?,?,?,?,?)";
+				sql = "insert into helpsreports(helpid,brief,reptime,state) values(?,?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((HelpsReports) t).getHelpId());
-				prep.setInt(2, ((HelpsReports) t).getUserId());
-				prep.setString(3, ((HelpsReports) t).getBrief());
-				prep.setString(4, (((HelpsReports) t).getRepTime()));
-				prep.setInt(5, ((HelpsReports) t).getState());
+//				prep.setInt(2, ((HelpsReports) t).getUserId());
+				prep.setString(2, ((HelpsReports) t).getBrief());
+				prep.setString(3, (((HelpsReports) t).getRepTime()));
+				prep.setInt(4, ((HelpsReports) t).getState());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();
@@ -760,6 +761,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					m.setGoodsCount(rs.getInt("goodscount"));
 					m.setUrl(urlHead + "/" +rs.getString("url"));
 					m.setBrief(rs.getString("brief"));
+					m.setInfoUrl(urlHead + "/"  + rs.getString("infourl"));
 					// 将对象加到集合中
 					list.add((T) m);
 				}

@@ -15,4 +15,12 @@ public class OrderService {
 	public List<Orders> getUserOrders(int curPage,int pageSize,int userId){
 		return od.getUserOrders(curPage, pageSize, userId);
 	}
+	//根据goodId找到order
+	public Orders getOrderByGoodId(int goodId){
+		return od.getOrderByGoodId(goodId);
+	}
+	//修改订单信息
+	public void updateOrder(Orders order){
+		od.update(order);
+	}
 }

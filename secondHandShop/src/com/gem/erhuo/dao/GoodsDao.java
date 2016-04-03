@@ -121,7 +121,7 @@ public class GoodsDao extends BaseDaoImpl<Goods> {
 			try {
 				conn = DBConnection.getConnection();
 				// 按时间排序 并且为上架状态
-				String sql = "select * from goods where state > 1 and userid = ? order by state desc limit ?,? ";
+				String sql = "select * from goods where state > 1 and userid = ? order by state asc limit ?,? ";
 				prep = conn.prepareStatement(sql);
 				prep.setInt(1, userId);
 				prep.setInt(2, (curPage - 1) * pageSize);

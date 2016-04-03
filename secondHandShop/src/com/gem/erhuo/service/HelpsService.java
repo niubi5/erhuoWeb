@@ -24,5 +24,19 @@ public class HelpsService {
 	public List<Helps> getPagedHelps(int curPage, int pageSize) {
 		return helpsDao.getPagedHelps(curPage, pageSize);
 	}
+	
+	// 获得用户分页商品
+		public List<Helps> getUserPagedHelps(int curPage, int pageSize,int userId) {
+			return helpsDao.getUserPagedHelps(curPage, pageSize,userId);
+		}
+		
+		//根据id获得求助信息
+		public Helps getHelpsById(int id){
+			return helpsDao.getByID(new Helps(), id);
+		}
+		//删除
+		public void deleteHelps(int[] ids){
+			helpsDao.delete(ids, new Helps());
+		}
 
 }

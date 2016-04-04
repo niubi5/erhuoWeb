@@ -24,4 +24,8 @@ public class MarketsService {
 	public void marketUsersCountSub(int marketId){
 		md.marketUsersCountSub(marketId);
 	}
+	//获取关注该集市的所有用户id
+	public List<Integer> getMarketUserId(int marketId){
+		return md.getMarketUserId(marketId);
+	}
 }

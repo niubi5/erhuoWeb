@@ -38,7 +38,7 @@ public class GetAddressServlet extends HttpServlet {
 		/**
 		 * @heikki  04.02 22:45
 		 * */
-		Address add = as.getUserAddressById(addressId);
+		Address add = as.getUserAddressById(Integer.parseInt(addressId));
 		Gson gson = new Gson();
 		String addJson = gson.toJson(add);
 		PrintWriter pw = response.getWriter();

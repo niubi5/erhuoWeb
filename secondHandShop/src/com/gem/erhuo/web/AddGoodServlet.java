@@ -2,12 +2,14 @@ package com.gem.erhuo.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gem.erhuo.api.JPush;
 import com.gem.erhuo.entity.Goods;
 import com.gem.erhuo.entity.GoodsImages;
 import com.gem.erhuo.service.GoodsImagesService;
@@ -56,6 +58,7 @@ public class AddGoodServlet extends HttpServlet {
 			Goods good = gson.fromJson(goodJson,Goods.class);
 			
 			GoodService gs = new GoodService();
+//			if(){}
 			GoodsImagesService gis = new GoodsImagesService();
 			//保存商品文字信息，返回数据库自增长id
 			int currentId = gs.save(good);
@@ -63,6 +66,15 @@ public class AddGoodServlet extends HttpServlet {
 				// 将集市数量加一
 				MarketsService ms = new MarketsService();
 				ms.marketGoodsCountPlus(good.getMarketId());
+				//向关注该集市的用户推送消息
+				List<Integer> listUserId = ms.getMarketUserId(good.getMarketId());
+				final int size =  listUserId.size();
+				String[] arrUserId = (String[])listUserId.toArray(new String[size]);
+				JPush.TITLE = "新品上架";
+				JPush.ALERT = "您关注的集市有新商品上架啦，赶快去看看吧!";
+				JPush.ALIAS = arrUserId;
+				JPush.sendPush();
+				
 			}
 			//处理获得的图片信息
 			String realpath = this.getServletContext().getRealPath("goodsimages");

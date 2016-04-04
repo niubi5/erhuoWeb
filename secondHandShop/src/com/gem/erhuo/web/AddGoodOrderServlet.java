@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gem.erhuo.api.JPush;
 import com.gem.erhuo.entity.Goods;
 import com.gem.erhuo.entity.Orders;
 import com.gem.erhuo.service.GoodsService;
@@ -47,6 +48,11 @@ public class AddGoodOrderServlet extends HttpServlet {
 		Goods good = gs.getGoodsById(order.getGoodId());
 		good.setState(2);
 		gs.update(good);
+		//发送推送消息
+		JPush.TITLE = "订单通知";
+		JPush.ALERT = "您上架的商品被拍下啦，赶快去看看吧!";
+		JPush.ALIAS = new String[]{good.getUserId()+""};
+		JPush.sendPush();
 		System.out.println(os.save(order));
 		
 	}

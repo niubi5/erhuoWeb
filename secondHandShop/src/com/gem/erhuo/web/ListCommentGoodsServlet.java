@@ -48,7 +48,7 @@ public class ListCommentGoodsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String str = request.getParameter("listRemarks");
+		String str = request.getParameter("remarkList");
 		Gson gson = new GsonBuilder().enableComplexMapKeySerialization().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Type type = new TypeToken<List<Remark>>(){}.getType();
 		List<Remark> listRemarks = gson.fromJson(str, type);
@@ -56,11 +56,11 @@ public class ListCommentGoodsServlet extends HttpServlet {
 		GoodsImagesService gis = new GoodsImagesService();
 		UserService us = new UserService();
 		List<Map<Map<Goods, Users>, List<String>>> listAll = new ArrayList<Map<Map<Goods, Users>, List<String>>>();
-		// 通过userId找到用户
 		for(Remark remark : listRemarks){
-			Users user = us.getById(remark.getUserId());
 			// 通过goodsId找到商品
 			Goods goods = gs.getGoodsById(remark.getGoodsId());
+			// 通过goods的userId找到商品拥有者
+			Users user = us.getById(goods.getUserId());
 			// 通过goodsId找到Url集合
 			List<String> listUrls = gis.getGoodsImages(remark.getGoodsId());
 			Map<Map<Goods, Users>, List<String>> mapAll = new HashMap<Map<Goods, Users>, List<String>>();

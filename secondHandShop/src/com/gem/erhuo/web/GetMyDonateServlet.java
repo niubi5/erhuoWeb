@@ -32,6 +32,7 @@ public class GetMyDonateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("donate请求");
 		// 获得参数
 		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
@@ -41,6 +42,7 @@ public class GetMyDonateServlet extends HttpServlet {
 		Gson gson = new GsonBuilder().enableComplexMapKeySerialization().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String str = gson.toJson(listDonates);
 		PrintWriter pw = response.getWriter();
+		System.out.println(str);
 		pw.print(str);
 		pw.close();
 

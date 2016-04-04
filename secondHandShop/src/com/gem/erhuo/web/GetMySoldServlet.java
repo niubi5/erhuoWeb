@@ -40,18 +40,9 @@ public class GetMySoldServlet extends HttpServlet {
 		// 获得用户在售商品集合
 		List<Goods> listGoods = gs.getSoldPagedGoods(curPage, pageSize, userId);
 		// Map<Goods,List<String>>
-		//Map<Goods, List<String>> mapSellingAll = new HashMap<Goods, List<String>>();
 		List<Map<Goods, List<String>>> listSoldGood = new ArrayList<Map<Goods, List<String>>>();
 		// 遍历集合取出id
 		// 通过id查找商品图片表，取出图片url，将url封装
-//		for (Goods goods : listGoods) {
-//			// 获得url集合
-//			List<String> urls = gis.getGoodsImages(goods.getId());
-//			// 将商品，图片集合封装
-//			// mapAll.put(goodsUsers, urls);
-//			// 加入总集合
-//			mapSellingAll.put(goods, urls);
-//		}
 		for (Goods goods : listGoods) {
 			Map<Goods, List<String>> mapGood = new HashMap<Goods, List<String>>();
 			// 获得url集合

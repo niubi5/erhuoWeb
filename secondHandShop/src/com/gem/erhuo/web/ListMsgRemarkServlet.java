@@ -49,15 +49,16 @@ public class ListMsgRemarkServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int fatherId = Integer.parseInt(request.getParameter("fatherId"));
+		int userId = Integer.parseInt(request.getParameter("userId"));
 		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		RemarkService rs = new RemarkService();
 		UserService us = new UserService();
 		List<Map<Remark, Users>> listRemarkUsers = new ArrayList<Map<Remark, Users>>();
-		// 通过用户Id找到fatherid字段对应的所有Remark对象
-		List<Remark> listRemarks = rs.getAllByFatherId(fatherId, curPage, pageSize);
-		// 通过Remark对象的useId找到所有评论用户
+		// 通过用户Id找到所有remark
+		// 当remark的id为其他评论的father_id时，这些评论就是我收到的评论
+		List<Remark> listRemarks = rs.getMyReceiveRemarks(userId, curPage, pageSize);
+		// 通过Remark对象的useId找到所有评论用户，通过id找到该评论
 		for (Remark remark : listRemarks) {
 			// 将评论对象与该用户对象封装在一起
 			Users user = us.getById(remark.getUserId());

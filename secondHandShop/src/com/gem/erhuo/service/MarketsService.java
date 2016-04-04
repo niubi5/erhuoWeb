@@ -12,4 +12,20 @@ public class MarketsService {
 	public List<Markets> getAll(Markets market){
 		return md.getAll(market);
 	}
+	
+	public void marketGoodsCountPlus(int marketId){
+		md.marketGoodsCountPlus(marketId);
+	}
+	
+	public void marketUsersCountPlus(int marketId){
+		md.marketUsersCountPlus(marketId);
+	}
+	
+	public void marketUsersCountSub(int marketId){
+		md.marketUsersCountSub(marketId);
+	}
+	//获取关注该集市的所有用户id
+	public List<Integer> getMarketUserId(int marketId){
+		return md.getMarketUserId(marketId);
+	}
 }

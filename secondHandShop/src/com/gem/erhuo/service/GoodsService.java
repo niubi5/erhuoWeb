@@ -45,8 +45,8 @@ public class GoodsService {
 	}
 
 	// 分类查询获得商品对象
-	public List<Goods> getClassifiGoods(int tag, int curPage, int pageSize) {
-		return gid.getClassificaImages(tag, curPage, pageSize);
+	public List<Goods> getClassifiGoods(int tag, int sortTag, int curPage, int pageSize) {
+		return gid.getClassificaImages(tag, sortTag, curPage, pageSize);
 	}
 
 	// 获得分页在售中的商品
@@ -57,6 +57,14 @@ public class GoodsService {
 	// 获得分页在售中的商品
 	public List<Goods> getSoldPagedGoods(int curPage, int pageSize, int userId) {
 		return gd.getSoldPagedGoods(curPage, pageSize, userId);
+	}
+	
+	//修改商品
+	public void updateGoods(Goods good){
+		gd.update(good);
+	}
+	public List<Goods> getGoodsByMarketId(int curPage, int pageSize, int marketId) {
+		return gd.getGoodsByMarketId(curPage,pageSize,marketId);
 	}
 
 }

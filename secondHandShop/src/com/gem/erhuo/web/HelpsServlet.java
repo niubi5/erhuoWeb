@@ -65,6 +65,8 @@ public class HelpsServlet extends HttpServlet {
 //			 处理获得的求助的文字信息
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
 			Helps help = gson.fromJson(helpsJson, Helps.class);
+			
+			System.out.println(help.getDetail());
             
 			// 保存求助信息并返回当前求助id
 			HelpsService helpsService = new HelpsService();

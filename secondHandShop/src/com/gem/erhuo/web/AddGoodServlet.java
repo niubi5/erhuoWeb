@@ -2,6 +2,7 @@ package com.gem.erhuo.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -68,8 +69,12 @@ public class AddGoodServlet extends HttpServlet {
 				ms.marketGoodsCountPlus(good.getMarketId());
 				//向关注该集市的用户推送消息
 				List<Integer> listUserId = ms.getMarketUserId(good.getMarketId());
+				List<String> strUserId = new ArrayList<>();
 				final int size =  listUserId.size();
-				String[] arrUserId = (String[])listUserId.toArray(new String[size]);
+				for(int i = 0; i < listUserId.size(); i ++){
+					strUserId.add(listUserId.get(i).toString());
+				}
+				String[] arrUserId =  strUserId.toArray(new String[size]);
 				JPush.TITLE = "新品上架";
 				JPush.ALERT = "您关注的集市有新商品上架啦，赶快去看看吧!";
 				JPush.ALIAS = arrUserId;

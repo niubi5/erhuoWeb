@@ -51,6 +51,7 @@ public class HelpsDao extends BaseDaoImpl<Helps>{
 				helps.setLogistics(rs.getString("logistics"));
 				helps.setConsignee(rs.getString("consignee"));
 				helps.setAddress(rs.getString("address"));
+				helps.setPhone(rs.getString("phone"));
 				listhelps.add(helps);
 			}
 		} catch (Exception e) {

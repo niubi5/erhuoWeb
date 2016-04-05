@@ -39,10 +39,6 @@ public class AddGoodServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//设置字符编码，防止乱码
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		// TODO Auto-generated method stub
 		
 		
 		//使用SmartUpload来处理上传的图片
@@ -91,6 +87,7 @@ public class AddGoodServlet extends HttpServlet {
 				if(!poster.isMissing()){
 					//客户端传过来的图片名
 					String imageName = poster.getFileName();
+					System.out.println(imageName);
 					File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
 					//File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
 					//文件的保存路径

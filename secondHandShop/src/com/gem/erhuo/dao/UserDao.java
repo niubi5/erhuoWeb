@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 import com.gem.erhuo.entity.Users;
 import com.gem.erhuo.util.DBConnection;
+import com.gem.erhuo.util.Url;
 
 public class UserDao extends BaseDaoImpl<Users> {
 	// 根据账号查找用户
@@ -19,7 +20,9 @@ public class UserDao extends BaseDaoImpl<Users> {
 		String sql = null;
 		Users u = null;
 		InputStream is = null;
+		String url = null;
 		try {
+			url = Url.getHeadUrl();// 获得url头部
 			conn = DBConnection.getConnection();
 			sql = "select * from users where identity =?";
 			prep = conn.prepareStatement(sql);
@@ -30,7 +33,7 @@ public class UserDao extends BaseDaoImpl<Users> {
 				u.setId(rs.getInt("id"));
 				u.setIdentity(rs.getString("identity"));
 				u.setPwd(rs.getString("pwd"));
-				u.setPhoto(rs.getString("photo"));
+				u.setPhoto(url  + "/"+ rs.getString("photo"));
 				u.setName(rs.getString("name"));
 				u.setSex(rs.getInt("sex"));
 				u.setJifen(rs.getInt("jifen"));

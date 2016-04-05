@@ -178,7 +178,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					currentId = rs.getInt(1);
 				}
 			} else if (t instanceof Donates) {
-				sql = "insert into donates(helpid,userid,dontime,logisticscom,logisticsnum) values(?,?,?,?,?)";
+				sql = "insert into donates(helpid,userid,dontime,logisticscom,logisticsnum,title,brief) values(?,?,?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Donates) t).getHelpId());
@@ -186,6 +186,8 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setString(3, (((Donates) t).getDonTime()));
 				prep.setString(4, ((Donates) t).getLogisticsCom());
 				prep.setString(5, ((Donates) t).getLogisticsNum());
+				prep.setString(6, ((Donates) t).getTitle());
+				prep.setString(7, ((Donates) t).getBrief());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();
@@ -750,7 +752,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				}
 			} else if (t instanceof Markets) {
 				list = (List<T>) new ArrayList<Markets>();
-				sql = "select * from markets";
+				sql = "select * from markets where id > 0";
 				prep = conn.prepareStatement(sql);
 				rs = prep.executeQuery();
 				while (rs.next()) {
@@ -1063,7 +1065,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((Helps) t).setPubTime(rs.getString("pubtime"));
 					((Helps) t).setConsignee(rs.getString("consignee"));
 					((Helps) t).setAddress(rs.getString("address"));
-					((Helps) t).setState(rs.getInt("state"));
+					
 				}
 			} else if (t instanceof Donates) {
 				sql = "select * from donates where id =?";

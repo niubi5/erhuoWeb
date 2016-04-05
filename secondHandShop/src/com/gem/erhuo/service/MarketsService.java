@@ -28,4 +28,8 @@ public class MarketsService {
 	public List<Integer> getMarketUserId(int marketId){
 		return md.getMarketUserId(marketId);
 	}
+	
+	public Markets getById(int marketId){
+		return md.getByID(new Markets(), marketId);
+	}
 }

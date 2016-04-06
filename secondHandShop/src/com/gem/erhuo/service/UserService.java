@@ -3,6 +3,7 @@ package com.gem.erhuo.service;
 import java.util.List;
 
 import com.gem.erhuo.dao.UserDao;
+import com.gem.erhuo.entity.GoodsImages;
 import com.gem.erhuo.entity.Users;
 
 public class UserService {
@@ -59,8 +60,11 @@ public class UserService {
 			
 		}
 		
-//		public Users getByGoodsId(int goodsId){
-//			return ud.getByGoodsId(goodsId);
-//		}
+		public int saveHeaderImage(Users users){
+			return ud.save(users);
+		}
+		public void update(Users users) {
+			ud.update(users);
+		}
 		
 }

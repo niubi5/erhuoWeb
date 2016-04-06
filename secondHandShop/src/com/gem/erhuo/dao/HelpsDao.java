@@ -51,6 +51,7 @@ public class HelpsDao extends BaseDaoImpl<Helps>{
 				helps.setLogistics(rs.getString("logistics"));
 				helps.setConsignee(rs.getString("consignee"));
 				helps.setAddress(rs.getString("address"));
+				helps.setPhone(rs.getString("phone"));
 				listhelps.add(helps);
 			}
 		} catch (Exception e) {
@@ -69,5 +70,49 @@ public class HelpsDao extends BaseDaoImpl<Helps>{
 		}
 		return listhelps;
 	}
+	
+	// 获得分页求助信息
+		public List<Helps> getUserPagedHelps(int curPage, int pageSize,int userId) {
+			Connection conn = null;
+			PreparedStatement prep = null;
+			ResultSet rs = null;
+			List<Helps> listhelps = new ArrayList<Helps>();
+			try {
+				conn = DBConnection.getConnection();
+				// 按时间排序
+				String sql = "select * from helps where userid = ? order by pubtime desc limit ?,? ";
+				prep = conn.prepareStatement(sql);
+				prep.setInt(1, userId);
+				prep.setInt(2, (curPage - 1) * pageSize);
+				prep.setInt(3, pageSize);
+				rs = prep.executeQuery();
+				while (rs.next()) {
+					Helps helps = new Helps();
+					helps.setId(rs.getInt("id"));
+					helps.setUserId(rs.getInt("userid"));
+					helps.setTitle(rs.getString("title"));
+					helps.setDetail(rs.getString("detail"));
+					helps.setPubTime(rs.getString("pubtime"));
+					helps.setLogistics(rs.getString("logistics"));
+					helps.setConsignee(rs.getString("consignee"));
+					helps.setAddress(rs.getString("address"));
+					listhelps.add(helps);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null)
+						conn.close();
+					if (prep != null)
+						prep.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return listhelps;
+		}
 
 }

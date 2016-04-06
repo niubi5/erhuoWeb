@@ -122,34 +122,35 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					currentId = rs.getInt(1);
 				}
 			} else if (t instanceof Orders) {
-				sql = "insert into orders(goodid,userid,ordernum,createtime,paytime,sendtime,completetime,status,logisticscom,logisticsnum) values(?,?,?,?,?,?,?,?,?,?)";
+				sql = "insert into orders(goodid,userid,useraddid,ordernum,createtime,paytime,sendtime,completetime,status,logisticscom,logisticsnum) values(?,?,?,?,?,?,?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Orders) t).getGoodId());
 				prep.setInt(2, ((Orders) t).getUserId());
-				prep.setString(3, ((Orders) t).getOrderNum());
-				prep.setString(4, ((Orders) t).getCreateTime());
-				prep.setString(5, ((Orders) t).getPayTime());
+				prep.setInt(3, ((Orders) t).getAddId());
+				prep.setString(4, ((Orders) t).getOrderNum());
+				prep.setString(5, ((Orders) t).getCreateTime());
+				prep.setString(6, ((Orders) t).getPayTime());
 				if(((Orders) t).getSendTime() == null){
-					prep.setDate(6,null);
-				}else{
-					prep.setString(6, (((Orders) t).getSendTime()));					
-				}
-				if(((Orders) t).getCompleteTime() == null){
 					prep.setDate(7,null);
 				}else{
-					prep.setString(7, (((Orders) t).getCompleteTime()));					
+					prep.setString(7, (((Orders) t).getSendTime()));					
 				}
-				prep.setInt(8, ((Orders) t).getState());
-				if(((Orders) t).getLogisticsCom() == null){
-					prep.setString(9,null);
+				if(((Orders) t).getCompleteTime() == null){
+					prep.setDate(8,null);
 				}else{
-					prep.setString(9, ((Orders) t).getLogisticsCom());					
+					prep.setString(8, (((Orders) t).getCompleteTime()));					
 				}
+				prep.setInt(9, ((Orders) t).getState());
 				if(((Orders) t).getLogisticsCom() == null){
 					prep.setString(10,null);
 				}else{
 					prep.setString(10, ((Orders) t).getLogisticsCom());					
+				}
+				if(((Orders) t).getLogisticsCom() == null){
+					prep.setString(11,null);
+				}else{
+					prep.setString(11, ((Orders) t).getLogisticsCom());					
 				}
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
@@ -177,14 +178,17 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					currentId = rs.getInt(1);
 				}
 			} else if (t instanceof Donates) {
-				sql = "insert into donates(helpid,userid,dontime,logisticscom,logisticsnum) values(?,?,?,?,?)";
+				sql = "insert into donates(helpid,userid,dontime,logisticscom,logisticsnum,title,brief) values(?,?,?,?,?,?,?)";
 				prep = conn.prepareStatement(sql);
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Donates) t).getHelpId());
 				prep.setInt(2, ((Donates) t).getUserId());
+				
 				prep.setString(3, (((Donates) t).getDonTime()));
 				prep.setString(4, ((Donates) t).getLogisticsCom());
 				prep.setString(5, ((Donates) t).getLogisticsNum());
+				prep.setString(6, ((Donates) t).getTitle());
+				prep.setString(7, ((Donates) t).getBrief());
 				prep.executeUpdate();
 				//获得当前插入的记录的自增长id
 				rs = prep.getGeneratedKeys();
@@ -545,19 +549,20 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep.setInt(6, ((Markets) t).getId());
 				prep.executeUpdate();
 			} else if (t instanceof Orders) {
-				sql = "update orders set goodid=?,userid=?,ordernumber=?,createtime=?,paytime=?,sendtime=?,completetime=?,state=?,logisticscom=?,logisticsnum=? where id=?";
+				sql = "update orders set goodid=?,userid=?,useraddid=?,ordernum=?,createtime=?,paytime=?,sendtime=?,completetime=?,status=?,logisticscom=?,logisticsnum=? where id=?";
 				prep = conn.prepareStatement(sql);
 				prep.setInt(1, ((Orders) t).getGoodId());
 				prep.setInt(2, ((Orders) t).getUserId());
-				prep.setString(3, ((Orders) t).getOrderNum());
-				prep.setString(4, (((Orders) t).getCreateTime()));
-				prep.setString(5, (((Orders) t).getPayTime()));
-				prep.setString(6, (((Orders) t).getSendTime()));
-				prep.setString(7, (((Orders) t).getCompleteTime()));
-				prep.setInt(8, ((Orders) t).getState());
-				prep.setString(9, ((Orders) t).getLogisticsCom());
-				prep.setString(10, ((Orders) t).getLogisticsNum());
-				prep.setInt(11, ((Orders) t).getId());
+				prep.setInt(3, ((Orders) t).getAddId());
+				prep.setString(4, ((Orders) t).getOrderNum());
+				prep.setString(5, (((Orders) t).getCreateTime()));
+				prep.setString(6, (((Orders) t).getPayTime()));
+				prep.setString(7, (((Orders) t).getSendTime()));
+				prep.setString(8, (((Orders) t).getCompleteTime()));
+				prep.setInt(9, ((Orders) t).getState());
+				prep.setString(10, ((Orders) t).getLogisticsCom());
+				prep.setString(11, ((Orders) t).getLogisticsNum());
+				prep.setInt(12, ((Orders) t).getId());
 				prep.executeUpdate();
 			} else if (t instanceof Helps) {
 				sql = "update helps set userid=?,title=?,detail=?,pubtime=?,state=? where id=?";
@@ -748,7 +753,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				}
 			} else if (t instanceof Markets) {
 				list = (List<T>) new ArrayList<Markets>();
-				sql = "select * from markets";
+				sql = "select * from markets where id > 0";
 				prep = conn.prepareStatement(sql);
 				rs = prep.executeQuery();
 				while (rs.next()) {
@@ -773,6 +778,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					o.setId(rs.getInt("id"));
 					o.setGoodId(rs.getInt("goodid"));
 					o.setUserId(rs.getInt("userid"));
+					o.setAddId(rs.getInt("useraddid"));
 					o.setOrderNum(rs.getString("ordernum"));
 					o.setCreateTime(rs.getString("createtime"));
 					o.setPayTime(rs.getString("paytime"));
@@ -997,7 +1003,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((Users) t).setId(rs.getInt("id"));
 					((Users) t).setIdentity(rs.getString("identity"));
 					((Users) t).setPwd(rs.getString("pwd"));
-					((Users) t).setPhoto(rs.getString("photo"));
+					((Users) t).setPhoto(Url.getHeadUrl() + "/" + rs.getString("photo"));
 					((Users) t).setName(rs.getString("name"));
 					((Users) t).setSex(rs.getInt("sex"));
 					((Users) t).setJifen(rs.getInt("jifen"));
@@ -1058,7 +1064,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((Helps) t).setTitle(rs.getString("title"));
 					((Helps) t).setDetail(rs.getString("detail"));
 					((Helps) t).setPubTime(rs.getString("pubtime"));
-					((Helps) t).setState(rs.getInt("state"));
+					((Helps) t).setConsignee(rs.getString("consignee"));
+					((Helps) t).setAddress(rs.getString("address"));
+					
 				}
 			} else if (t instanceof Donates) {
 				sql = "select * from donates where id =?";
@@ -1297,6 +1305,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					o.setId(rs.getInt("id"));
 					o.setGoodId(rs.getInt("goodid"));
 					o.setUserId(rs.getInt("userid"));
+					o.setAddId(rs.getInt("useraddid"));
 					o.setOrderNum(rs.getString("ordernum"));
 					o.setCreateTime(rs.getString("createtime"));
 					o.setPayTime(rs.getString("paytime"));

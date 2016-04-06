@@ -44,6 +44,8 @@ public class AddUserServlet extends HttpServlet {
 			boolean b = us.canRegister(identity);
 			System.out.println(identity+name);
 			if(b){
+				// 设置默认头像
+				user.setPhoto("headerimages/header_default.png");
 				us.save(user);
 				request.setAttribute("tag",true);
 			}else{

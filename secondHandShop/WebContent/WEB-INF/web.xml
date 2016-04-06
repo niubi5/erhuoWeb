@@ -369,6 +369,96 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>GetMyHelpServlet</display-name>
+    <servlet-name>GetMyHelpServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetMyHelpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMyHelpServlet</servlet-name>
+    <url-pattern>/GetMyHelpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateGoodServlet</display-name>
+    <servlet-name>UpdateGoodServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.UpdateGoodServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateGoodServlet</servlet-name>
+    <url-pattern>/UpdateGoodServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateOrderServlet</display-name>
+    <servlet-name>UpdateOrderServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.UpdateOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateOrderServlet</servlet-name>
+    <url-pattern>/UpdateOrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetGoodOrderServlet</display-name>
+    <servlet-name>GetGoodOrderServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetGoodOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetGoodOrderServlet</servlet-name>
+    <url-pattern>/GetGoodOrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAddressServlet</display-name>
+    <servlet-name>GetAddressServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetAddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAddressServlet</servlet-name>
+    <url-pattern>/GetAddressServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteDonateServlet</display-name>
+    <servlet-name>DeleteDonateServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.DeleteDonateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteDonateServlet</servlet-name>
+    <url-pattern>/DeleteDonateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetHelpServlet</display-name>
+    <servlet-name>GetHelpServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetHelpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetHelpServlet</servlet-name>
+    <url-pattern>/GetHelpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteHelpServlet</display-name>
+    <servlet-name>DeleteHelpServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.DeleteHelpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteHelpServlet</servlet-name>
+    <url-pattern>/DeleteHelpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetHelpAllDonateServlet</display-name>
+    <servlet-name>GetHelpAllDonateServlet</servlet-name>
+    <servlet-class>com.gem.erhuo.web.GetHelpAllDonateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetHelpAllDonateServlet</servlet-name>
+    <url-pattern>/GetHelpAllDonateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>DonateServlet</display-name>
     <servlet-name>DonateServlet</servlet-name>
     <servlet-class>com.gem.erhuo.web.DonateServlet</servlet-class>
@@ -407,8 +497,7 @@
     <servlet-name>GetDonatorServlet</servlet-name>
     <url-pattern>/GetDonatorServlet</url-pattern>
   </servlet-mapping>
-
- <servlet>
+  <servlet>
     <display-name>AddHeaderImageServlet</display-name>
     <servlet-name>AddHeaderImageServlet</servlet-name>
     <servlet-class>com.gem.erhuo.web.AddHeaderImageServlet</servlet-class>
@@ -417,7 +506,7 @@
     <servlet-name>AddHeaderImageServlet</servlet-name>
     <url-pattern>/AddHeaderImageServlet</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <display-name>ListCommentGoodsServlet</display-name>
     <servlet-name>ListCommentGoodsServlet</servlet-name>
     <servlet-class>com.gem.erhuo.web.ListCommentGoodsServlet</servlet-class>
@@ -435,5 +524,15 @@
   <servlet-mapping>
     <servlet-name>UserMarketServlet</servlet-name>
     <url-pattern>/UserMarketServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NotifySendGood</display-name>
+    <servlet-name>NotifySendGood</servlet-name>
+    <servlet-class>com.gem.erhuo.web.NotifySendGood</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NotifySendGood</servlet-name>
+    <url-pattern>/NotifySendGood</url-pattern>
   </servlet-mapping>
 </web-app>

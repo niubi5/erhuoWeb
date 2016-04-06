@@ -44,7 +44,7 @@ public class ListHelpsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at:
 		// ").append(request.getContextPath());
-		
+
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
@@ -58,7 +58,7 @@ public class ListHelpsServlet extends HttpServlet {
 
 		// 获得求助集合
 		List<Helps> listHelps = hs.getPagedHelps(curPage, pageSize);
-        // 封装所有查询到的信息
+		// 封装所有查询到的信息
 		List<Map<Map<Helps, Users>, List<String>>> listAll = new ArrayList<Map<Map<Helps, Users>, List<String>>>();
 
 		// 遍历求助集合
@@ -66,11 +66,9 @@ public class ListHelpsServlet extends HttpServlet {
 			// 根据helpId获得所有url，加入集合
 			List<String> urls = his.getHelpsImages(help.getId());
 			for (String url : urls) {
-				System.out.println(url);
 			}
 			// 通过helpId获得用户对象
 			Users user = us.getById(help.getUserId());
-			System.out.println(user.getName());
 			Map<Map<Helps, Users>, List<String>> mapAll = new HashMap<Map<Helps, Users>, List<String>>();
 			Map<Helps, Users> helpUsers = new HashMap<Helps, Users>();
 			// 将求助，用户加入集合
@@ -81,7 +79,6 @@ public class ListHelpsServlet extends HttpServlet {
 			listAll.add(mapAll);
 
 		}
-
 		Gson gson = new GsonBuilder().enableComplexMapKeySerialization().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String str = gson.toJson(listAll);
 		PrintWriter pw = response.getWriter();

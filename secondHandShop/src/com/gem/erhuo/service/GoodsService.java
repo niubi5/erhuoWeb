@@ -58,6 +58,11 @@ public class GoodsService {
 	public List<Goods> getSoldPagedGoods(int curPage, int pageSize, int userId) {
 		return gd.getSoldPagedGoods(curPage, pageSize, userId);
 	}
+	
+	//修改商品
+	public void updateGoods(Goods good){
+		gd.update(good);
+	}
 	public List<Goods> getGoodsByMarketId(int curPage, int pageSize, int marketId) {
 		return gd.getGoodsByMarketId(curPage,pageSize,marketId);
 	}

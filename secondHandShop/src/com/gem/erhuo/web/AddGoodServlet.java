@@ -2,12 +2,15 @@ package com.gem.erhuo.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gem.erhuo.api.JPush;
 import com.gem.erhuo.entity.Goods;
 import com.gem.erhuo.entity.GoodsImages;
 import com.gem.erhuo.service.GoodsImagesService;
@@ -37,10 +40,6 @@ public class AddGoodServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//设置字符编码，防止乱码
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		// TODO Auto-generated method stub
 		
 		
 		//使用SmartUpload来处理上传的图片
@@ -56,6 +55,7 @@ public class AddGoodServlet extends HttpServlet {
 			Goods good = gson.fromJson(goodJson,Goods.class);
 			
 			GoodService gs = new GoodService();
+//			if(){}
 			GoodsImagesService gis = new GoodsImagesService();
 			//保存商品文字信息，返回数据库自增长id
 			int currentId = gs.save(good);
@@ -63,6 +63,19 @@ public class AddGoodServlet extends HttpServlet {
 				// 将集市数量加一
 				MarketsService ms = new MarketsService();
 				ms.marketGoodsCountPlus(good.getMarketId());
+				//向关注该集市的用户推送消息
+				List<Integer> listUserId = ms.getMarketUserId(good.getMarketId());
+				List<String> strUserId = new ArrayList<>();
+				final int size =  listUserId.size();
+				for(int i = 0; i < listUserId.size(); i ++){
+					strUserId.add(listUserId.get(i).toString());
+				}
+				String[] arrUserId =  strUserId.toArray(new String[size]);
+				JPush.TITLE = "新品上架";
+				JPush.ALERT = "您关注的集市有新商品上架啦，赶快去看看吧!";
+				JPush.ALIAS = arrUserId;
+				JPush.sendPush();
+				
 			}
 			//处理获得的图片信息
 			String realpath = this.getServletContext().getRealPath("goodsimages");
@@ -79,6 +92,7 @@ public class AddGoodServlet extends HttpServlet {
 				if(!poster.isMissing()){
 					//客户端传过来的图片名
 					String imageName = poster.getFileName();
+					System.out.println(imageName);
 					File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
 					//File file = new File(imageDir,""+currentId+System.currentTimeMillis()+imageName.substring(imageName.lastIndexOf("."), imageName.length()));
 					//文件的保存路径

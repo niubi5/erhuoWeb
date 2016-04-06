@@ -53,10 +53,11 @@ public class ListRemarkServlet extends HttpServlet {
 		UserService us = new UserService();
 		List<Remark> listRemark = rs.getAll(goodsId);
 		List<Map<Remark, Users>> listRemarkUsers = new ArrayList<Map<Remark, Users>>();
-
 		// 通过评论中的用户id取出用户对象，封装起来
 		for (Remark remark : listRemark) {
 			Users user = us.getById(remark.getUserId());
+			System.out.println(remark.getUserId());
+			System.out.println(user.getPhoto());
 			Map<Remark, Users> userRemark = new HashMap<Remark, Users>();
 			userRemark.put(remark, user);
 			listRemarkUsers.add(userRemark);// 加到list中

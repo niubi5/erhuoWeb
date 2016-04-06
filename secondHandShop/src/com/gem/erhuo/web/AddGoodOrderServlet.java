@@ -46,6 +46,7 @@ public class AddGoodOrderServlet extends HttpServlet {
 		Gson orderGson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Orders order = orderGson.fromJson(orderJson, Orders.class);
 		Goods good = gs.getGoodsById(order.getGoodId());
+		System.out.println("marketid:"+good.getMarketId());
 		good.setState(2);
 		gs.update(good);
 		//发送推送消息

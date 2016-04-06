@@ -31,7 +31,6 @@ public class DeleteDonateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String deleteDonatesId = request.getParameter("deleteDonatesId");
-		System.out.println(deleteDonatesId);
 		DonateService ds = new DonateService();
 		/**
 		 * @heikki  04.02 22:45
@@ -39,8 +38,8 @@ public class DeleteDonateServlet extends HttpServlet {
 		int[] donateIds = new int[]{Integer.parseInt(deleteDonatesId)};
 		ds.deleteDonate(donateIds);
 		PrintWriter pw = response.getWriter();
+		System.out.println("deleteDonatesId:"+deleteDonatesId);
 		pw.print("ok");
-		System.out.println("删除捐赠");
 		pw.flush();
 		pw.close();
 	}

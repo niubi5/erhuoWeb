@@ -183,6 +183,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				prep = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				prep.setInt(1, ((Donates) t).getHelpId());
 				prep.setInt(2, ((Donates) t).getUserId());
+				
 				prep.setString(3, (((Donates) t).getDonTime()));
 				prep.setString(4, ((Donates) t).getLogisticsCom());
 				prep.setString(5, ((Donates) t).getLogisticsNum());

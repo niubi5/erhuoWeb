@@ -50,7 +50,7 @@ public class GetDonatorServlet extends HttpServlet {
 		response.setContentType("utf-8");
 		
 	    int helpId = Integer.valueOf(request.getParameter("helpId"));
-	    
+	    System.out.println(helpId);
 	    GetDonatorService gds = new GetDonatorService();
 	    List<String> names = gds.getName(helpId);
 	    List<Map<Integer,List<String>>> donatorsName= new ArrayList<Map<Integer,List<String>>>();

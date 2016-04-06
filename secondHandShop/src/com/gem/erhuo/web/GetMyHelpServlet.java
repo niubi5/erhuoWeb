@@ -43,7 +43,7 @@ public class GetMyHelpServlet extends HttpServlet {
 		HelpsImagesService his = new HelpsImagesService();
 		// 获得用户在售商品集合
 		List<Helps> listHelps = hs.getUserPagedHelps(curPage, pageSize, userId);
-		// Map<Goods,List<String>>
+		// Map<Helps,List<String>>
 		List<Map<Helps, List<String>>> listHelpsPhoto = new ArrayList<Map<Helps, List<String>>>();
 		// 遍历集合取出id
 		// 通过id查找求助图片表，取出图片url，将url封装
@@ -51,8 +51,6 @@ public class GetMyHelpServlet extends HttpServlet {
 			Map<Helps, List<String>> mapHelp = new HashMap<Helps, List<String>>();
 			// 获得url集合
 			List<String> urls = his.getHelpsImages(helps.getId());
-			// 将商品，图片集合封装
-			// mapAll.put(goodsUsers, urls);
 			// 加入总集合
 			mapHelp.put(helps, urls);
 			listHelpsPhoto.add(mapHelp);

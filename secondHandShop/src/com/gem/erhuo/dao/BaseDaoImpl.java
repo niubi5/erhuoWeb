@@ -1002,7 +1002,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 					((Users) t).setId(rs.getInt("id"));
 					((Users) t).setIdentity(rs.getString("identity"));
 					((Users) t).setPwd(rs.getString("pwd"));
-					((Users) t).setPhoto(rs.getString("photo"));
+					((Users) t).setPhoto(Url.getHeadUrl() + "/" + rs.getString("photo"));
 					((Users) t).setName(rs.getString("name"));
 					((Users) t).setSex(rs.getInt("sex"));
 					((Users) t).setJifen(rs.getInt("jifen"));

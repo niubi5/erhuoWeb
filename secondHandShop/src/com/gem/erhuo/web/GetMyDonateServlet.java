@@ -2,10 +2,7 @@ package com.gem.erhuo.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,10 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gem.erhuo.entity.Donates;
-import com.gem.erhuo.entity.Goods;
 import com.gem.erhuo.service.DonateService;
-import com.gem.erhuo.service.GoodsImagesService;
-import com.gem.erhuo.service.GoodsService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

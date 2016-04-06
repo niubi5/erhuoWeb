@@ -86,6 +86,7 @@ public class ListHelpsServlet extends HttpServlet {
 		String str = gson.toJson(listAll);
 		PrintWriter pw = response.getWriter();
 		pw.print(str);
+		System.out.println("ListHelps："+str);
 		pw.close();
 	}
 

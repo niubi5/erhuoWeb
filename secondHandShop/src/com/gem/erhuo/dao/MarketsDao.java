@@ -1,7 +1,5 @@
 package com.gem.erhuo.dao;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -94,12 +92,12 @@ public class MarketsDao extends BaseDaoImpl<Markets> {
 		PreparedStatement prep = null;
 		ResultSet rs = null;
 		String sql;
-		InputStream is = null;
 		try {
 			list = (List<Integer>) new ArrayList<Integer>();
+			conn = DBConnection.getConnection();
 			sql = "select * from usermarket where marketid = ?";
-			prep.setInt(1, marketId);
 			prep = conn.prepareStatement(sql);
+			prep.setInt(1, marketId);
 			rs = prep.executeQuery();
 			while (rs.next()) {
 				UserMarket um = new UserMarket();
@@ -109,7 +107,7 @@ public class MarketsDao extends BaseDaoImpl<Markets> {
 				// 将对象加到集合中
 				list.add(um.getUserId());
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{

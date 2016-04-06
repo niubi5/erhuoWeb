@@ -81,14 +81,14 @@ public class GoodsImagesDao extends BaseDaoImpl<GoodsImages> {
 			} else if (tag == 4) {
 				sql = "select * from goods where concat(name,imformation) like '%小米%' or '%红米%' order by" + sort + "limit ?,?";
 			} else if (tag == 5) {
-				sql = "select * from goods where concat(name,imformation) like '%数码%' or '%相机%' or '%微单%' or '%单反%' or '%硬盘%' or '%U盘%' order by" + sort + "limit ?,?";
+				sql = "select * from goods where typeid = 3 order by" + sort + "limit ?,?";
 			} else if (tag == 6) {
-				sql = "select * from goods where concat(name,imformation) like '%书%' order by" + sort + "limit ?,?";
+				sql = "select * from goods where typeid = 4 order by" + sort + "limit ?,?";
 			} else if (tag == 7) {
-				sql = "select * from goods where concat(name,imformation) like '%衣%' or '%t恤%' or '%外套%' or '%包%' order by" + sort
+				sql = "select * from goods where typeid = 5 order by" + sort
 						+ "limit ?,?";
 			} else if (tag == 8) {
-				sql = "select * from goods where concat(name,imformation) like '%香水%' or '%指甲油%' or '%膏%' or '%霜%' order by" + sort + "limit ?,?";
+				sql = "select * from goods where typeid = 6 order by" + sort + "limit ?,?";
 			} else if (tag == 9) {
 				sql = "select * from goods where typeid = 1 order by" + sort + "limit ?,?";
 			}

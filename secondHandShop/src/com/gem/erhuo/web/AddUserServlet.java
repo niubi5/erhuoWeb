@@ -33,7 +33,6 @@ public class AddUserServlet extends HttpServlet {
 //		String name = request.getParameter("name");
 //		String pwd = request.getParameter("pwd");
 		String userJson = request.getParameter("userJson");
-		System.out.println(userJson);
 		Gson gson = new Gson();
 		Users user = gson.fromJson(userJson, Users.class);
 		String identity = user.getIdentity();
@@ -42,7 +41,6 @@ public class AddUserServlet extends HttpServlet {
 		if(identity != null){
 			UserService us = new UserService();
 			boolean b = us.canRegister(identity);
-			System.out.println(identity+name);
 			if(b){
 				// 设置默认头像
 				user.setPhoto("headerimages/header_default.png");

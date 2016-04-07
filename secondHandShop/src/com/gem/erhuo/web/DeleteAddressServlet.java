@@ -10,38 +10,44 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gem.erhuo.entity.Address;
 import com.gem.erhuo.service.AddressService;
-import com.gem.erhuo.service.DonateService;
-import com.google.gson.Gson;
 
 /**
- * Servlet implementation class DeleteDonateServlet
+ * Servlet implementation class DeleteAddressServlet
  */
-public class DeleteDonateServlet extends HttpServlet {
+public class DeleteAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DeleteAddressServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		// TODO Auto-generated method stub
+        doPost(request, response);
+        
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String deleteDonatesId = request.getParameter("deleteDonatesId");
-		DonateService ds = new DonateService();
-		/**
-		 * @heikki  04.02 22:45
-		 * */
-		int[] donateIds = new int[]{Integer.parseInt(deleteDonatesId)};
-		ds.deleteDonate(donateIds);
-		PrintWriter pw = response.getWriter();
-		System.out.println("deleteDonatesId:"+deleteDonatesId);
-		pw.print("ok");
-		pw.flush();
-		pw.close();
+		// TODO Auto-generated method stub
+        String addressid=request.getParameter("addressid");
+        AddressService service = new AddressService();
+        service.deteleAddress(addressid);
+        Address address=service.getUserAddressById(Integer.parseInt(addressid));
+        if (address==null) {
+        	  PrintWriter pw = response.getWriter();
+        	  pw.print("ok");
+        	  pw.close();
+		}
 	}
 
 }

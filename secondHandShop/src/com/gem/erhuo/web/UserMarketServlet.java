@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gem.erhuo.entity.UserMarket;
 import com.gem.erhuo.service.MarketsService;
 import com.gem.erhuo.service.UserMarketService;
 import com.google.gson.Gson;

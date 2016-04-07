@@ -390,6 +390,19 @@
 		<servlet-name>UpdateGoodServlet</servlet-name>
 		<url-pattern>/UpdateGoodServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>UpdateUserServlet</display-name>
+		<servlet-name>UpdateUserServlet</servlet-name>
+		<servlet-class>com.gem.erhuo.web.UpdateUserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateUserServlet</servlet-name>
+		<url-pattern>/UpdateUserServlet</url-pattern>
+	</servlet-mapping>
+	
+	
 	<servlet>
 		<description></description>
 		<display-name>UpdateOrderServlet</display-name>

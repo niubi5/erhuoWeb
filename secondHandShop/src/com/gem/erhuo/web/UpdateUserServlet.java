@@ -24,14 +24,7 @@ public class UpdateUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	    doPost(request,response);		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("有人么");
 		String usersphone=request.getParameter("identity");
 		String userspwd=request.getParameter("pwd");
 		String userStr = null;
@@ -46,7 +39,16 @@ public class UpdateUserServlet extends HttpServlet {
 		
 		pw.print(userStr);
 		
-		pw.close();
+		pw.close();		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("有人么");
+		doGet(request, response);
 	}
 
 }

@@ -37,16 +37,13 @@ public class AddGoodOrderServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("AddGoodOrderServlet");
 		OrderService os = new OrderService();
 		GoodsService gs = new GoodsService();
 		//获取订单信息
 		String orderJson = request.getParameter("orderJosn");
-		System.out.println(orderJson);
 		Gson orderGson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Orders order = orderGson.fromJson(orderJson, Orders.class);
 		Goods good = gs.getGoodsById(order.getGoodId());
-		System.out.println("marketid:"+good.getMarketId());
 		good.setState(2);
 		gs.update(good);
 		//发送推送消息

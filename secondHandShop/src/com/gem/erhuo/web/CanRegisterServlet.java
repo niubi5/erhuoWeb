@@ -49,7 +49,6 @@ public class CanRegisterServlet extends HttpServlet {
 			pw.print("no");
     		pw.close();
 		}
-        System.out.println(flg);
 	}
 
 }

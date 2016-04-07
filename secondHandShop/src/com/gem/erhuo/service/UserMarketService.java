@@ -3,7 +3,6 @@ package com.gem.erhuo.service;
 import java.util.List;
 
 import com.gem.erhuo.dao.UserMarketDao;
-import com.gem.erhuo.entity.UserMarket;
 
 public class UserMarketService {
 	

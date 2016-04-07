@@ -1,8 +1,10 @@
 package com.gem.erhuo.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -181,6 +183,21 @@ public class AddressDao extends BaseDaoImpl<Address>{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void deleteAddress(String addressid){
+		Connection conn = null;
+		PreparedStatement prep = null;
+		try {
+			conn=DBConnection.getConnection();
+			String sql="delete from address where id=?";
+			prep=conn.prepareStatement(sql);
+			prep.setString(1, addressid);
+			prep.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

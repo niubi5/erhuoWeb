@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.gem.erhuo.entity.Remark;
@@ -56,6 +59,21 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 				e.printStackTrace();
 			}
 		}
+		// 排序 时间从小到大
+		Collections.sort(listRemarks, new Comparator<Remark>() {
+
+			@Override
+			public int compare(Remark o1, Remark o2) {
+				String time1 = o1.getComment_time();
+				String time2 = o2.getComment_time();
+				if(time1.compareTo(time2) > 0){
+					return 1;
+				} else if(time1.compareTo(time2) < 0) {
+					return -1;
+				} else 
+				return 0;
+			}
+		});
 		return listRemarks;
 	}
 
@@ -81,12 +99,14 @@ public class RemarkDao extends BaseDaoImpl<Remark> {
 				remark.setComment_time(rs.getString("comment_time"));
 				remark.setFatherId(rs.getInt("father_id"));
 				remark.setIsEnd(rs.getInt("is_end"));
-				// 将子评论装入集合，实现排序
 				listRemarks.add(remark);
-				if (remark.getIsEnd() != 0) {
-					getChildRemark(rs.getInt("id"));
+				if (remark.getIsEnd() == 0) {
+					continue;// 当前为终极评论了  跳到下次循环
 				} else {
-					break;
+					// 否则继续查找子评论
+					if(getChildRemark(rs.getInt("id")) == 0){
+						break;// 没有查到 结束循环
+					}
 				}
 			}
 		} catch (Exception e) {

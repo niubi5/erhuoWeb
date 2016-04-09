@@ -22,7 +22,7 @@ public class OrdersDao extends BaseDaoImpl {
 		try {
 			conn = DBConnection.getConnection();
 			// 按时间排序 并且为上架状态
-			String sql = "select * from orders where userid = ? order by status desc limit ?,? ";
+			String sql = "select * from orders where userid = ? order by status asc limit ?,? ";
 			prep = conn.prepareStatement(sql);
 			prep.setInt(1, userId);
 			prep.setInt(2, (curPage - 1) * pageSize);

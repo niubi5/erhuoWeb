@@ -41,6 +41,7 @@ public class UpdateAddressServlet extends HttpServlet {
 		String ads=request.getParameter("address");
 		Address address=new Gson().fromJson(ads, Address.class);
 		AddressService service=new AddressService();
+		System.out.println(ads);
 		int userid=address.getUserId();
 		if ((address.getIsdefault().toString()).equals("yes")) {
 			service.updateAddressIsdefault(userid);

@@ -37,4 +37,7 @@ public class AddressService {
 	public void updateUserAddress(String address,String userid){
 		ad.updateAddress(address, userid);
 	}
+	public void deteleAddress(String addressid){
+		ad.deleteAddress(addressid);
+	}
 }

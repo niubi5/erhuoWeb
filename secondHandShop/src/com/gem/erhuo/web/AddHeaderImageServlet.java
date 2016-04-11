@@ -67,19 +67,12 @@ public class AddHeaderImageServlet extends HttpServlet {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
-					
-				
 				}
-				
 			}
 		} catch (SmartUploadException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		
-		
 	}
 
 }
